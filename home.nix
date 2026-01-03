@@ -1,10 +1,13 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs,inputs, lib, ... }:
 {
 imports = [
     ./modules/git.nix
     ./modules/ghostty.nix
     ./modules/vscode.nix
     ./modules/development.nix
+    ./modules/walker.nix
+    ./modules/starship.nix
+    ./modules/fastfetch.nix
     # Add other modules here
   ];
   # This value determines the Home Manager release that your
@@ -18,49 +21,14 @@ imports = [
   home.sessionVariables = {
   EDITOR = "nvim";
 };
+programs.walker.enable = true;
 
- programs.starship = {
-    enable = true;
-    settings = {
-      format = ''
-        [╭─](bold green)$username[@](bold yellow)$hostname [in ](bold white)$directory$git_branch$git_status$cmd_duration
-        [╰─](bold green)$character
-      '';
-
-      character = {
-        success_symbol = lib.mkDefault "[➜](bold green)";
-        error_symbol = lib.mkDefault "[➜](bold red)";
-      };
-
-      directory = {
-        truncation_length = 3;
-        truncate_to_repo = true;
-        style = lib.mkDefault "bold cyan";
-      };
-
-      git_branch = {
-        style = lib.mkDefault "bold purple";
-        symbol = " ";
-      };
-
-      git_status = {
-        style = lib.mkDefault "bold red";
-        ahead = "⇡\${count}";
-        diverged = "⇕⇡\${ahead_count}⇣\${behind_count}";
-        behind = "⇣\${count}";
-      };
-
-      cmd_duration = {
-        min_time = 500;
-        format = " took [$duration](bold yellow)";
-      };
-    };
-  };
 programs.fish = {
   enable = true;
 shellInit = "
       set fish_greeting
     ";
 };
-  home.stateVersion = "25.11";
+home.stateVersion = "25.11";
+home.packages = with pkgs;[ inputs.zen-browser.packages.${pkgs.system}.default];
 }
