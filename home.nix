@@ -1,10 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
 imports = [
     ./modules/git.nix
     ./modules/ghostty.nix
     ./modules/vscode.nix
-    # ./modules/development.nix
+    ./modules/development.nix
     # Add other modules here
   ];
   # This value determines the Home Manager release that your
@@ -19,31 +19,41 @@ imports = [
   EDITOR = "nvim";
 };
 
-programs.neovim = {
-  enable = true;
-  vimAlias = true;
-  vimdiffAlias = true;
-  withNodeJs = true;
-};
-programs.starship = {
+ programs.starship = {
     enable = true;
-    enableFishIntegration = true;
-
-    # Optional: Configure starship settings using the settings attribute
     settings = {
-      # Inserts a blank line between shell prompts
-      add_newline = true;
-      # Customize the prompt character
+      format = ''
+        [╭─](bold green)$username[@](bold yellow)$hostname [in ](bold white)$directory$git_branch$git_status$cmd_duration
+        [╰─](bold green)$character
+      '';
+
       character = {
-        success_symbol = "[➜](bold green)";
-        error_symbol = "[✗](bold red)";
+        success_symbol = lib.mkDefault "[➜](bold green)";
+        error_symbol = lib.mkDefault "[➜](bold red)";
       };
-      # Customize specific modules, e.g., directory
+
       directory = {
         truncation_length = 3;
+        truncate_to_repo = true;
+        style = lib.mkDefault "bold cyan";
       };
-      # Example of disabling a module
-      package.disabled = true;
+
+      git_branch = {
+        style = lib.mkDefault "bold purple";
+        symbol = " ";
+      };
+
+      git_status = {
+        style = lib.mkDefault "bold red";
+        ahead = "⇡\${count}";
+        diverged = "⇕⇡\${ahead_count}⇣\${behind_count}";
+        behind = "⇣\${count}";
+      };
+
+      cmd_duration = {
+        min_time = 500;
+        format = " took [$duration](bold yellow)";
+      };
     };
   };
 programs.fish = {

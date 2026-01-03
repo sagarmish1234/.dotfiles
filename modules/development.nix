@@ -4,27 +4,25 @@
     # Development tools
     home.packages = with pkgs; [
       # Version control
-      git
-      git-lfs
-      lazygit
-      gh
-      gitlab
-      hub
+      # lazygit
+      # gh
+      #gitlab
+      # hub
 
       # Editors and IDEs
-      # neovim (configured via home-manager programs.neovim)
-      vscode
-      vim
-      emacs
+      #neovim #(configured via home-manager programs.neovim)
+      # vscode
+      #vim
+      #emacs
 
       # Language servers and tools
       # Nix
-      nil
-      nixpkgs-fmt
-      statix
-      deadnix
-      nixd
-      alejandra
+      #nil
+      #nixpkgs-fmt
+      #statix
+      #deadnix
+      #nixd
+      #alejandra
 
       # Rust
       rustc
@@ -49,40 +47,39 @@
     #   impl
 
       # Python
-      python3
-      python3Packages.pip
-      python3Packages.virtualenv
-      python3Packages.black
-      python3Packages.pylint
-      python3Packages.pytest
-      python3Packages.ipython
-      pyright
-      ruff
+      #python3
+      #python3Packages.pip
+      #python3Packages.virtualenv
+      #python3Packages.black
+      #python3Packages.pylint
+      #python3Packages.pytest
+      #python3Packages.ipython
+      #pyright
+      #ruff
 
       # Node.js
       nodejs
-      nodePackages.npm
-      nodePackages.pnpm
-      nodePackages.yarn
-      nodePackages.typescript
-      nodePackages.typescript-language-server
-      nodePackages.eslint
-      nodePackages.prettier
-      nodePackages.nodemon
-      deno
-      bun
+      #nodePackages.pnpm
+      #nodePackages.yarn
+      #nodePackages.typescript
+      #nodePackages.typescript-language-server
+      #nodePackages.eslint
+      #nodePackages.prettier
+      #nodePackages.nodemon
+      #deno
+      # bun
 
       # C/C++
       gcc
-      clang
-      cmake
-      gnumake
-      gdb
-      lldb
-      clang-tools
-      ccls
-      bear
-      valgrind
+      #clang
+      #cmake
+      #gnumake
+      #gdb
+      #lldb
+      #clang-tools
+      #ccls
+      #bear
+      #valgrind
 
       # Java
       jdk
@@ -101,10 +98,10 @@
       # Container tools
       docker
       docker-compose
-      podman
-      buildah
-      skopeo
-      dive
+      # podman
+      # buildah
+      # skopeo
+      # dive
       lazydocker
 
       # Kubernetes tools
@@ -131,10 +128,11 @@
       # API development
       httpie
       curl
-      postman
-      insomnia
-      grpcurl
-      evans
+      bruno
+      #postman
+      #insomnia
+      #grpcurl
+      #evans
 
       # Build tools
     #   bazel
@@ -155,18 +153,17 @@
     #   heaptrack
 
       # Network tools
-      wireshark
-      tcpdump
-      nmap
+      #wireshark
+      #tcpdump
+      #nmap
       netcat
-      socat
-      mtr
+      #socat
+      #mtr
 
       # Misc development utilities
       jq
       yq-go
       fx
-      direnv
       watchexec
       entr
       tmux
@@ -175,222 +172,10 @@
       tokei
       cloc
       tree-sitter
-
-    #   # Custom development scripts
-    #   (writeShellScriptBin "dev-postgres" ''
-    #     #!/usr/bin/env bash
-    #     echo "Starting PostgreSQL development container..."
-    #     docker run --rm -d \
-    #       --name dev-postgres \
-    #       -e POSTGRES_PASSWORD=postgres \
-    #       -p 5432:5432 \
-    #       postgres:15-alpine
-    #     echo "PostgreSQL running on localhost:5432"
-    #     echo "Username: postgres, Password: postgres"
-    #     echo "Stop with: docker stop dev-postgres"
-    #   '')
-
-    #   (writeShellScriptBin "dev-redis" ''
-    #     #!/usr/bin/env bash
-    #     echo "Starting Redis development container..."
-    #     docker run --rm -d \
-    #       --name dev-redis \
-    #       -p 6379:6379 \
-    #       redis:alpine
-    #     echo "Redis running on localhost:6379"
-    #     echo "Stop with: docker stop dev-redis"
-    #   '')
-
-    #   (writeShellScriptBin "dev-mysql" ''
-    #     #!/usr/bin/env bash
-    #     echo "Starting MySQL development container..."
-    #     docker run --rm -d \
-    #       --name dev-mysql \
-    #       -e MYSQL_ROOT_PASSWORD=mysql \
-    #       -p 3306:3306 \
-    #       mysql:8
-    #     echo "MySQL running on localhost:3306"
-    #     echo "Username: root, Password: mysql"
-    #     echo "Stop with: docker stop dev-mysql"
-    #   '')
-
-    #   (writeShellScriptBin "dev-mongodb" ''
-    #     #!/usr/bin/env bash
-    #     echo "Starting MongoDB development container..."
-    #     docker run --rm -d \
-    #       --name dev-mongodb \
-    #       -p 27017:27017 \
-    #       mongo:latest
-    #     echo "MongoDB running on localhost:27017"
-    #     echo "Stop with: docker stop dev-mongodb"
-    #   '')
-
-    #   (writeShellScriptBin "dev-env" ''
-    #     #!/usr/bin/env bash
-    #     # Create a development shell for a specific language
-
-    #     case "$1" in
-    #       rust)
-    #         nix-shell -p rustc cargo rustfmt rust-analyzer clippy
-    #         ;;
-    #       go)
-    #         nix-shell -p go gopls gotools
-    #         ;;
-    #       python)
-    #         nix-shell -p python3 python3Packages.pip python3Packages.virtualenv
-    #         ;;
-    #       node)
-    #         nix-shell -p nodejs nodePackages.npm nodePackages.pnpm
-    #         ;;
-    #       c|cpp)
-    #         nix-shell -p gcc cmake gnumake gdb
-    #         ;;
-    #       *)
-    #         echo "Usage: dev-env <language>"
-    #         echo "Supported languages: rust, go, python, node, c, cpp"
-    #         exit 1
-    #         ;;
-    #     esac
-    #   '')
-
-    #   (writeShellScriptBin "dev-project" ''
-    #     #!/usr/bin/env bash
-    #     # Initialize a new development project
-
-    #     PROJECT_NAME="$1"
-    #     PROJECT_TYPE="$2"
-
-    #     if [ -z "$PROJECT_NAME" ] || [ -z "$PROJECT_TYPE" ]; then
-    #       echo "Usage: dev-project <name> <type>"
-    #       echo "Types: rust, go, python, node, nix"
-    #       exit 1
-    #     fi
-
-    #     mkdir -p "$PROJECT_NAME"
-    #     cd "$PROJECT_NAME"
-
-    #     case "$PROJECT_TYPE" in
-    #       rust)
-    #         cargo init
-    #         echo "use flake" > .envrc
-    #         cat > flake.nix << 'EOF'
-    #     {
-    #       description = "Rust development environment";
-    #       inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    #       outputs = { self, nixpkgs }:
-    #         let pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    #         in {
-    #           devShells.x86_64-linux.default = pkgs.mkShell {
-    #             packages = with pkgs; [ rustc cargo rustfmt rust-analyzer clippy ];
-    #           };
-    #         };
-    #     }
-    #     EOF
-    #         ;;
-
-    #       go)
-    #         go mod init "$PROJECT_NAME"
-    #         echo "use flake" > .envrc
-    #         cat > flake.nix << 'EOF'
-    #     {
-    #       description = "Go development environment";
-    #       inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    #       outputs = { self, nixpkgs }:
-    #         let pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    #         in {
-    #           devShells.x86_64-linux.default = pkgs.mkShell {
-    #             packages = with pkgs; [ go gopls gotools ];
-    #           };
-    #         };
-    #     }
-    #     EOF
-    #         ;;
-
-    #       python)
-    #         echo "use flake" > .envrc
-    #         cat > flake.nix << 'EOF'
-    #     {
-    #       description = "Python development environment";
-    #       inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    #       outputs = { self, nixpkgs }:
-    #         let pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    #         in {
-    #           devShells.x86_64-linux.default = pkgs.mkShell {
-    #             packages = with pkgs; [
-    #               python3 python3Packages.pip python3Packages.virtualenv
-    #             ];
-    #             shellHook = "python -m venv .venv && source .venv/bin/activate";
-    #           };
-    #         };
-    #     }
-    #     EOF
-    #         ;;
-
-    #       node)
-    #         npm init -y
-    #         echo "use flake" > .envrc
-    #         cat > flake.nix << 'EOF'
-    #     {
-    #       description = "Node.js development environment";
-    #       inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    #       outputs = { self, nixpkgs }:
-    #         let pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    #         in {
-    #           devShells.x86_64-linux.default = pkgs.mkShell {
-    #             packages = with pkgs; [ nodejs nodePackages.pnpm ];
-    #           };
-    #         };
-    #     }
-    #     EOF
-    #         ;;
-
-    #       nix)
-    #         echo "use flake" > .envrc
-    #         cat > flake.nix << 'EOF'
-    #     {
-    #       description = "Nix development environment";
-    #       inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    #       outputs = { self, nixpkgs }:
-    #         let pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    #         in {
-    #           packages.x86_64-linux.default = pkgs.hello;
-    #           devShells.x86_64-linux.default = pkgs.mkShell {
-    #             packages = with pkgs; [ nixpkgs-fmt nil ];
-    #           };
-    #         };
-    #     }
-    #     EOF
-    #         ;;
-
-    #       *)
-    #         echo "Unknown project type: $PROJECT_TYPE"
-    #         exit 1
-    #         ;;
-    #     esac
-
-    #     git init
-    #     direnv allow
-
-    #     echo "Project '$PROJECT_NAME' created with $PROJECT_TYPE template"
-    #     echo "Run 'direnv allow' to activate the development environment"
-    #   '')
     ];
 
     # Docker daemon (only if containers feature is enabled)
-    # virtualisation.docker = {
-    #   enable = true;
-    #   enableOnBoot = true;
-    #   daemon.settings = {
-    #     features = { buildkit = true; };
-    #     registry-mirrors = [ "https://mirror.gcr.io" ];
-    #   };
-
-    #   autoPrune = {
-    #     enable = true;
-    #     dates = "weekly";
-    #     flags = [ "--all" ];
-    #   };
-    # };
+    
 
     # # Podman as Docker alternative (disabled dockerCompat to avoid conflict)
     # virtualisation.podman = {
@@ -443,8 +228,14 @@
     # Git configuration
     programs.git = {
       enable = true;
-      lfs.enable = true;
+    #  lfs.enable = true;
     };
+   programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+  };
 
     # Enable lorri for automatic nix-shell
     services.lorri.enable = true;

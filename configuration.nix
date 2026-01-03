@@ -81,7 +81,7 @@
   users.users.sagar = {
     isNormalUser = true;
     description = "Sagar Mishra";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
     #  thunderbird
     gh
@@ -128,4 +128,19 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  virtualisation.docker = {
+      enable = true;
+      enableOnBoot = true;
+      daemon.settings = {
+        features = { buildkit = true; };
+        registry-mirrors = [ "https://mirror.gcr.io" ];
+      };
+
+      autoPrune = {
+        enable = true;
+        dates = "weekly";
+        flags = [ "--all" ];
+      };
+    };
 }
