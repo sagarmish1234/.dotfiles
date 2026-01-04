@@ -29,11 +29,6 @@
         diverged = "⇕⇡\${ahead_count}⇣\${behind_count}";
         behind = "⇣\${count}";
       };
-
-      cmd_duration = {
-        min_time = 500;
-        format = " took [$duration](bold yellow)";
-      };
     };
   };
 }
