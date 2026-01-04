@@ -6,10 +6,21 @@
 {
   wayland.windowManager.hyprland.settings = {
     bind = [
-      "SUPER, space, exec, wofi --show drun --sort-order=alphabetical"
       "SUPER SHIFT, SPACE, exec, pkill -SIGUSR1 waybar"
+      "SUPER, SPACE, exec, walker"
+      "SUPER, F, fullscreen, 0"           # Fullscreen (maximize)
+      "SUPER, M, fullscreen, 1"           # Maximize (keep gaps and bar)
       # "SUPER CTRL, SPACE, exec, ~/.local/share/omarchy/bin/swaybg-next"
       # "SUPER SHIFT CTRL, SPACE, exec, ~/.local/share/omarchy/bin/omarchy-theme-next"
+
+      # Alt+Tab window switching
+      "ALT, TAB, cyclenext"              # Cycle to next window
+      "ALT, TAB, bringactivetotop"       # Bring it to front
+        
+      # Alt+Shift+Tab (reverse)
+      "ALT SHIFT, TAB, cyclenext, prev"  # Cycle to previous window
+      "ALT SHIFT, TAB, bringactivetotop" # Bring it to front
+
 
       "SUPER, W, killactive,"
       "SUPER, Backspace, killactive,"
@@ -121,5 +132,11 @@
       ", XF86AudioPlay, exec, playerctl play-pause"
       ", XF86AudioPrev, exec, playerctl previous"
     ];
+    bindd = [
+    "SUPER, C, Universal copy, sendshortcut, CTRL, Insert"
+    "SUPER, V, Universal paste, sendshortcut, SHIFT, Insert"
+    "SUPER, X, Universal cut, sendshortcut, CTRL, X"
+    "SUPER CTRL, V, Clipboard manager, exec, omarchy-launch-walker -m clipboard"
+  ];
   };
 }

@@ -11,6 +11,8 @@ imports = [
     ./modules/hyprland.nix
     ./modules/wofi.nix
     ./modules/waybar.nix
+    ./modules/awww.nix
+    # ./modules/hyprpaper.nix
     # Add other modules here
   ];
   # This value determines the Home Manager release that your

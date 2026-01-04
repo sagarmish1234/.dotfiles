@@ -7,6 +7,7 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     zen-browser.url = "github:youwen5/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+    awww.url = "git+https://codeberg.org/LGFae/awww";
 
     #Walker flake
     elephant.url = "github:abenz1267/elephant";
@@ -33,7 +34,11 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.sagar = ./home.nix; # replace <USERNAME> with your actual username
+              users.sagar =  {
+                imports = [
+                  ./home.nix
+                ];
+              };
             };
             home-manager.extraSpecialArgs = { inherit inputs; system = "x86_64-linux";};
           }
