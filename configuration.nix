@@ -83,11 +83,11 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
+  # services.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -126,8 +126,11 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+  pkgs.kitty
   ];
-
+  environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
+  programs.hyprland.enable = true; # enable Hyprland
+  
   virtualisation.docker = {
       enable = true;
       enableOnBoot = true;
