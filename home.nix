@@ -12,6 +12,7 @@ imports = [
     ./modules/wofi.nix
     ./modules/waybar.nix
     ./modules/awww.nix
+    ./modules/mako.nix
     # ./modules/hyprpaper.nix
     # Add other modules here
   ];
@@ -34,7 +35,18 @@ shellInit = "
       set fish_greeting
     ";
 };
+programs.chromium.enable = true;
+home.sessionVariables = {
+  # Firefox Wayland fixes
+  MOZ_ENABLE_WAYLAND = "1";
+  MOZ_DBUS_REMOTE = "1";
+};
  # enable Hyprland
 home.stateVersion = "25.11";
-home.packages = with pkgs;[ inputs.zen-browser.packages.${pkgs.system}.default];
+home.packages = with pkgs;[ 
+  inputs.zen-browser.packages.${pkgs.system}.default
+  libsForQt5.qtwayland
+
+];
+
 }

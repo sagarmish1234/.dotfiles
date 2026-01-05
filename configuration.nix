@@ -21,6 +21,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  environment.variables.QT_QPA_PLATFORM = "wayland";
 
   #Nvidia driver package
   hardware.nvidia.open = true;

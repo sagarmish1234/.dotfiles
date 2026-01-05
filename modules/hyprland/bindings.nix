@@ -5,6 +5,10 @@
 }:
 {
   wayland.windowManager.hyprland.settings = {
+    misc = {
+      focus_on_activate = true;
+      new_window_takes_over_fullscreen = 1;
+    };
     bind = [
       "SUPER SHIFT, SPACE, exec, pkill -SIGUSR1 waybar"
       "SUPER, SPACE, exec, walker"

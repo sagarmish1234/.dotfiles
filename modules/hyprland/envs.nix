@@ -16,7 +16,7 @@ in
   wayland.windowManager.hyprland.settings = {
     # Environment variables
     env = [
-      "GDK_SCALE, 1.25"
+      "GDK_SCALE, 1"
 
       # Cursor size
       "XCURSOR_SIZE,24"
