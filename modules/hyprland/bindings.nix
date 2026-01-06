@@ -10,6 +10,7 @@
       new_window_takes_over_fullscreen = 1;
     };
     bind = [
+
       "SUPER SHIFT, SPACE, exec, pkill -SIGUSR1 waybar"
       "SUPER, SPACE, exec, walker"
       "SUPER, F, fullscreen, 0"           # Fullscreen (maximize)
@@ -25,17 +26,18 @@
       "ALT SHIFT, TAB, cyclenext, prev"  # Cycle to previous window
       "ALT SHIFT, TAB, bringactivetotop" # Bring it to front
 
+      # Launch file manager
+      "SUPER SHIFT, F, exec, $fileManager"
 
       "SUPER, W, killactive,"
       "SUPER, Backspace, killactive,"
-      "SUPER, RETURN, exec, ghostty"
+      "SUPER, RETURN, exec, $terminal"
 
       # End active session
       "SUPER, ESCAPE, exec, hyprlock"
       "SUPER SHIFT, ESCAPE, exit,"
       "SUPER CTRL, ESCAPE, exec, reboot"
       "SUPER SHIFT CTRL, ESCAPE, exec, systemctl poweroff"
-      "SUPER, K, exec, ~/.local/share/omarchy/bin/omarchy-show-keybindings"
 
       # Control tiling
       "SUPER, J, togglesplit, # dwindle"

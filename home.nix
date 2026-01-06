@@ -46,6 +46,7 @@ home.stateVersion = "25.11";
 home.packages = with pkgs;[ 
   inputs.zen-browser.packages.${pkgs.system}.default
   libsForQt5.qtwayland
+  nautilus
 
 ];
 

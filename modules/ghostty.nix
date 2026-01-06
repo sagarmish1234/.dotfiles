@@ -13,7 +13,7 @@
         # Font settings
         font-family = "JetBrainsMono Nerd Font";
         font-style = "Regular";
-        font-size = 9;
+        font-size = 11;
 
         # Window styling
         window-theme = "ghostty";

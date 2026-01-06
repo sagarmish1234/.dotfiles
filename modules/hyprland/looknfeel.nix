@@ -30,6 +30,7 @@ in
 
       layout = "dwindle";
     };
+    monitor=",preferred,auto,1.25";
 
     decoration = {
       rounding = 4;
