@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   programs.waybar = {
@@ -7,7 +12,7 @@
     #   enable = true;
     #   target = "graphical-session.target";
     # };
-    
+
     settings = {
       mainBar = {
         layer = "top";
@@ -17,10 +22,21 @@
         margin-top = 8;
         margin-left = 12;
         margin-right = 12;
-        
-        modules-left = [ "custom/launcher" "hyprland/workspaces" "hyprland/window" ];
-        modules-center = [ "clock" ];
-        modules-right = [ "pulseaudio" "network" "cpu" "memory" "temperature" "battery" "tray" "custom/power" ];
+
+        modules-left = [
+          "hyprland/workspaces"
+        ];
+        modules-center = [
+          "hyprland/window"
+        ];
+        modules-right = [
+          "pulseaudio"
+          "network"
+          "cpu"
+          "memory"
+          "clock"
+          "battery"
+        ];
 
         "hyprland/workspaces" = {
           format = "{icon}";
@@ -53,7 +69,7 @@
 
         clock = {
           interval = 1;
-          format = "{:%H:%M:%S}";
+          format = "{:%I:%M %p}";
           format-alt = "{:%A, %B %d, %Y (%R)}";
           tooltip-format = "<tt><small>{calendar}</small></tt>";
           calendar = {
@@ -75,13 +91,17 @@
           format = "{icon} {volume}%";
           format-muted = "  muted";
           format-icons = {
-            headphone = "";
-            hands-free = "";
-            headset = "";
-            phone = "";
-            portable = "";
-            car = "";
-            default = [ "" "" "" ];
+            headphone = "🎧";
+            headset = "";
+            portable = "";
+            car = "";
+            hifi = "on";
+            phone = "";
+            default = [
+              ""
+              ""
+              ""
+            ];
           };
           on-click = "pavucontrol";
           tooltip-format = "{desc} | {volume}%";
@@ -112,7 +132,13 @@
         temperature = {
           critical-threshold = 80;
           format = "{icon} {temperatureC}°C";
-          format-icons = [ "" "" "" "" "" ];
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
         };
 
         battery = {
@@ -123,7 +149,13 @@
           format = "{icon} {capacity}%";
           format-charging = "  {capacity}%";
           format-plugged = "  {capacity}%";
-          format-icons = [ "" "" "" "" "" ];
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
           tooltip-format = "{timeTo} | {capacity}%";
         };
 
@@ -149,19 +181,19 @@
       @define-color base   #1e1e2e;
       @define-color mantle #181825;
       @define-color crust  #11111b;
-      
+
       @define-color text     #cdd6f4;
       @define-color subtext0 #a6adc8;
       @define-color subtext1 #bac2de;
-      
+
       @define-color surface0 #313244;
       @define-color surface1 #45475a;
       @define-color surface2 #585b70;
-      
+
       @define-color overlay0 #6c7086;
       @define-color overlay1 #7f849c;
       @define-color overlay2 #9399b2;
-      
+
       @define-color blue   #89b4fa;
       @define-color lavender #b4befe;
       @define-color sapphire #74c7ec;
