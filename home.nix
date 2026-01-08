@@ -13,6 +13,7 @@ imports = [
     ./modules/waybar.nix
     ./modules/awww.nix
     ./modules/mako.nix
+    ./modules/zed-editor.nix
     # ./modules/hyprpaper.nix
     # Add other modules here
   ];
@@ -43,7 +44,7 @@ home.sessionVariables = {
 };
  # enable Hyprland
 home.stateVersion = "25.11";
-home.packages = with pkgs;[ 
+home.packages = with pkgs;[
   inputs.zen-browser.packages.${pkgs.system}.default
   libsForQt5.qtwayland
   nautilus

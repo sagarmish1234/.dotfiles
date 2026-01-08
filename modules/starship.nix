@@ -1,5 +1,6 @@
-{lib, ...}:{
- programs.starship = {
+{ lib, ... }:
+{
+  programs.starship = {
     enable = true;
     settings = {
       format = ''

@@ -1,13 +1,16 @@
-{ config, lib, pkgs, ... }:
 {
-      programs.git = {
-      enable = true;
-      settings = {
+  ...
+}:
+{
+  programs.git = {
+    enable = true;
+    settings = {
       user = {
-      	 name = "Sagar Mishra";
-	 email = "sagarmish1234@gmail.com";
-      	};
+        name = "Sagar Mishra";
+        email = "sagarmish1234@gmail.com";
       };
-      # Add other git configurations here
     };
+    # Add other git configurations here
+  };
+
 }

@@ -23,26 +23,31 @@
     };
   };
 
-  outputs = {  nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./configuration.nix
-         home-manager.nixosModules.default
+  outputs =
+    { nixpkgs, home-manager, ... }@inputs:
+    {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration.nix
+          home-manager.nixosModules.default
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.sagar =  {
+              users.sagar = {
                 imports = [
                   ./home.nix
                 ];
               };
             };
-            home-manager.extraSpecialArgs = { inherit inputs; system = "x86_64-linux";};
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+              system = "x86_64-linux";
+            };
           }
-      ];
+        ];
+      };
     };
-  };
 }

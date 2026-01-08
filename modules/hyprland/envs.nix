@@ -1,11 +1,8 @@
 {
-  config,
-  lib,
-  pkgs,
   ...
 }:
 let
-  
+
   nvidiaEnv = [
     "NVD_BACKEND,direct"
     "LIBVA_DRIVER_NAME,nvidia"

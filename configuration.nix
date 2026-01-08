@@ -5,10 +5,10 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   system.stateVersion = "25.11";
@@ -27,7 +27,10 @@
   hardware.nvidia.open = true;
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       auto-optimise-store = true;
 
       # Binary caches
@@ -109,13 +112,16 @@
     pulse.enable = true;
   };
 
-  
   users.users.sagar = {
     isNormalUser = true;
     description = "Sagar Mishra";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
     packages = with pkgs; [
-    gh
+      gh
     ];
   };
 
@@ -123,27 +129,31 @@
 
   nixpkgs.config.allowUnfree = true;
 
-
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  pkgs.kitty
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
+    pkgs.kitty
   ];
-  environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
+  environment.pathsToLink = [
+    "/share/applications"
+    "/share/xdg-desktop-portal"
+  ];
   programs.hyprland.enable = true; # enable Hyprland
-  
-  virtualisation.docker = {
-      enable = true;
-      enableOnBoot = true;
-      daemon.settings = {
-        features = { buildkit = true; };
-        registry-mirrors = [ "https://mirror.gcr.io" ];
-      };
 
-      autoPrune = {
-        enable = true;
-        dates = "weekly";
-        flags = [ "--all" ];
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+    daemon.settings = {
+      features = {
+        buildkit = true;
       };
+      registry-mirrors = [ "https://mirror.gcr.io" ];
     };
+
+    autoPrune = {
+      enable = true;
+      dates = "weekly";
+      flags = [ "--all" ];
+    };
+  };
 }

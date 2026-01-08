@@ -1,13 +1,17 @@
-{inputs, ...}:
+{ inputs, ... }:
 {
-  imports = [ inputs.walker.homeManagerModules.default];
+  imports = [ inputs.walker.homeManagerModules.default ];
   programs.walker = {
-  enable = true;
-  runAsService = true;
+    enable = true;
+    runAsService = true;
 
-  config = {
-    keybinds.quick_activate = ["F1" "F2" "F3"];
+    config = {
+      keybinds.quick_activate = [
+        "F1"
+        "F2"
+        "F3"
+      ];
+    };
   };
-};
 
 }

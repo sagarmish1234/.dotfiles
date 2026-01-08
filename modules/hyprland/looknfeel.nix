@@ -4,11 +4,6 @@
   ...
 }:
 let
-  hexToRgba =
-    hex: alpha:
-    let
-    in
-    "rgba(${hex}${alpha})";
 
   # inactiveBorder = hexToRgba config.colorScheme.palette.base09 "aa";
   # activeBorder = hexToRgba config.colorScheme.palette.base0D "aa";
@@ -30,7 +25,7 @@ in
 
       layout = "dwindle";
     };
-    monitor=",preferred,auto,1.25";
+    monitor = ",preferred,auto,1.25";
 
     decoration = {
       rounding = 4;
