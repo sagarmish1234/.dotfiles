@@ -55,42 +55,42 @@
       group-by = "app-name";
 
       # Extra config for different urgency levels
-      extraConfig = ''
-        [urgency=low]
-        background-color=#1e1e2e
-        text-color=#6c7086
-        border-color=#313244
-        default-timeout=3000
-
-        [urgency=normal]
-        background-color=#1e1e2e
-        text-color=#cdd6f4
-        border-color=#89b4fa
-        default-timeout=5000
-
-        [urgency=critical]
-        background-color=#1e1e2e
-        text-color=#f38ba8
-        border-color=#f38ba8
-        default-timeout=0
-        ignore-timeout=1
-
-        [app-name="Spotify"]
-        border-color=#a6e3a1
-
-        [app-name="Volume"]
-        border-color=#fab387
-
-        [app-name="Brightness"]
-        border-color=#f9e2af
-
-        [app-name="Battery"]
-        border-color=#f38ba8
-
-        [category=mpd]
-        border-color=#cba6f7
-      '';
     };
+    extraConfig = ''
+      [urgency=low]
+      background-color=#1e1e2e
+      text-color=#6c7086
+      border-color=#313244
+      default-timeout=3000
+
+      [urgency=normal]
+      background-color=#1e1e2e
+      text-color=#cdd6f4
+      border-color=#89b4fa
+      default-timeout=5000
+
+      [urgency=critical]
+      background-color=#1e1e2e
+      text-color=#f38ba8
+      border-color=#f38ba8
+      default-timeout=0
+      ignore-timeout=1
+
+      [app-name="Spotify"]
+      border-color=#a6e3a1
+
+      [app-name="Volume"]
+      border-color=#fab387
+
+      [app-name="Brightness"]
+      border-color=#f9e2af
+
+      [app-name="Battery"]
+      border-color=#f38ba8
+
+      [category=mpd]
+      border-color=#cba6f7
+    '';
   };
 
   # Hyprland integration
