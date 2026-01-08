@@ -17,6 +17,11 @@
       "float, class:^(steam)$"
       "fullscreen, class:^(com.libretro.RetroArch)$"
 
+      # Float TUI windows
+      "float, class:^(sagar\\.nixos\\..*)$"
+      "size 70% 70%, class:^(sagar\\.nixos\\..*)$"
+      "center, class:^(sagar\\.nixos\\..*)$"
+
       # Just dash of transparency
       "opacity 0.97 0.9, class:.*"
       # Normal chrome Youtube tabs
@@ -39,7 +44,7 @@
     layerrule = [
       # Proper background blur for wofi
       "blur,wofi"
-      "blur,waybar"
+      # "blur,waybar"
     ];
   };
 }

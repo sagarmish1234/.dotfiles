@@ -40,7 +40,7 @@
       # Control tiling
       "SUPER, J, togglesplit, # dwindle"
       "SUPER, P, pseudo, # dwindle"
-      "SUPER, V, togglefloating,"
+      "SUPER, T, togglefloating,"
       "SUPER SHIFT, Plus, fullscreen,"
 
       # Move focus with mainMod + arrow keys

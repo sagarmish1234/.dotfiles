@@ -1,6 +1,15 @@
-{ config, pkgs,inputs, lib, ... }:
 {
-imports = [
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
+let
+  launch-tui = import ./bin/launch-tui.nix { inherit pkgs; };
+in
+{
+  imports = [
     ./modules/git.nix
     ./modules/ghostty.nix
     ./modules/vscode.nix
@@ -14,6 +23,7 @@ imports = [
     ./modules/awww.nix
     ./modules/mako.nix
     ./modules/zed-editor.nix
+    ./modules/wiremix.nix
     # ./modules/hyprpaper.nix
     # Add other modules here
   ];
@@ -26,29 +36,30 @@ imports = [
   # the Home Manager release notes for a list of state version
   # changes in each release.
   home.sessionVariables = {
-  EDITOR = "nvim";
-};
-programs.walker.enable = true;
+    EDITOR = "nvim";
+  };
+  programs.walker.enable = true;
 
-programs.fish = {
-  enable = true;
-shellInit = "
+  programs.fish = {
+    enable = true;
+    shellInit = "
       set fish_greeting
     ";
-};
-programs.chromium.enable = true;
-home.sessionVariables = {
-  # Firefox Wayland fixes
-  MOZ_ENABLE_WAYLAND = "1";
-  MOZ_DBUS_REMOTE = "1";
-};
- # enable Hyprland
-home.stateVersion = "25.11";
-home.packages = with pkgs;[
-  inputs.zen-browser.packages.${pkgs.system}.default
-  libsForQt5.qtwayland
-  nautilus
-
-];
+  };
+  programs.chromium.enable = true;
+  home.sessionVariables = {
+    # Firefox Wayland fixes
+    MOZ_ENABLE_WAYLAND = "1";
+    MOZ_DBUS_REMOTE = "1";
+  };
+  # enable Hyprland
+  home.stateVersion = "25.11";
+  home.packages = with pkgs; [
+    inputs.zen-browser.packages.${pkgs.system}.default
+    libsForQt5.qtwayland
+    nautilus
+    fzf
+    launch-tui
+  ];
 
 }

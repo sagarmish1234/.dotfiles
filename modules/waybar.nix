@@ -103,7 +103,7 @@
               ""
             ];
           };
-          on-click = "pavucontrol";
+          on-click = "launch-tui wiremix";
           tooltip-format = "{desc} | {volume}%";
         };
 
@@ -143,20 +143,22 @@
 
         battery = {
           states = {
+            good = 80;
             warning = 30;
             critical = 15;
           };
-          format = "{icon} {capacity}%";
-          format-charging = "  {capacity}%";
-          format-plugged = "  {capacity}%";
+          format = "{capacity}% {icon}";
+          format-full = "{capacity}% {icon}";
+          format-charging = "{capacity}% ";
+          format-plugged = "{capacity}% ";
+          format-alt = "{time} {icon}";
           format-icons = [
-            ""
-            ""
-            ""
-            ""
-            ""
+            ""
+            ""
+            ""
+            ""
+            ""
           ];
-          tooltip-format = "{timeTo} | {capacity}%";
         };
 
         tray = {
@@ -225,7 +227,7 @@
         color: @text;
         padding: 0px 16px;
         margin: 4px 0px;
-        border-radius: 12px;
+        border-radius: 6px;
         border: 2px solid @surface0;
       }
 
@@ -272,7 +274,6 @@
         color: @blue;
         font-weight: bold;
         padding: 0px 20px;
-        border: 2px solid @blue;
       }
 
       #pulseaudio {
@@ -368,6 +369,7 @@
   # Ensure dependencies are available in home.packages
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
     font-awesome
     wofi
     pavucontrol
