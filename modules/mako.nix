@@ -4,91 +4,93 @@
   # Mako notification daemon
   services.mako = {
     enable = true;
+    settings = {
 
-    # Catppuccin Mocha colors
-    backgroundColor = "#1e1e2e";
-    textColor = "#cdd6f4";
-    borderColor = "#89b4fa";
-    progressColor = "over #313244";
+      # Catppuccin Mocha colors
+      background-color = "#1e1e2e";
+      text-color = "#cdd6f4";
+      border-color = "#89b4fa";
+      progress-color = "over #313244";
 
-    # Layout and positioning
-    width = 400;
-    height = 150;
-    margin = "20";
-    padding = "15";
-    borderSize = 2;
-    borderRadius = 12;
+      # Layout and positioning
+      width = 400;
+      height = 150;
+      margin = "20";
+      padding = "15";
+      border-size = 2;
+      border-radius = 12;
 
-    # Icons
-    icons = true;
-    maxIconSize = 48;
-    iconPath = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
+      # Icons
+      icons = true;
+      max-icon-size = 48;
+      icon-path = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
 
-    # Behavior
-    layer = "overlay";
-    anchor = "top-right";
+      # Behavior
+      layer = "overlay";
+      anchor = "top-right";
 
-    # Font
-    font = "JetBrains Mono 11";
+      # Font
+      font = "JetBrains Mono 11";
 
-    # Timing
-    defaultTimeout = 5000; # 5 seconds
-    ignoreTimeout = false;
+      # Timing
+      default-timeout = 5000; # 5 seconds
+      ignore-timeout = false;
 
-    # Max notifications
-    maxVisible = 5;
+      # Max notifications
+      max-visible = 5;
 
-    # Sorting (time-ascending, time-descending, priority-ascending, priority-descending)
-    sort = "-time";
+      # Sorting (time-ascending, time-descending, priority-ascending, priority-descending)
+      sort = "-time";
 
-    # Markup
-    markup = true;
+      # Markup
+      markup = true;
 
-    # Actions
-    actions = true;
+      # Actions
+      actions = true;
 
-    # Format
-    format = "<b>%s</b>\\n%b";
+      # Format
+      format = "<b>%s</b>\\n%b";
 
-    # Grouping
-    groupBy = "app-name";
+      # Grouping
+      group-by = "app-name";
 
-    # Extra config for different urgency levels
-    extraConfig = ''
-      [urgency=low]
-      background-color=#1e1e2e
-      text-color=#6c7086
-      border-color=#313244
-      default-timeout=3000
+      # Extra config for different urgency levels
+      extraConfig = ''
+        [urgency=low]
+        background-color=#1e1e2e
+        text-color=#6c7086
+        border-color=#313244
+        default-timeout=3000
 
-      [urgency=normal]
-      background-color=#1e1e2e
-      text-color=#cdd6f4
-      border-color=#89b4fa
-      default-timeout=5000
+        [urgency=normal]
+        background-color=#1e1e2e
+        text-color=#cdd6f4
+        border-color=#89b4fa
+        default-timeout=5000
 
-      [urgency=critical]
-      background-color=#1e1e2e
-      text-color=#f38ba8
-      border-color=#f38ba8
-      default-timeout=0
-      ignore-timeout=1
+        [urgency=critical]
+        background-color=#1e1e2e
+        text-color=#f38ba8
+        border-color=#f38ba8
+        default-timeout=0
+        ignore-timeout=1
 
-      [app-name="Spotify"]
-      border-color=#a6e3a1
+        [app-name="Spotify"]
+        border-color=#a6e3a1
 
-      [app-name="Volume"]
-      border-color=#fab387
+        [app-name="Volume"]
+        border-color=#fab387
 
-      [app-name="Brightness"]
-      border-color=#f9e2af
+        [app-name="Brightness"]
+        border-color=#f9e2af
 
-      [app-name="Battery"]
-      border-color=#f38ba8
+        [app-name="Battery"]
+        border-color=#f38ba8
 
-      [category=mpd]
-      border-color=#cba6f7
-    '';
+        [category=mpd]
+        border-color=#cba6f7
+      '';
+    };
   };
 
   # Hyprland integration
