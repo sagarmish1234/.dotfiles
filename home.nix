@@ -1,43 +1,11 @@
 {
-  config,
-  pkgs,
-  inputs,
-  lib,
   ...
 }:
-let
-  launch-tui = import ./bin/launch-tui.nix { inherit pkgs; };
-in
 {
+
   imports = [
-    ./modules/git.nix
-    ./modules/ghostty.nix
-    ./modules/vscode.nix
-    ./modules/development.nix
-    # ./modules/walker.nix
-    ./modules/starship.nix
-    ./modules/fastfetch.nix
-    ./modules/hyprland.nix
-    ./modules/wofi.nix
-    ./modules/waybar.nix
-    ./modules/awww.nix
-    ./modules/mako.nix
-    ./modules/zed-editor.nix
-    ./modules/terminal-apps.nix
-    # ./modules/hyprpaper.nix
-    # Add other modules here
+    ./modules/defaults.nix
   ];
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
 
   programs.fish = {
     enable = true;
@@ -45,7 +13,6 @@ in
       set fish_greeting
     ";
   };
-  programs.chromium.enable = true;
   home.sessionVariables = {
     # Firefox Wayland fixes
     MOZ_ENABLE_WAYLAND = "1";
@@ -54,14 +21,4 @@ in
   targets.genericLinux.enable = true;
   # enable Hyprland
   home.stateVersion = "25.11";
-  home.packages = with pkgs; [
-    inputs.zen-browser.packages.${pkgs.system}.default
-    libsForQt5.qtwayland
-    nautilus
-    fzf
-    launch-tui
-    jetbrains.idea
-    vlc
-  ];
-
 }
