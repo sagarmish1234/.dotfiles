@@ -26,6 +26,7 @@
   #Nvidia driver package
   hardware.nvidia.open = true;
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = false;
   nix = {
     settings = {
       experimental-features = [
