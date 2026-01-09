@@ -25,6 +25,7 @@
 
   #Nvidia driver package
   hardware.nvidia.open = true;
+  hardware.bluetooth.enable = true;
   nix = {
     settings = {
       experimental-features = [
@@ -53,7 +54,6 @@
       options = "--delete-older-than 15d";
     };
   };
-
   # Bootloader (now configured in boot.nix module)
   boot = {
     loader = {

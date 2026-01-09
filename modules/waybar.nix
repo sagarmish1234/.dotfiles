@@ -31,9 +31,9 @@
         ];
         modules-right = [
           "pulseaudio"
-          "network"
           "cpu"
-          "memory"
+          "network"
+          "bluetooth"
           "clock"
           "battery"
         ];
@@ -119,26 +119,25 @@
 
         cpu = {
           interval = 2;
-          format = "  {usage}%";
+          format = "{icon}";
+          format-icons = {
+            default = [ "" ];
+          };
           tooltip = true;
+          on-click = "launch-tui btop --force-utf";
         };
 
-        memory = {
-          interval = 2;
-          format = "  {}%";
-          tooltip-format = "{used:0.1f}G / {total:0.1f}G used";
-        };
-
-        temperature = {
-          critical-threshold = 80;
-          format = "{icon} {temperatureC}°C";
-          format-icons = [
-            ""
-            ""
-            ""
-            ""
-            ""
-          ];
+        bluetooth = {
+          format = "";
+          format-off = "";
+          format-on = "";
+          format-connected = " {device_alias}";
+          format-connected-battery = " {device_alias} {device_battery_percentage}%";
+          tooltip = true;
+          tooltip-format = "Controller: {controller_alias}\nAddress: {controller_address}\nStatus: {status}";
+          tooltip-format-connected = "Controller: {controller_alias}\nAddress: {controller_address}\nConnected: {device_alias} ({device_address})\nBattery: {device_battery_percentage}%";
+          on-click = "launch-tui bluetui";
+          # "on-click-right "$HOME/.config/hypr/scripts/toggle_bluetooth.sh"
         };
 
         battery = {
@@ -220,6 +219,7 @@
       #memory,
       #temperature,
       #battery,
+      #bluetooth,
       #tray,
       #custom-launcher,
       #custom-power {

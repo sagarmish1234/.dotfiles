@@ -23,7 +23,7 @@ in
     ./modules/awww.nix
     ./modules/mako.nix
     ./modules/zed-editor.nix
-    ./modules/wiremix.nix
+    ./modules/terminal-apps.nix
     # ./modules/hyprpaper.nix
     # Add other modules here
   ];
