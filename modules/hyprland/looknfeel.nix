@@ -3,11 +3,6 @@
   pkgs,
   ...
 }:
-let
-
-  # inactiveBorder = hexToRgba config.colorScheme.palette.base09 "aa";
-  # activeBorder = hexToRgba config.colorScheme.palette.base0D "aa";
-in
 {
   wayland.windowManager.hyprland.settings = {
     general = {
@@ -16,8 +11,9 @@ in
 
       border_size = 2;
 
-      # "col.active_border" = activeBorder;
-      # "col.inactive_border" = inactiveBorder;
+      "col.active_border" = "rgba(89b4faff) rgba(cba6f7ff) 45deg";
+
+      "col.inactive_border" = "rgba(45475aff) rgba(313244ff) 45deg";
 
       resize_on_border = false;
 
