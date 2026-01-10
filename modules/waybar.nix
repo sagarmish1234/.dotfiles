@@ -272,9 +272,13 @@
       }
 
       #clock {
-        color: @blue;
+        color: @sky;
         font-weight: bold;
         padding: 0px 20px;
+      }
+
+      #bluetooth {
+        color: @blue;
       }
 
       #pulseaudio {
