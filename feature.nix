@@ -26,6 +26,7 @@
     waybar = true;
     wofi = true;
     hypridle = true;
+    hyprlock = true;
   };
 
   launcher = {

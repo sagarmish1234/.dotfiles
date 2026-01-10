@@ -315,7 +315,7 @@
       }
 
       #battery {
-        color: @green;
+        color: @flamingo;
       }
 
       #battery.charging, #battery.plugged {

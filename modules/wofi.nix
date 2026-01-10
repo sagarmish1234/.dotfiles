@@ -19,5 +19,6 @@ lib.mkIf feature.desktop.wofi {
       image_size = 40;
       gtk_dark = true;
     };
+    style = builtins.readFile ../config/wofi/style.css;
   };
 }

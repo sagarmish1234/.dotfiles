@@ -18,6 +18,7 @@
     ./terminal-apps.nix
     ./packages.nix
     ./hypridle.nix
+    ./hyprlock.nix
     # ./walker.nix
     # ./modules/hyprpaper.nix
   ];
