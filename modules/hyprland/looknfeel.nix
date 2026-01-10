@@ -40,8 +40,8 @@ in
 
       blur = {
         enabled = true;
-        size = 5;
-        passes = 2;
+        size = 7;
+        passes = 4;
 
         vibrancy = 0.1696;
       };
