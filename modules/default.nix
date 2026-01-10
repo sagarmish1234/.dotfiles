@@ -17,6 +17,7 @@
     ./zed-editor.nix
     ./terminal-apps.nix
     ./packages.nix
+    ./hypridle.nix
     # ./walker.nix
     # ./modules/hyprpaper.nix
   ];

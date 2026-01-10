@@ -1,5 +1,5 @@
-{ ... }:
-{
+{ lib, feature, ... }:
+lib.mkIf feature.desktop.wofi {
   programs.wofi = {
     enable = true;
     settings = {

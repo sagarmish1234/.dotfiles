@@ -88,7 +88,7 @@
         };
 
         pulseaudio = {
-          format = "{icon} {volume}%";
+          format = "{icon}";
           format-muted = "  muted";
           format-icons = {
             headphone = "🎧";
@@ -98,9 +98,9 @@
             hifi = "on";
             phone = "";
             default = [
-              ""
-              ""
-              ""
+              " "
+              " "
+              " "
             ];
           };
           on-click = "launch-tui wiremix";
@@ -108,7 +108,8 @@
         };
 
         network = {
-          format-wifi = "  {essid}";
+          format-wifi = " ";
+          justify = "center";
           format-ethernet = " wired";
           format-disconnected = "󰤭 ";
           tooltip-format = "{ifname} via {gwaddr}";
@@ -121,7 +122,7 @@
           interval = 2;
           format = "{icon}";
           format-icons = {
-            default = [ "" ];
+            default = [ " " ];
           };
           tooltip = true;
           on-click = "launch-tui btop --force-utf";
