@@ -1,68 +1,218 @@
 * {
-  border: none;
-  border-radius: 0;
-  font-family: Cartograph CF Nerd Font, monospace;
-  font-weight: bold;
-  font-size: 14px;
-  min-height: 0;
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
+    font-size: 14px;
+    min-height: 0;
 }
 
 window#waybar {
-  background: transparent;
-  color: #cdd6f4;
+    background: transparent;
 }
 
-tooltip {}
+/* Catppuccin Mocha Colors */
+@define-color base   #1e1e2e;
+@define-color mantle #181825;
+@define-color crust  #11111b;
 
-#workspaces button {}
+@define-color text     #cdd6f4;
+@define-color subtext0 #a6adc8;
+@define-color subtext1 #bac2de;
 
-#workspaces button.active {
-  color: #9ccfd8;
-}
+@define-color surface0 #313244;
+@define-color surface1 #45475a;
+@define-color surface2 #585b70;
 
-#workspaces button.focused {
-  color: #9ccfd8;
-}
+@define-color overlay0 #6c7086;
+@define-color overlay1 #7f849c;
+@define-color overlay2 #9399b2;
 
-#workspaces button.urgent {}
+@define-color blue   #89b4fa;
+@define-color lavender #b4befe;
+@define-color sapphire #74c7ec;
+@define-color sky      #89dceb;
+@define-color teal     #94e2d5;
+@define-color green    #a6e3a1;
+@define-color yellow   #f9e2af;
+@define-color peach    #fab387;
+@define-color maroon   #eba0ac;
+@define-color red      #f38ba8;
+@define-color mauve    #cba6f7;
+@define-color pink     #f5c2e7;
+@define-color flamingo #f2cdcd;
+@define-color rosewater #f5e0dc;
 
-#workspaces button:hover {}
-
-#custom-language,
-#custom-updates,
-#custom-caffeine,
-#custom-weather,
+#workspaces,
 #window,
 #clock,
-#battery,
 #pulseaudio,
 #network,
-#workspaces,
+#cpu,
+#memory,
+#temperature,
+#battery,
+#bluetooth,
 #tray,
-#backlight {}
+#custom-launcher,
+#custom-power {
+    background: @base;
+    color: @text;
+    padding: 0px 16px;
+    margin: 4px 0px;
+    border-radius: 16px;
+    border: 2px solid @surface0;
+}
 
-#tray {}
+#custom-launcher {
+    background: @blue;
+    color: @crust;
+    padding: 0px 18px;
+    margin-right: 8px;
+    font-size: 20px;
+    border: none;
+}
 
-#workspaces {}
+#custom-launcher:hover {
+    background: @lavender;
+}
 
-#custom-caffeine {}
+#workspaces {
+    padding: 5px 3px;
+    border-color: @crust;
+}
 
-#custom-language {}
+#workspaces button {
+    padding: 0px 12px;
+    color: @subtext0;
+    border-radius: 16px;
+    color: transparent;
+    background-color: @mantle;
+    transition: all 0.3s ease-in-out;
+}
 
-#custom-updates {}
+#workspaces button.active {
+    color: @mantle;
+    background: @lavender;
+    min-width: 50px;
+    transition: all 0.3s ease-in-out;
+    font-size: 13px;
+}
 
-#window {}
+#workspaces button:hover {
+    background-color: @mauve;
+    color: @mantle;
+    border-radius: 16px;
+    min-width: 50px;
+    background-size: 400% 400%;
+}
 
-#clock {}
+#workspaces button.urgent {
+    background: @red;
+    color: @mantle;
+    border-radius: 50%;
+    min-width: 50px;
+    background-size: 400% 400%;
+    transition: all 0.3s ease-in-out;
+}
 
-#network {}
+#window {
+    color: @mauve;
+    font-weight: bold;
+}
 
-#pulseaudio {}
+#clock {
+    color: @sky;
+    font-weight: bold;
+    padding: 0px 20px;
+}
 
-#pulseaudio.microphone {}
+#bluetooth {
+    color: @blue;
+}
 
-#battery {}
+#pulseaudio {
+    color: @yellow;
+}
 
-#custom-weather {}
+#pulseaudio.muted {
+    color: @red;
+}
 
-#custom-endright {}
+#network {
+    color: @teal;
+}
+
+#network.disconnected {
+    color: @red;
+}
+
+#cpu {
+    color: @green;
+}
+
+#memory {
+    color: @peach;
+}
+
+#temperature {
+    color: @sapphire;
+}
+
+#temperature.critical {
+    color: @red;
+    animation: blink 0.5s linear infinite alternate;
+}
+
+#battery {
+    color: @flamingo;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: @teal;
+}
+
+#battery.warning:not(.charging) {
+    color: @yellow;
+}
+
+#battery.critical:not(.charging) {
+    color: @red;
+    animation: blink 0.5s linear infinite alternate;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+#custom-power {
+    background: @red;
+    color: @crust;
+    padding: 0px 18px;
+    margin-left: 8px;
+    font-size: 16px;
+    border: none;
+}
+
+#custom-power:hover {
+    background: @maroon;
+}
+
+@keyframes blink {
+    to {
+        opacity: 0.5;
+    }
+}
+
+tooltip {
+    background: @base;
+    border: 2px solid @surface0;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+tooltip label {
+    color: @text;
+}

@@ -1,6 +1,7 @@
 { pkgs, inputs, ... }:
 let
   launch-tui = import ../bin/launch-tui.nix { inherit pkgs; };
+  launch-wofi = import ../bin/launch-wofi.nix { inherit pkgs; };
 in
 {
   home.packages = with pkgs; [
@@ -9,6 +10,7 @@ in
     nautilus
     fzf
     launch-tui
+    launch-wofi
     jetbrains.idea
     vlc
     chromium

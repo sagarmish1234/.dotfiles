@@ -6,7 +6,6 @@
   imports = [
     ./modules
   ];
-
   home.sessionVariables = {
     # Firefox Wayland fixes
     MOZ_ENABLE_WAYLAND = "1";

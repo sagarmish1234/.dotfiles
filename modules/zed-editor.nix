@@ -20,8 +20,8 @@ lib.mkIf feature.editor.zed {
     userSettings = {
       theme = {
         mode = "dark";
-        dark = "Carbonfox - blurred";
-        light = "Carbonfox - blurred";
+        dark = "Catppuccin Mocha (Blur)";
+        light = "Catppuccin Mocha (Blur)";
       };
       vim_mode = true;
       # ... other settings
