@@ -28,14 +28,13 @@
       "SUPER SHIFT, F, exec, $fileManager"
 
       "SUPER, W, killactive,"
-      "SUPER, Backspace, killactive,"
       "SUPER, RETURN, exec, $terminal"
 
       # End active session
-      "SUPER, ESCAPE, exec, hyprlock"
-      "SUPER SHIFT, ESCAPE, exit,"
+      "SUPER, L, exec, hyprlock"
       "SUPER CTRL, ESCAPE, exec, reboot"
       "SUPER SHIFT CTRL, ESCAPE, exec, systemctl poweroff"
+      "SUPER, ESCAPE, exec, hyprshutdown"
 
       # Control tiling
       "SUPER, J, togglesplit, # dwindle"
