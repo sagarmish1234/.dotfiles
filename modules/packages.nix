@@ -12,5 +12,7 @@ in
     jetbrains.idea
     vlc
     chromium
+    gh
+    firefox
   ];
 }

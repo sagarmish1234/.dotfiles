@@ -1,6 +1,10 @@
-{ config, pkgs, ... }:
-
 {
+  lib,
+  feature,
+  pkgs,
+  ...
+}:
+lib.mkIf feature.editor.zed {
   # ... other configurations
   home.packages = with pkgs; [
     nixd

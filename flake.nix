@@ -25,10 +25,16 @@
 
   outputs =
     { nixpkgs, home-manager, ... }@inputs:
+    let
+      feature = import ./feature.nix;
+    in
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+          inherit feature;
+        };
         modules = [
           ./configuration.nix
           home-manager.nixosModules.default
@@ -44,6 +50,7 @@
             };
             home-manager.extraSpecialArgs = {
               inherit inputs;
+              inherit feature;
               system = "x86_64-linux";
             };
           }

@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./dev
     ./git.nix
     ./ghostty.nix
     ./vscode.nix
@@ -15,8 +16,7 @@
     ./zed-editor.nix
     ./terminal-apps.nix
     ./packages.nix
-    # ./modules/walker.nix
+    # ./walker.nix
     # ./modules/hyprpaper.nix
-    # Add other modules here
   ];
 }

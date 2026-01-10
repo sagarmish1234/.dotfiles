@@ -29,17 +29,6 @@
     #nixd
     #alejandra
 
-    # Rust
-    rustc
-    cargo
-    rustfmt
-    rust-analyzer
-    clippy
-    cargo-watch
-    cargo-edit
-    cargo-audit
-    bacon
-
     # Go
     #   go
     #   gopls
@@ -85,12 +74,6 @@
     #ccls
     #bear
     #valgrind
-
-    # Java
-    jdk
-    maven
-    gradle
-    jdt-language-server
 
     # Database tools
     #   postgresql

@@ -4,7 +4,7 @@
 {
 
   imports = [
-    ./modules/defaults.nix
+    ./modules
   ];
 
   programs.fish = {

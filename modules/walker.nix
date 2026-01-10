@@ -1,6 +1,10 @@
-{ inputs, ... }:
 {
-  imports = [ inputs.walker.homeManagerModules.default ];
+  lib,
+  feature,
+  inputs,
+  ...
+}:
+lib.mkIf feature.launcher.walker {
   programs.walker = {
     enable = true;
     runAsService = true;

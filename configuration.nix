@@ -8,13 +8,19 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./services
   ];
 
   # Bootloader.
   system.stateVersion = "25.11";
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
+  xdg.terminal-exec = {
+    enable = true;
+    settings = {
+      default = [ "ghostty.desktop" ];
+    };
+  };
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -91,7 +97,6 @@
   # services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
   # services.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
@@ -103,37 +108,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  # TLP battery management
-  services.tlp = {
-    enable = true;
-    settings = {
-      # CPU Scaling Governor
-      CPU_SCALING_GOVERNOR_ON_AC = "performance"; # When plugged in
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave"; # On battery
-
-      # Battery Charge Thresholds (for long-term health)
-      START_CHARGE_THRESH_BAT0 = 80; # Start charging when below 40%
-      STOP_CHARGE_THRESH_BAT0 = 80; # Stop charging at 80%
-
-      START_CHARGE_THRESH_BAT1 = 80;
-      STOP_CHARGE_THRESH_BAT1 = 80;
-      # Other common settings
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-      CPU_BOOST_ON_BAT = 0; # Disable CPU boost on battery
-      USB_AUTOSUSPEND = 1; # Enable USB autosuspend
-    };
-  };
-
   users.users.sagar = {
     isNormalUser = true;
     description = "Sagar Mishra";
@@ -142,40 +116,13 @@
       "wheel"
       "docker"
     ];
-    packages = with pkgs; [
-      gh
-    ];
   };
-
-  programs.firefox.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-    pkgs.kitty
-  ];
   environment.pathsToLink = [
     "/share/applications"
     "/share/xdg-desktop-portal"
   ];
-  programs.hyprland.enable = true; # enable Hyprland
 
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = true;
-    daemon.settings = {
-      features = {
-        buildkit = true;
-      };
-      registry-mirrors = [ "https://mirror.gcr.io" ];
-    };
-
-    autoPrune = {
-      enable = true;
-      dates = "weekly";
-      flags = [ "--all" ];
-    };
-  };
 }

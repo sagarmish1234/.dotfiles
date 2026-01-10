@@ -1,5 +1,10 @@
-{ pkgs, ... }:
 {
+  pkgs,
+  lib,
+  feature,
+  ...
+}:
+lib.mkIf feature.terminal.ghostty {
 
   xdg.terminal-exec.enable = true;
   xdg.terminal-exec.settings.default = [ "ghostty.desktop" ];
