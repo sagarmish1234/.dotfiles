@@ -2,6 +2,7 @@
 {
   imports = [
     ./dev
+    ./shell
     ./git.nix
     ./ghostty.nix
     ./vscode.nix

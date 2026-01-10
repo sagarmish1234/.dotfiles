@@ -7,12 +7,6 @@
     ./modules
   ];
 
-  programs.fish = {
-    enable = true;
-    shellInit = "
-      set fish_greeting
-    ";
-  };
   home.sessionVariables = {
     # Firefox Wayland fixes
     MOZ_ENABLE_WAYLAND = "1";

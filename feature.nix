@@ -15,6 +15,12 @@
     };
   };
 
+  shell = {
+    fish = true;
+    zsh = false;
+    bash = true;
+  };
+
   desktop = {
     hyprland = true;
     waybar = true;
