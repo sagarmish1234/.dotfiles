@@ -38,7 +38,7 @@
       exec-once = [
         "awww-daemon"
         # Wait a moment for daemon to start, then set wallpaper
-        "sleep 1 && awww img ~/Pictures/Wallpapers/Clearday.jpg --transition-type wipe --transition-fps 60 --transition-duration 2"
+        "sleep 1 && awww img ~/Pictures/Wallpapers/shaded_landscape.png --transition-type wipe --transition-fps 61 --transition-duration 2"
       ];
 
       bind = [
