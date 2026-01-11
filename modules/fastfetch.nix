@@ -3,127 +3,93 @@
   programs.fastfetch = {
     enable = true;
     settings = {
+      "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
+
       logo = {
-        source = "nixos_large";
+        type = "small";
         padding = {
-          top = 2;
-          right = 6;
+          top = 1;
           left = 2;
         };
       };
+
+      display = {
+        separator = "  ";
+        color = {
+          keys = "magenta";
+          title = "#b4befe";
+          separator = "#585b70";
+        };
+      };
+
       modules = [
-        "break"
         {
-          type = "custom";
-          format = "┌──────────────────────Hardware──────────────────────┐";
-          keyColor = "green";
-        }
-        {
-          type = "host";
-          key = " PC";
-          keyColor = "green";
-        }
-        {
-          type = "cpu";
-          key = "│ ├";
-          showPeCoreCount = true;
-          keyColor = "green";
-        }
-        {
-          type = "gpu";
-          key = "│ ├";
-          detectionMethod = "pci";
-          keyColor = "green";
-        }
-        {
-          type = "display";
-          key = "│ ├󱄄";
-          keyColor = "green";
-        }
-        {
-          type = "disk";
-          key = "│ ├󰋊";
-          keyColor = "green";
-        }
-        {
-          type = "memory";
-          key = "│ ├";
-          keyColor = "green";
-        }
-        {
-          type = "swap";
-          key = "└ └󰓡 ";
-          keyColor = "green";
-        }
-        {
-          type = "custom";
-          format = "└────────────────────────────────────────────────────┘";
-          keyColor = "green";
-        }
-        "break"
-        {
-          type = "custom";
-          format = "┌──────────────────────Software──────────────────────┐";
-          keyColor = "blue";
+          type = "title";
+          color = {
+            user = "#b4befe";
+            host = "#f5c2e7";
+          };
         }
 
+        "break"
+
+        {
+          type = "os";
+          key = "󰣇 OS";
+        }
         {
           type = "kernel";
-          key = "│ ├";
-          keyColor = "blue";
-        }
-        {
-          type = "wm";
-          key = "│ ├";
-          keyColor = "blue";
-        }
-        {
-          type = "de";
-          key = " DE";
-          keyColor = "blue";
-        }
-        {
-          type = "terminal";
-          key = "│ ├";
-          keyColor = "blue";
-        }
-        {
-          type = "packages";
-          key = "│ ├󰏖";
-          keyColor = "blue";
-        }
-        {
-          type = "wmtheme";
-          key = "│ ├󰉼";
-          keyColor = "blue";
-        }
-        {
-          type = "terminalfont";
-          key = "└ └";
-          keyColor = "blue";
-        }
-        {
-          type = "custom";
-          format = "└────────────────────────────────────────────────────┘";
-          keyColor = "blue";
-        }
-        "break"
-        {
-          type = "custom";
-          format = "┌────────────────Age / Uptime / Update───────────────┐";
-          keyColor = "magenta";
+          key = " Kernel";
         }
         {
           type = "uptime";
-          key = "󱫐 Uptime";
-          keyColor = "magenta";
+          key = "󰅐 Uptime";
+        }
+
+        "break"
+
+        {
+          type = "wm";
+          key = " WM";
         }
         {
-          type = "custom";
-          format = "└────────────────────────────────────────────────────┘";
-          keyColor = "magenta";
+          type = "terminal";
+          key = " Terminal";
         }
+        {
+          type = "shell";
+          key = " Shell";
+        }
+
         "break"
+
+        {
+          type = "cpu";
+          key = " CPU";
+        }
+        {
+          type = "gpu";
+          key = "󰍛 GPU";
+        }
+        {
+          type = "memory";
+          key = "󰑭 Memory";
+        }
+
+        "break"
+
+        {
+          type = "disk";
+          key = "󰋊 Disk";
+          folders = [ "/" ];
+        }
+
+        "break"
+
+        {
+          type = "colors";
+          symbol = "●";
+        }
       ];
     };
   };

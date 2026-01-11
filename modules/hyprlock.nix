@@ -16,7 +16,7 @@ lib.mkIf feature.desktop.hyprlock {
 
       background = {
         monitor = "";
-        path = "~/Pictures/Wallpapers/Cloudsnight.jpg";
+        path = "~/Pictures/Wallpapers/shaded_landscape.png";
         blur_passes = 3;
         blur_size = 8;
         noise = 0.02;
