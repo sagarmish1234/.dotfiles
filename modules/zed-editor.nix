@@ -10,6 +10,14 @@ lib.mkIf feature.editor.zed {
     nixd
     nil
   ];
+  catppuccin.zed = {
+    enable = true;
+    flavor = "mocha";
+    icons = {
+      enable = true;
+      flavor = "mocha";
+    };
+  };
   programs.zed-editor = {
     enable = true;
     extensions = [
@@ -18,11 +26,6 @@ lib.mkIf feature.editor.zed {
       "rust"
     ];
     userSettings = {
-      theme = {
-        mode = "dark";
-        dark = "Catppuccin Mocha (Blur)";
-        light = "Catppuccin Mocha (Blur)";
-      };
       vim_mode = true;
       # ... other settings
     };

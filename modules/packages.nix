@@ -1,9 +1,18 @@
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  catppuccin,
+  ...
+}:
 let
   launch-tui = import ../bin/launch-tui.nix { inherit pkgs; };
   launch-wofi = import ../bin/launch-wofi.nix { inherit pkgs; };
 in
 {
+  programs.firefox.enable = true;
+  catppuccin.firefox.accent = "peach";
+  catppuccin.firefox.enable = true;
+  catppuccin.firefox.flavor = "mocha";
   home.packages = with pkgs; [
     inputs.zen-browser.packages.${pkgs.system}.default
     libsForQt5.qtwayland
@@ -15,6 +24,5 @@ in
     vlc
     chromium
     gh
-    firefox
   ];
 }
