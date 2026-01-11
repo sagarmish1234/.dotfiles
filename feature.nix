@@ -27,6 +27,10 @@
     wofi = true;
     hypridle = true;
     hyprlock = true;
+    notification = {
+      swaync = true;
+      mako = false;
+    };
   };
 
   launcher = {

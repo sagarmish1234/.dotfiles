@@ -52,6 +52,7 @@ window#waybar {
 #bluetooth,
 #tray,
 #custom-launcher,
+#custom-notification,
 #custom-power {
     background: @base;
     color: @text;

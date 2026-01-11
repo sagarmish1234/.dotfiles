@@ -1,6 +1,10 @@
-{ pkgs, ... }:
-
 {
+  lib,
+  feature,
+  pkgs,
+  ...
+}:
+lib.mkIf feature.desktop.notification.mako {
   # Mako notification daemon
   services.mako = {
     enable = true;

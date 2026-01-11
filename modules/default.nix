@@ -19,6 +19,7 @@
     ./packages.nix
     ./hypridle.nix
     ./hyprlock.nix
+    ./swaync.nix
     # ./walker.nix
     # ./modules/hyprpaper.nix
   ];
