@@ -4,8 +4,8 @@
     bluetooth = true;
     printing = true;
     displayManager = {
-      sdm = true;
-      greetd = false;
+      sdm = false;
+      greetd = true;
     };
     batteryManager = {
       tlp = true;
