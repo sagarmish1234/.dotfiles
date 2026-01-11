@@ -8,6 +8,7 @@
     zen-browser.url = "github:youwen5/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     awww.url = "git+https://codeberg.org/LGFae/awww";
+    catppuccin.url = "github:catppuccin/nix/release-25.11";
 
     #Walker flake
     elephant.url = "github:abenz1267/elephant";
@@ -24,7 +25,12 @@
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }@inputs:
+    {
+      nixpkgs,
+      home-manager,
+      catppuccin,
+      ...
+    }@inputs:
     let
       feature = import ./feature.nix;
     in
@@ -37,6 +43,7 @@
         };
         modules = [
           ./configuration.nix
+          catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.default
           {
             home-manager = {
@@ -45,6 +52,7 @@
               users.sagar = {
                 imports = [
                   ./home.nix
+                  catppuccin.homeModules.catppuccin
                 ];
               };
             };
