@@ -6,5 +6,6 @@
     ./sdm.nix
     ./tlp.nix
     ./docker.nix
+    ./nvidia.nix
   ];
 }

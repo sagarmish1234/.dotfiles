@@ -24,5 +24,9 @@ in
     vlc
     chromium
     gh
+    qbittorrent-enhanced
+    adwaita-icon-theme
+    celluloid
+    lshw
   ];
 }

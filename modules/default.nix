@@ -20,6 +20,7 @@
     ./hypridle.nix
     ./hyprlock.nix
     ./swaync.nix
+    ./mpv.nix
     # ./walker.nix
     # ./modules/hyprpaper.nix
   ];

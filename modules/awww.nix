@@ -3,11 +3,26 @@
   inputs,
   ...
 }:
+let
+  wallpaper_config = import ../config/wallpaper/config.nix;
+  launch-wallpaper = import ../bin/launch-wallpaper.nix {
+    inherit pkgs;
+    inherit wallpaper_config;
+    inherit inputs;
+  };
 
+  wallpaper-switcher = import ../bin/wallpaper-switcher.nix {
+    inherit pkgs;
+    inherit wallpaper_config;
+    inherit inputs;
+  };
+in
 {
   # Install awww
-  home.packages = with pkgs; [
+  home.packages = [
     inputs.awww.packages.${pkgs.stdenv.hostPlatform.system}.awww
+    launch-wallpaper
+    wallpaper-switcher
   ];
 
   # Ensure wallpaper directory exists
@@ -36,14 +51,12 @@
     settings = {
       # Start awww daemon on Hyprland startup
       exec-once = [
-        "awww-daemon"
-        # Wait a moment for daemon to start, then set wallpaper
-        "sleep 1 && awww img ~/Pictures/Wallpapers/shaded_landscape.png --transition-type wipe --transition-fps 61 --transition-duration 2"
+        "${launch-wallpaper}/bin/launch-wallpaper"
       ];
 
       bind = [
         # Optional: Add wallpaper switcher binding
-        "SUPER SHIFT, W, exec, ~/.config/hypr/scripts/wallpaper-switcher.sh"
+        "SUPER SHIFT, W, exec, ${wallpaper-switcher}/bin/wallpaper-switcher"
       ];
     };
   };
