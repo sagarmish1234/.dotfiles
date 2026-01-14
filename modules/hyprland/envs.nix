@@ -1,14 +1,6 @@
 {
   ...
 }:
-let
-
-  nvidiaEnv = [
-    "NVD_BACKEND,direct"
-    "LIBVA_DRIVER_NAME,nvidia"
-    "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-  ];
-in
 {
   wayland.windowManager.hyprland.settings = {
     # Environment variables
@@ -43,7 +35,7 @@ in
       "EDITOR,nvim"
 
       # GTK theme
-      "GTK_THEME, Adwaita:dark"
+      # "GTK_THEME, Adwaita:dark"
 
       # Podman compatibility. Probably need to add cfg.env?
       # "DOCKER_HOST,unix://$XDG_RUNTIME_DIR/podman/podman.sock"

@@ -10,14 +10,14 @@ lib.mkIf feature.editor.zed {
     nixd
     nil
   ];
-  catppuccin.zed = {
-    enable = true;
-    flavor = "mocha";
-    icons = {
-      enable = true;
-      flavor = "mocha";
-    };
-  };
+  # catppuccin.zed = {
+  #   enable = true;
+  #   flavor = "mocha";
+  #   icons = {
+  #     enable = true;
+  #     flavor = "mocha";
+  #   };
+  # };
   programs.zed-editor = {
     enable = true;
     extensions = [

@@ -1,9 +1,11 @@
 {
   lib,
   feature,
+  catppuccin,
   ...
 }:
 lib.mkIf feature.desktop.hyprlock {
+  catppuccin.hyprlock.enable = false;
   programs.hyprlock = {
     enable = true;
     settings = {

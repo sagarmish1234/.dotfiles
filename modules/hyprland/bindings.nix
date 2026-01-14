@@ -34,7 +34,7 @@
       "SUPER, L, exec, hyprlock"
       "SUPER CTRL, ESCAPE, exec, reboot"
       "SUPER SHIFT CTRL, ESCAPE, exec, systemctl poweroff"
-      "SUPER, ESCAPE, exec, hyprshutdown"
+      "SUPER, ESCAPE, exec, wlogout"
 
       # Control tiling
       "SUPER, J, togglesplit, # dwindle"

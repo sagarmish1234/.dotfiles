@@ -10,9 +10,6 @@ let
 in
 {
   programs.firefox.enable = true;
-  catppuccin.firefox.accent = "peach";
-  catppuccin.firefox.enable = true;
-  catppuccin.firefox.flavor = "mocha";
   home.packages = with pkgs; [
     inputs.zen-browser.packages.${pkgs.system}.default
     libsForQt5.qtwayland
@@ -26,7 +23,6 @@ in
     gh
     qbittorrent-enhanced
     adwaita-icon-theme
-    celluloid
     lshw
   ];
 }
