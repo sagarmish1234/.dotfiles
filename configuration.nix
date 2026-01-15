@@ -20,6 +20,10 @@
   catppuccin.enable = true;
   programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
 
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
   environment.systemPackages = with pkgs; [
     wlogout
   ];

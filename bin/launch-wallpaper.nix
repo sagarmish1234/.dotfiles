@@ -45,6 +45,6 @@ pkgs.writeShellApplication {
     fi
     NEXT_WALLPAPER="''${WALLPAPERS[$NEXT_INDEX]}"
     echo "$NEXT_WALLPAPER" > "$STATE_FILE"
-    sleep 1 && ${awww}/bin/awww img "$NEXT_WALLPAPER" --transition-type wipe --transition-fps 30 --transition-duration 0
+    sleep 1 && ${awww}/bin/awww img "$NEXT_WALLPAPER" --transition-type wipe --transition-fps 30 --transition-duration 2
   '';
 }
