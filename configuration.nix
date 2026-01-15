@@ -26,7 +26,6 @@
 
   system.stateVersion = "25.11";
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   xdg.terminal-exec = {
     enable = true;
     settings = {

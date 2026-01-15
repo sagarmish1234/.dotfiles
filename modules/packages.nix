@@ -10,6 +10,8 @@ let
 in
 {
   programs.firefox.enable = true;
+  programs.eza.enable = true;
+  programs.yazi.enable = true;
   home.packages = with pkgs; [
     inputs.zen-browser.packages.${pkgs.system}.default
     libsForQt5.qtwayland
@@ -24,5 +26,6 @@ in
     qbittorrent-enhanced
     adwaita-icon-theme
     lshw
+    spotify
   ];
 }

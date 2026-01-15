@@ -27,6 +27,11 @@ lib.mkIf feature.editor.zed {
     ];
     userSettings = {
       vim_mode = true;
+      terminal = {
+        shell = {
+          program = "fish";
+        };
+      };
       # ... other settings
     };
     # Recommended: Enable nix-ld to help LSP servers resolve libraries
