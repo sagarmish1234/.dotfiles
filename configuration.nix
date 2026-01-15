@@ -26,6 +26,8 @@
   };
   environment.systemPackages = with pkgs; [
     wlogout
+    glib
+    gsettings-desktop-schemas
   ];
 
   system.stateVersion = "25.11";
