@@ -25,6 +25,7 @@
 
         modules-left = [
           "hyprland/workspaces"
+          "tray"
         ];
         modules-center = [
           "hyprland/window"

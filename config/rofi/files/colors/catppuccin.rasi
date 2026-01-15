@@ -19,4 +19,5 @@
     selected:       rgba(203, 166, 247, 0.95); /* Mauve */
     active:         rgba(166, 227, 161, 0.95); /* Green */
     urgent:         rgba(243, 139, 168, 0.95); /* Red */
+    secondary:      rgba(137, 180, 250, 0.95);
 }

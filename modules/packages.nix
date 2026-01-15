@@ -23,7 +23,7 @@ in
     vlc
     chromium
     gh
-    qbittorrent-enhanced
+    qbittorrent
     adwaita-icon-theme
     lshw
     spotify
