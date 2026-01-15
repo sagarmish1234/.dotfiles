@@ -24,7 +24,10 @@
   desktop = {
     hyprland = true;
     waybar = true;
-    wofi = true;
+    launcher = {
+      wofi = false;
+      rofi = true;
+    };
     hypridle = true;
     hyprlock = true;
     notification = {

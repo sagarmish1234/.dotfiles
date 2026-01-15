@@ -21,6 +21,7 @@
     ./hyprlock.nix
     ./swaync.nix
     ./mpv.nix
+    ./rofi.nix
     # ./walker.nix
     # ./modules/hyprpaper.nix
   ];

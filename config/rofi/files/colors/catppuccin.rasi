@@ -1,0 +1,22 @@
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ *
+ * Colors
+ **/
+
+
+* {
+    /* Base surfaces */
+    background:     rgba(30, 30, 46, 0.85);   /* Base */
+    background-alt: rgba(24, 24, 37, 0.85);   /* Mantle */
+
+    /* Text */
+    foreground:     #CDD6F4;                  /* Text */
+
+    /* Accents */
+    selected:       rgba(203, 166, 247, 0.95); /* Mauve */
+    active:         rgba(166, 227, 161, 0.95); /* Green */
+    urgent:         rgba(243, 139, 168, 0.95); /* Red */
+}

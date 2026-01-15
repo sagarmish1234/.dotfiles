@@ -27,5 +27,6 @@ in
     adwaita-icon-theme
     lshw
     spotify
+    vim
   ];
 }
