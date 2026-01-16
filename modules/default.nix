@@ -22,6 +22,7 @@
     ./swaync.nix
     ./mpv.nix
     ./rofi.nix
+    ./webapps.nix
     # ./walker.nix
     # ./modules/hyprpaper.nix
   ];

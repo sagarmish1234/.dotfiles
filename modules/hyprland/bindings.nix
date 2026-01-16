@@ -9,7 +9,7 @@
     };
     bind = [
 
-      "SUPER SHIFT, SPACE, exec, pkill -SIGUSR1 waybar"
+      # "SUPER SHIFT, SPACE, exec, pkill -SIGUSR1 waybar"
       "SUPER, SPACE, exec, ~/.config/rofi/launchers/type-1/launcher.sh"
       "SUPER, F, fullscreen, 0" # Fullscreen (maximize)
       "SUPER, M, fullscreen, 1" # Maximize (keep gaps and bar)
