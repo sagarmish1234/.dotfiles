@@ -24,6 +24,13 @@
       "ALT SHIFT, TAB, cyclenext, prev" # Cycle to previous window
       "ALT SHIFT, TAB, bringactivetotop" # Bring it to front
 
+      #Taking a screenshot
+      "SUPER, PRINT, exec, hyprshot -m window"
+      # Screenshot a monitor
+      ", PRINT, exec, hyprshot -m output"
+      # Screenshot a region
+      "SUPER SHIFT, PRINT, exec, hyprshot -m region"
+
       # Launch file manager
       "SUPER SHIFT, F, exec, $fileManager"
 

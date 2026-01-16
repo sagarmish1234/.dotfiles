@@ -29,5 +29,6 @@ in
     spotify
     vim
     imv
+    hyprshot
   ];
 }
