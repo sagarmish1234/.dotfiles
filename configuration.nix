@@ -28,8 +28,19 @@
     wlogout
     glib
     gsettings-desktop-schemas
+    polkit
+    exfatprogs
+    gparted
   ];
 
+  services.gvfs.enable = true;
+  # programs.thunar = {
+  #   enable = true;
+  #   plugins = with pkgs.xfce; [
+  #     thunar-archive-plugin
+  #     thunar-volman
+  #   ];
+  # };
   system.stateVersion = "25.11";
   networking.hostName = "nixos"; # Define your hostname.
   xdg.terminal-exec = {
