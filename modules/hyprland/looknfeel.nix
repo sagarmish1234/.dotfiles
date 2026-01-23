@@ -38,7 +38,8 @@
         enabled = true;
         size = 7;
         passes = 4;
-
+        new_optimizations = true;
+        xray = false;
         vibrancy = 0.1696;
       };
     };

@@ -38,10 +38,10 @@
       "SUPER, RETURN, exec, $terminal"
 
       # End active session
-      "SUPER, L, exec, hyprlock"
+      "SUPER, L, exec, noctalia-shell ipc call lockScreen lock"
       "SUPER CTRL, ESCAPE, exec, reboot"
       "SUPER SHIFT CTRL, ESCAPE, exec, systemctl poweroff"
-      "SUPER, ESCAPE, exec, wlogout"
+      "SUPER, ESCAPE, exec, noctalia-shell ipc call sessionMenu toggle"
 
       # Control tiling
       "SUPER, J, togglesplit, # dwindle"

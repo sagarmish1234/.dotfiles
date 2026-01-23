@@ -13,10 +13,11 @@
 
       # "dropbox-cli start"  # Uncomment to run Dropbox
       "hypridle"
+      "noctalia-shell"
     ];
 
-    exec = [
-      "pkill -SIGUSR2 waybar || waybar"
-    ];
+    # exec = [
+    #   "pkill -SIGUSR2 .quickshell || noctalia-shell"
+    # ];
   };
 }

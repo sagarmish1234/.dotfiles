@@ -44,6 +44,7 @@
     layerrule = [
       # Proper background blur for wofi
       "blur,rofi"
+      # "blur,^noctalia-background.*"
       # "blur,waybar"
     ];
   };

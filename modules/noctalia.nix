@@ -401,7 +401,7 @@
         countdownDuration = 10000;
         enableCountdown = false;
         largeButtonsLayout = "grid";
-        largeButtonsStyle = true;
+        largeButtonsStyle = false;
         position = "center";
 
         powerOptions = [
@@ -432,7 +432,7 @@
         ];
 
         showHeader = true;
-        showNumberLabels = true;
+        showNumberLabels = false;
       };
 
       settingsVersion = 43;

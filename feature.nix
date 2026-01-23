@@ -31,7 +31,7 @@
     hypridle = true;
     hyprlock = true;
     notification = {
-      swaync = true;
+      swaync = false;
       mako = false;
     };
   };

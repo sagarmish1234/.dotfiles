@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   catppuccin,
+  quickshell,
   ...
 }:
 let
@@ -30,5 +31,11 @@ in
     vim
     imv
     hyprshot
+    libnotify
+    cliphist
+    matugen
+    cava
+    evolution-data-server
+    quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell
   ];
 }

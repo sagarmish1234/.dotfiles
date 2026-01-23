@@ -9,7 +9,18 @@
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     awww.url = "git+https://codeberg.org/LGFae/awww";
     catppuccin.url = "github:catppuccin/nix/release-25.11";
+    quickshell = {
+      # add ?ref=<tag> to track a tag
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
 
+      # THIS IS IMPORTANT
+      # Mismatched system dependencies will lead to crashes and other issues.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     #Walker flake
     elephant.url = "github:abenz1267/elephant";
     walker = {
@@ -34,6 +45,7 @@
       home-manager,
       catppuccin,
       noctalia,
+      quickshell,
       ...
     }@inputs:
     let
@@ -54,6 +66,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              backupFileExtension = "bak";
               users.sagar = {
                 imports = [
                   ./home.nix
@@ -65,6 +78,7 @@
             home-manager.extraSpecialArgs = {
               inherit inputs;
               inherit feature;
+              inherit quickshell;
               system = "x86_64-linux";
             };
           }
