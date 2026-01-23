@@ -16,6 +16,10 @@
       url = "github:abenz1267/walker";
       inputs.elephant.follows = "elephant";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Home Manager
     home-manager = {
@@ -29,6 +33,7 @@
       nixpkgs,
       home-manager,
       catppuccin,
+      noctalia,
       ...
     }@inputs:
     let
@@ -53,6 +58,7 @@
                 imports = [
                   ./home.nix
                   catppuccin.homeModules.catppuccin
+                  noctalia.homeModules.default
                 ];
               };
             };
