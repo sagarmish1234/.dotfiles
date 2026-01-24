@@ -30,5 +30,7 @@ in
     vim
     imv
     hyprshot
+    quickshell
+    qt6.qtdeclarative
   ];
 }
