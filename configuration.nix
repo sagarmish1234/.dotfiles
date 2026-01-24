@@ -6,6 +6,7 @@
   config,
   pkgs,
   catppuccin,
+  nix-cachyos-kernel,
   ...
 }:
 
@@ -16,7 +17,10 @@
     ./services
   ];
   # Bootloader.
-  #
+
+  #Use Cachyos kernel
+  nixpkgs.overlays = [ nix-cachyos-kernel.overlays.default ];
+  boot.kernelPackages = pkgs.linuxKernel.packagesFor pkgs.cachyosKernels.linux-cachyos-latest;
   catppuccin.enable = true;
   programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
 
@@ -99,7 +103,7 @@
     };
 
     # Kernel
-    kernelPackages = pkgs.linuxPackages_latest;
+    # kernelPackages = pkgs.linuxPackages_latest;
   };
 
   # Set your time zone.

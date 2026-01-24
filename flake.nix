@@ -9,6 +9,7 @@
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     awww.url = "git+https://codeberg.org/LGFae/awww";
     catppuccin.url = "github:catppuccin/nix/release-25.11";
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
     #Walker flake
     elephant.url = "github:abenz1267/elephant";
@@ -34,6 +35,7 @@
       home-manager,
       catppuccin,
       noctalia,
+      nix-cachyos-kernel,
       ...
     }@inputs:
     let
@@ -45,6 +47,7 @@
         specialArgs = {
           inherit inputs;
           inherit feature;
+          inherit nix-cachyos-kernel;
         };
         modules = [
           ./configuration.nix
