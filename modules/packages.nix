@@ -24,7 +24,6 @@ in
     chromium
     gh
     qbittorrent
-    adwaita-icon-theme
     lshw
     spotify
     vim
