@@ -35,7 +35,6 @@
       home-manager,
       catppuccin,
       noctalia,
-      nix-cachyos-kernel,
       ...
     }@inputs:
     let
@@ -47,7 +46,6 @@
         specialArgs = {
           inherit inputs;
           inherit feature;
-          inherit nix-cachyos-kernel;
         };
         modules = [
           ./configuration.nix

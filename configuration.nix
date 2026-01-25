@@ -6,7 +6,7 @@
   config,
   pkgs,
   catppuccin,
-  nix-cachyos-kernel,
+  inputs,
   ...
 }:
 
@@ -16,11 +16,9 @@
     ./hardware-configuration.nix
     ./services
   ];
-  # Bootloader.
 
   #Use Cachyos kernel
-  nixpkgs.overlays = [ nix-cachyos-kernel.overlays.default ];
-  boot.kernelPackages = pkgs.linuxKernel.packagesFor pkgs.cachyosKernels.linux-cachyos-latest;
+  nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.default ];
   catppuccin.enable = true;
   programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
 
@@ -34,7 +32,6 @@
     gsettings-desktop-schemas
     polkit
     exfatprogs
-    gparted
   ];
 
   services.gvfs.enable = true;
@@ -53,17 +50,14 @@
       default = [ "ghostty.desktop" ];
     };
   };
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Enable networking
   networking.networkmanager.enable = true;
   environment.variables.QT_QPA_PLATFORM = "wayland";
 
-  #Nvidia driver package
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = false;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
   nix = {
     settings = {
       experimental-features = [
@@ -103,7 +97,7 @@
       };
       efi.canTouchEfiVariables = true;
     };
-
+    kernelPackages = pkgs.linuxKernel.packagesFor pkgs.cachyosKernels.linux-cachyos-latest;
     # Kernel
     # kernelPackages = pkgs.linuxPackages_latest;
   };
