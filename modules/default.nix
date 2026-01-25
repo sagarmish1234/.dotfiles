@@ -23,7 +23,8 @@
     ./mpv.nix
     ./rofi.nix
     ./webapps.nix
-    ./noctalia.nix
+    # ./noctalia.nix
+    ./theme.nix
     # ./walker.nix
     # ./modules/hyprpaper.nix
   ];

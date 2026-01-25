@@ -44,7 +44,6 @@ lib.mkIf feature.terminal.ghostty {
         "super+control+shift+alt+arrow_left=resize_split:left,100"
         "super+control+shift+alt+arrow_right=resize_split:right,100"
       ];
-      theme = "catppuccin-mocha";
       # Transparency (actual blur handled by compositor)
       background-opacity = 0.75;
 

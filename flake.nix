@@ -8,9 +8,11 @@
     zen-browser.url = "github:youwen5/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     awww.url = "git+https://codeberg.org/LGFae/awww";
-    catppuccin.url = "github:catppuccin/nix/release-25.11";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
-
+    stylix = {
+      url = "github:nix-community/stylix/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     #Walker flake
     elephant.url = "github:abenz1267/elephant";
     walker = {
@@ -33,7 +35,6 @@
     {
       nixpkgs,
       home-manager,
-      catppuccin,
       noctalia,
       ...
     }@inputs:
@@ -49,16 +50,16 @@
         };
         modules = [
           ./configuration.nix
-          catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.default
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              backupFileExtension = "bak";
               users.sagar = {
                 imports = [
                   ./home.nix
-                  catppuccin.homeModules.catppuccin
+                  inputs.stylix.homeModules.stylix
                   noctalia.homeModules.default
                 ];
               };

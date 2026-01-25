@@ -5,7 +5,6 @@
 {
   config,
   pkgs,
-  catppuccin,
   inputs,
   ...
 }:
@@ -19,7 +18,6 @@
 
   #Use Cachyos kernel
   nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.default ];
-  catppuccin.enable = true;
   programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
 
   programs.hyprland = {
