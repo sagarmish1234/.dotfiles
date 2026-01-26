@@ -32,12 +32,7 @@
     hyprlock = true;
     notification = {
       swaync = true;
-      mako = false;
     };
-  };
-
-  launcher = {
-    walker = false;
   };
 
   terminal = {
