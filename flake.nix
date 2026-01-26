@@ -23,7 +23,15 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      # You can override the input nixpkgs to follow your system's
+      # instance of nixpkgs. This is safe to do as nvf does not depend
+      # on a binary cache.
+      inputs.nixpkgs.follows = "nixpkgs";
+      # Optionally, you can also override individual plugins
+      # for example:
+    };
     # Home Manager
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -50,6 +58,7 @@
         };
         modules = [
           ./configuration.nix
+          inputs.nvf.nixosModules.default
           home-manager.nixosModules.default
           {
             home-manager = {
