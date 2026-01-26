@@ -1,4 +1,4 @@
-{ pkgs,... }:
+{ pkgs, ... }:
 {
 
   programs.nvf = {
@@ -13,7 +13,14 @@
       vim.dashboard.startify.enable = true;
       vim.statusline.lualine.enable = true;
       vim.tabline.nvimBufferline.enable = true;
-      vim.filetree.neo-tree.enable = true;
+      vim.filetree.neo-tree = {
+        enable = true;
+        setupOpts = {
+          filesystem = {
+            use_libuv_file_watcher = true; # Automatically watch for file changes
+          };
+        };
+      };
       vim.telescope.enable = true;
       vim.binds.whichKey.enable = true;
       vim.autocomplete.nvim-cmp.enable = true;
