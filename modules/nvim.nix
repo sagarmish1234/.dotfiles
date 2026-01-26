@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-{
-
+{pkgs, ...}: {
   programs.nvf = {
     enable = true;
 
@@ -10,7 +8,6 @@
       vim.viAlias = false;
       vim.vimAlias = true;
       vim.mini.animate.enable = true;
-      vim.minimap.minimap-vim.enable = true;
 
       vim.dashboard.startify.enable = true;
       vim.statusline.lualine.enable = true;
@@ -72,7 +69,6 @@
           lazygit = {
             enable = true;
             mappings.open = "<leader>gg";
-
           }; # Adds <leader>gg for lazygit, just like LazyVim
           mappings = {
             open = "<C-`>"; # Default toggle key
@@ -114,5 +110,4 @@
       };
     };
   };
-
 }
