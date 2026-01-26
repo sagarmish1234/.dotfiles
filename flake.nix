@@ -69,6 +69,8 @@
                 imports = [
                   ./home.nix
                   inputs.stylix.homeModules.stylix
+
+                  inputs.nvf.homeModules.default
                   noctalia.homeModules.default
                 ];
               };

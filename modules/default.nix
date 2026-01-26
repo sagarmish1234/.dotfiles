@@ -25,6 +25,7 @@
     ./webapps.nix
     # ./noctalia.nix
     ./theme.nix
+    ./nvim.nix
     # ./walker.nix
     # ./modules/hyprpaper.nix
   ];
