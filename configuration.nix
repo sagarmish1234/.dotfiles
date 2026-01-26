@@ -19,6 +19,7 @@
   #Use Cachyos kernel
   nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
   programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -40,7 +41,6 @@
   #     thunar-volman
   #   ];
   # };
-
   system.stateVersion = "25.11";
   networking.hostName = "nixos"; # Define your hostname.
   xdg.terminal-exec = {
