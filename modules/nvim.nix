@@ -10,6 +10,8 @@
       vim.viAlias = false;
       vim.vimAlias = true;
       vim.mini.animate.enable = true;
+      vim.minimap.minimap-vim.enable = true;
+
       vim.dashboard.startify.enable = true;
       vim.statusline.lualine.enable = true;
       vim.tabline.nvimBufferline.enable = true;
@@ -97,8 +99,11 @@
         nvim-web-devicons.enable = true;
         indent-blankline.enable = true; # Adds the vertical indentation guides
       };
+      vim.lsp = {
+        enable = true;
+        formatOnSave = true;
+      };
       vim.languages = {
-        enableLSP = true;
         enableTreesitter = true;
         enableFormat = true;
         # Replicate LazyVim language extras
