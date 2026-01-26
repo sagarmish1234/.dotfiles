@@ -23,7 +23,7 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    nvf.url = "github:notashelf/nvf";
     # Home Manager
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -50,6 +50,7 @@
         };
         modules = [
           ./configuration.nix
+          # inputs.nvf.nixosModules.default
           home-manager.nixosModules.default
           {
             home-manager = {
@@ -61,7 +62,7 @@
                   ./home.nix
                   inputs.stylix.homeModules.stylix
 
-                  inputs.nvf.homeModules.default
+                  inputs.nvf.homeManagerModules.default
                   noctalia.homeModules.default
                 ];
               };

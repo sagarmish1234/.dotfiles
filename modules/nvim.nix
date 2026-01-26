@@ -57,11 +57,6 @@
           desc = "Go to Right Window";
         }
       ];
-      vim.theme = {
-        enable = true;
-        name = "catppuccin";
-        style = "mocha"; # Options: storm, moon, night, day
-      };
       vim.terminal = {
         toggleterm = {
           enable = true;
