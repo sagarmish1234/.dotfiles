@@ -5,14 +5,12 @@
   ...
 }:
 lib.mkIf feature.terminal.ghostty {
-
   xdg.terminal-exec.enable = true;
-  xdg.terminal-exec.settings.default = [ "ghostty.desktop" ];
+  xdg.terminal-exec.settings.default = ["ghostty.desktop"];
   programs.ghostty = {
     enable = true;
     enableFishIntegration = true;
     settings = {
-
       command = "${pkgs.fish}/bin/fish";
 
       # Font settings
@@ -22,8 +20,8 @@ lib.mkIf feature.terminal.ghostty {
 
       # Window styling
       window-theme = "ghostty";
-      window-padding-x = 14;
-      window-padding-y = 14;
+      window-padding-x = 10;
+      window-padding-y = 10;
       confirm-close-surface = false;
       resize-overlay = "never";
       gtk-toolbar-style = "flat";

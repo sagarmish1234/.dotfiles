@@ -95,6 +95,7 @@
         tabstop = 2;
         expandtab = true;
         shell = "${pkgs.fish}/bin/fish";
+        clipboard = "unnamedplus";
       };
       vim.visuals = {
         nvim-web-devicons.enable = true;
