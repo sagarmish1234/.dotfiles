@@ -11,7 +11,6 @@
     ./hyprland.nix
     ./waybar.nix
     ./awww.nix
-    ./terminal-apps.nix
     ./packages.nix
     ./hypridle.nix
     ./hyprlock.nix
