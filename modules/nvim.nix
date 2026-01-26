@@ -84,6 +84,11 @@
         borders.enable = true; # Adds rounded borders to popups/LSP windows
         illuminate.enable = true; # Highlights other uses of the word under cursor
       };
+      vim.git = {
+        enable = true;
+        gitsigns.enable = true;
+        gitsigns.codeActions.enable = true; # Allows staging hunks directly
+      };
       vim.options = {
         autoindent = true;
         shiftwidth = 2;
