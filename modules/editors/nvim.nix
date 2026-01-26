@@ -8,8 +8,23 @@
       vim.viAlias = false;
       vim.vimAlias = true;
       vim.mini.animate.enable = true;
+      vim.autopairs.nvim-autopairs = {
+        enable = true;
+        # Optional: configure nvim-autopairs specific options
+        setupOpts = {
+          check_ts = true; # Enable Treesitter integration for smarter pairing
+          disable_filetype = ["TelescopePrompt"]; # Avoid double-closing in search
+        };
+      };
 
-      vim.dashboard.startify.enable = true;
+      vim.dashboard = {
+        alpha = {
+          enable = true;
+          # Choose a theme: "dashboard" (standard), "startify", or "theta"
+          # "theta" is a modern theme with recent files and status info.
+          theme = "theta";
+        };
+      };
       vim.statusline.lualine.enable = true;
       vim.tabline.nvimBufferline.enable = true;
       vim.filetree.neo-tree = {
@@ -91,6 +106,7 @@
       };
       vim.options = {
         autoindent = true;
+        smartindent = true;
         shiftwidth = 2;
         tabstop = 2;
         expandtab = true;
