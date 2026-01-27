@@ -1,7 +1,4 @@
-{
-  ...
-}:
-{
+{...}: {
   programs.git = {
     enable = true;
     settings = {
@@ -10,7 +7,5 @@
         email = "sagarmish1234@gmail.com";
       };
     };
-    # Add other git configurations here
   };
-
 }
