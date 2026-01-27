@@ -5,4 +5,5 @@
     polarity = "dark";
   };
   stylix.targets.gtk.enable = false;
+  stylix.targets.noctalia-shell.enable = false;
 }

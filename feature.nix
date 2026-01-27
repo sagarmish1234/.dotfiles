@@ -23,7 +23,7 @@
 
   desktop = {
     hyprland = true;
-    waybar = true;
+    waybar = false;
     launcher = {
       wofi = false;
       rofi = true;
@@ -31,7 +31,7 @@
     hypridle = true;
     hyprlock = true;
     notification = {
-      swaync = true;
+      swaync = false;
     };
   };
 

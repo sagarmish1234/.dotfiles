@@ -1,7 +1,4 @@
-{
-  ...
-}:
-{
+{...}: {
   wayland.windowManager.hyprland.settings = {
     exec-once = [
       # "hypridle & mako & waybar & fcitx5"
@@ -13,10 +10,11 @@
 
       # "dropbox-cli start"  # Uncomment to run Dropbox
       "hypridle"
+      "noctalia-shell"
     ];
 
-    exec = [
-      "pkill -SIGUSR2 waybar || waybar"
-    ];
+    # exec = [
+    #   "pkill -SIGUSR2 waybar || waybar"
+    # ];
   };
 }

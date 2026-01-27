@@ -148,7 +148,12 @@
         enableTreesitter = true;
         enableFormat = true;
         # Replicate LazyVim language extras
-        nix.enable = true;
+        nix = {
+          enable = true;
+          lsp = {
+            servers = ["nixd"];
+          };
+        };
         python.enable = true;
         rust.enable = true;
         ts.enable = true; # TypeScript
