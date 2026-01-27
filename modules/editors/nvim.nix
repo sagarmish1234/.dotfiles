@@ -7,7 +7,9 @@
     settings = {
       vim.viAlias = false;
       vim.vimAlias = true;
-      vim.mini.animate.enable = true;
+      vim.mini.animate.enable = false;
+      vim.minimap.codewindow.enable = true;
+      vim.minimap.minimap-vim.enable = true;
       vim.autopairs.nvim-autopairs = {
         enable = true;
         # Optional: configure nvim-autopairs specific options
@@ -42,6 +44,27 @@
       vim.globals.mapleader = " ";
       vim.globals.maplocalleader = "\\";
       vim.keymaps = [
+        {
+          key = "gd";
+          mode = "n";
+          action = ":Telescope lsp_definitions<CR>";
+          desc = "Go to Definition";
+        }
+
+        {
+          key = "gr";
+          mode = "n";
+          action = ":Telescope lsp_references<CR>";
+          desc = "Go to References";
+        }
+
+        {
+          key = "gi";
+          mode = "n";
+          action = ":Telescope lsp_implementations<CR>";
+          desc = "Go to Implementations";
+        }
+
         {
           key = "<C-s>";
           mode = [
