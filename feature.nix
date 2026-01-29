@@ -43,10 +43,13 @@
     zed = true;
     vscode = true;
     intellij = true;
+    nvim = true;
   };
 
   dev = {
     rust = true;
     java = false;
+    python = true;
+    go = false;
   };
 }

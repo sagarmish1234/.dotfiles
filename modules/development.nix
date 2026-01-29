@@ -3,54 +3,9 @@
   pkgs,
   lib,
   ...
-}:
-{
-
+}: {
   # Development tools
   home.packages = with pkgs; [
-    # Version control
-    # lazygit
-    # gh
-    #gitlab
-    # hub
-
-    # Editors and IDEs
-    #neovim #(configured via home-manager programs.neovim)
-    # vscode
-    #vim
-    #emacs
-
-    # Language servers and tools
-    # Nix
-    #nil
-    #nixpkgs-fmt
-    #statix
-    #deadnix
-    #nixd
-    #alejandra
-
-    # Go
-    #   go
-    #   gopls
-    #   gotools
-    #   go-tools
-    #   golangci-lint
-    #   delve
-    #   gomodifytags
-    #   gotests
-    #   impl
-
-    # Python
-    python3
-    python3Packages.pip
-    python3Packages.virtualenv
-    #python3Packages.black
-    #python3Packages.pylint
-    python3Packages.pytest
-    #python3Packages.ipython
-    #pyright
-    #ruff
-
     # Node.js
     nodejs
     #nodePackages.pnpm
@@ -212,10 +167,6 @@
   };
 
   # Git configuration
-  programs.git = {
-    enable = true;
-    #  lfs.enable = true;
-  };
 
   # Enable lorri for automatic nix-shell
   services.lorri.enable = true;

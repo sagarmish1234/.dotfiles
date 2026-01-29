@@ -1,15 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
 {
   config,
   pkgs,
   inputs,
   ...
-}:
-
-{
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -17,8 +14,8 @@
   ];
 
   #Use Cachyos kernel
-  nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
-  programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
+  # nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
+  programs.gdk-pixbuf.modulePackages = [pkgs.librsvg];
 
   programs.hyprland = {
     enable = true;
@@ -31,7 +28,6 @@
     polkit
     exfatprogs
   ];
-
 
   services.gvfs.enable = true;
   # programs.thunar = {
@@ -46,7 +42,7 @@
   xdg.terminal-exec = {
     enable = true;
     settings = {
-      default = [ "ghostty.desktop" ];
+      default = ["ghostty.desktop"];
     };
   };
   # Enable networking
@@ -96,9 +92,9 @@
       };
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = pkgs.linuxKernel.packagesFor pkgs.cachyosKernels.linux-cachyos-latest;
+    # kernelPackages = pkgs.linuxKernel.packagesFor pkgs.cachyosKernels.linux-cachyos-latest;
     # Kernel
-    # kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   # Set your time zone.
@@ -149,5 +145,4 @@
     "/share/applications"
     "/share/xdg-desktop-portal"
   ];
-
 }

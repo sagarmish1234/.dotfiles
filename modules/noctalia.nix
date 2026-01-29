@@ -1,6 +1,7 @@
 {...}: {
   programs.noctalia-shell = {
     enable = true;
+    # systemd.enable = true;
     settings = {
       appLauncher = {
         autoPasteClipboard = false;
@@ -400,7 +401,7 @@
         countdownDuration = 10000;
         enableCountdown = false;
         largeButtonsLayout = "grid";
-        largeButtonsStyle = true;
+        largeButtonsStyle = false;
         position = "center";
 
         powerOptions = [

@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  feature,
+  ...
+}:
+lib.mkIf feature.editor.nvim {
   programs.nvf = {
     enable = true;
 
