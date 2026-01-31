@@ -161,8 +161,10 @@ lib.mkIf feature.editor.nvim {
           };
         };
         python.enable = true;
+        java.enable = true;
         rust.enable = true;
         ts.enable = true; # TypeScript
+        typst.enable = true;
       };
     };
   };

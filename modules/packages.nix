@@ -32,5 +32,6 @@ in {
     wl-clipboard
     wiremix
     bluetui
+    typst
   ];
 }

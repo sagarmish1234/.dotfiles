@@ -5,12 +5,14 @@
   ...
 }:
 lib.mkIf feature.dev.java {
-
+  programs.java = {
+    enable = true;
+    package = pkgs.openjdk25;
+  };
   home.packages = with pkgs; [
-    jdk
+    # openjdk25
+    # openjdk21
     maven
     gradle
-    jdt-language-server
   ];
-
 }

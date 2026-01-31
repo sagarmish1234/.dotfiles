@@ -48,8 +48,8 @@
 
   dev = {
     rust = true;
-    java = false;
-    python = true;
+    java = true;
+    python = false;
     go = false;
   };
 }

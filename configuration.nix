@@ -12,7 +12,6 @@
     ./hardware-configuration.nix
     ./services
   ];
-
   #Use Cachyos kernel
   # nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
   programs.gdk-pixbuf.modulePackages = [pkgs.librsvg];
