@@ -18,13 +18,13 @@ in {
     launch-tui
     launch-wofi
     jetbrains.idea
-    vlc
+    # vlc
     chromium
     gh
     qbittorrent
     lshw
     spotify
-    vim
+    # vim
     imv
     hyprshot
     quickshell
@@ -33,5 +33,6 @@ in {
     wiremix
     bluetui
     typst
+    localsend
   ];
 }

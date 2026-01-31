@@ -44,12 +44,13 @@
     vscode = true;
     intellij = true;
     nvim = true;
+    emacs = false;
   };
 
   dev = {
     rust = true;
     java = true;
-    python = false;
+    python = true;
     go = false;
   };
 }
