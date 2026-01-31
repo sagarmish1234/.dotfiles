@@ -13,7 +13,7 @@
     ./services
   ];
   #Use Cachyos kernel
-  # nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
+  nixpkgs.overlays = [inputs.nix-cachyos-kernel.overlays.pinned];
   programs.gdk-pixbuf.modulePackages = [pkgs.librsvg];
 
   programs.hyprland = {
@@ -91,9 +91,9 @@
       };
       efi.canTouchEfiVariables = true;
     };
-    # kernelPackages = pkgs.linuxKernel.packagesFor pkgs.cachyosKernels.linux-cachyos-latest;
+    kernelPackages = pkgs.linuxKernel.packagesFor pkgs.cachyosKernels.linux-cachyos-latest;
     # Kernel
-    kernelPackages = pkgs.linuxPackages_latest;
+    # kernelPackages = pkgs.linuxPackages_latest;
   };
 
   # Set your time zone.
