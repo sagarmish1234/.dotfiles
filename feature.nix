@@ -52,5 +52,6 @@
     java = true;
     python = true;
     go = false;
+    javascript = true;
   };
 }

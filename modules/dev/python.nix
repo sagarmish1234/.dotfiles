@@ -7,8 +7,10 @@
 lib.mkIf feature.dev.python {
   home.packages = with pkgs; [
     python3
-    python3Packages.pip
-    python3Packages.virtualenv
+    # python3Packages.pip
+    # python3Packages.virtualenv
+    # uv
+    # poetry
     #python3Packages.black
     #python3Packages.pylint
     # python3Packages.pytest

@@ -6,18 +6,6 @@
 }: {
   # Development tools
   home.packages = with pkgs; [
-    # Node.js
-    nodejs
-    #nodePackages.pnpm
-    #nodePackages.yarn
-    #nodePackages.typescript
-    #nodePackages.typescript-language-server
-    #nodePackages.eslint
-    #nodePackages.prettier
-    #nodePackages.nodemon
-    #deno
-    # bun
-
     # C/C++
     gcc
     #clang
@@ -45,7 +33,7 @@
     # buildah
     # skopeo
     # dive
-    lazydocker
+    # lazydocker
 
     # Kubernetes tools
     #   kubectl
@@ -106,7 +94,7 @@
     # Misc development utilities
     jq
     yq-go
-    fx
+    # fx
     watchexec
     entr
     tmux

@@ -4,5 +4,6 @@
     ./rust.nix
     ./python.nix
     ./go.nix
+    ./javascript.nix
   ];
 }

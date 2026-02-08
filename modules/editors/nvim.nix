@@ -16,6 +16,7 @@ lib.mkIf feature.editor.nvim {
       vim.mini.animate.enable = false;
       vim.minimap.codewindow.enable = true;
       vim.minimap.minimap-vim.enable = true;
+      vim.utility.direnv.enable = true;
       vim.autopairs.nvim-autopairs = {
         enable = true;
         # Optional: configure nvim-autopairs specific options
@@ -106,6 +107,13 @@ lib.mkIf feature.editor.nvim {
           action = "<C-w>l";
           desc = "Go to Right Window";
         }
+
+        {
+          key = "<leader>e";
+          mode = "n";
+          action = ":Neotree filesystem toggle<CR>";
+          desc = "Toggle Neotree";
+        }
       ];
       vim.terminal = {
         toggleterm = {
@@ -149,6 +157,29 @@ lib.mkIf feature.editor.nvim {
       vim.lsp = {
         enable = true;
         formatOnSave = true;
+        lspconfig.enable = true;
+        lspconfig.sources.pyright = ''
+          lspconfig.pyright.setup({
+            settings = {
+              python = {
+                -- Automatically use the python from your nix develop/direnv shell
+                pythonPath = vim.fn.exepath('python'),
+                analysis = {
+                  autoSearchPaths = true,
+                  useLibraryCodeForTypes = true,
+                  diagnosticMode = "workspace",
+                },
+              },
+            },
+            on_init = function(client)
+              local nix_python = vim.fn.exepath('python')
+              if nix_python ~= "" then
+                client.config.settings.python.pythonPath = nix_python
+                client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+              end
+            end,
+          })
+        '';
       };
       vim.languages = {
         enableTreesitter = true;
@@ -160,11 +191,15 @@ lib.mkIf feature.editor.nvim {
             servers = ["nixd"];
           };
         };
-        python.enable = true;
+        python = {
+          enable = true;
+          lsp.servers = ["pyright"];
+        };
         java.enable = true;
         rust.enable = true;
         ts.enable = true; # TypeScript
         typst.enable = true;
+        qml.enable = true;
       };
     };
   };

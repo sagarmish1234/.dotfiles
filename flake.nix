@@ -19,6 +19,7 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nvf.url = "github:notashelf/nvf";
     # Home Manager
     home-manager = {
@@ -26,6 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:vic/import-tree";
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = {
@@ -55,6 +57,7 @@
                 inputs.stylix.homeModules.stylix
                 inputs.nvf.homeManagerModules.default
                 inputs.noctalia.homeModules.default
+                inputs.catppuccin.homeModules.catppuccin
               ];
             };
           };
