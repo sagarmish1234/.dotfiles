@@ -14,5 +14,6 @@ lib.mkIf feature.dev.java {
     # openjdk21
     maven
     gradle
+    jdt-language-server
   ];
 }

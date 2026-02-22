@@ -2,17 +2,19 @@
   pkgs,
   inputs,
   ...
-}: let
-  launch-tui = import ../bin/launch-tui.nix {inherit pkgs;};
-  launch-wofi = import ../bin/launch-wofi.nix {inherit pkgs;};
-in {
+}:
+let
+  launch-tui = import ../bin/launch-tui.nix { inherit pkgs; };
+  launch-wofi = import ../bin/launch-wofi.nix { inherit pkgs; };
+in
+{
   programs = {
-    firefox.enable = true;
+    # firefox.enable = true;
     eza.enable = true;
     yazi.enable = true;
     btop.enable = true;
   };
-  stylix.targets.firefox.profileNames = ["Sagar"];
+  # stylix.targets.firefox.profileNames = ["Sagar"];
   home.packages = with pkgs; [
     inputs.zen-browser.packages.${pkgs.system}.default
     libsForQt5.qtwayland

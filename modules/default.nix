@@ -1,8 +1,10 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./dev
     ./shell
     ./editors
+    ./browsers
     ./git.nix
     ./ghostty.nix
     ./development.nix
@@ -20,5 +22,6 @@
     ./webapps.nix
     ./noctalia.nix
     ./theme.nix
+    ./yazi.nix
   ];
 }

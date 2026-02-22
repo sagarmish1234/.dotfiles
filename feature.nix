@@ -44,7 +44,7 @@
     vscode = true;
     intellij = true;
     nvim = true;
-    emacs = false;
+    emacs = true;
   };
 
   dev = {

@@ -3,11 +3,13 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   # Development tools
   home.packages = with pkgs; [
     # C/C++
     gcc
+    cmake
     #clang
     #cmake
     #gnumake
