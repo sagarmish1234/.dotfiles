@@ -7,6 +7,7 @@
 lib.mkIf feature.dev.python {
   home.packages = with pkgs; [
     python3
+    python313Packages.markdown
     # python3Packages.pip
     # python3Packages.virtualenv
     # uv

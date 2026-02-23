@@ -2,7 +2,7 @@
 {
   search = {
     force = true;
-    default = "searxng";
+    default = "google";
     engines = {
       "searxng" = {
         urls = [ { template = "https://search.sndh.dev/search?q={searchTerms}"; } ];
