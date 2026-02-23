@@ -32,7 +32,7 @@
     import-tree.url = "github:vic/import-tree";
     catppuccin.url = "github:catppuccin/nix";
   };
-
+  # Hello world
   outputs =
     {
       nixpkgs,
