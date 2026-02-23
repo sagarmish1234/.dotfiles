@@ -16,7 +16,6 @@ in
   };
   # stylix.targets.firefox.profileNames = ["Sagar"];
   home.packages = with pkgs; [
-    inputs.zen-browser.packages.${pkgs.system}.default
     libsForQt5.qtwayland
     nautilus
     fzf

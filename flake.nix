@@ -6,8 +6,11 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
     awww.url = "git+https://codeberg.org/LGFae/awww";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
@@ -30,44 +33,47 @@
     catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = {
-    nixpkgs,
-    home-manager,
-    ...
-  } @ inputs: let
-    feature = import ./feature.nix;
-  in {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {
-        inherit inputs;
-        inherit feature;
-      };
-      modules = [
-        ./configuration.nix
-        home-manager.nixosModules.default
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            backupFileExtension = "bak";
-            users.sagar = {
-              imports = [
-                ./home.nix
-                inputs.stylix.homeModules.stylix
-                inputs.nvf.homeManagerModules.default
-                inputs.noctalia.homeModules.default
-                inputs.catppuccin.homeModules.catppuccin
-              ];
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
+    let
+      feature = import ./feature.nix;
+    in
+    {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs;
+          inherit feature;
+        };
+        modules = [
+          ./configuration.nix
+          home-manager.nixosModules.default
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "bak";
+              users.sagar = {
+                imports = [
+                  ./home.nix
+                  inputs.stylix.homeModules.stylix
+                  inputs.nvf.homeManagerModules.default
+                  inputs.noctalia.homeModules.default
+                  inputs.catppuccin.homeModules.catppuccin
+                ];
+              };
             };
-          };
-          home-manager.extraSpecialArgs = {
-            inherit inputs;
-            inherit feature;
-            system = "x86_64-linux";
-          };
-        }
-      ];
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+              inherit feature;
+              system = "x86_64-linux";
+            };
+          }
+        ];
+      };
     };
-  };
 }
