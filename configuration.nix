@@ -38,12 +38,7 @@
   #   ];
   # };
   system.stateVersion = "25.11"; # Define your hostname.
-  xdg.terminal-exec = {
-    enable = true;
-    settings = {
-      default = [ "ghostty.desktop" ];
-    };
-  };
+
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
@@ -123,18 +118,6 @@
     LC_PAPER = "en_IN";
     LC_TELEPHONE = "en_IN";
     LC_TIME = "en_IN";
-  };
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  # services.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
   };
 
   # Enable CUPS to print documents.

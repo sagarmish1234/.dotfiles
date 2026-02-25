@@ -1,15 +1,13 @@
-{ ... }:
+{ inputs, ... }:
 {
   imports = [
-    ./dev
-    ./shell
+    (inputs.import-tree ./shell)
+    (inputs.import-tree ./browsers)
+    (inputs.import-tree ./dev)
     ./editors
-    ./browsers
     ./git.nix
     ./ghostty.nix
     ./development.nix
-    ./starship.nix
-    ./fastfetch.nix
     ./hyprland.nix
     ./waybar.nix
     ./awww.nix
@@ -22,6 +20,5 @@
     ./webapps.nix
     ./noctalia.nix
     ./theme.nix
-    ./yazi.nix
   ];
 }
