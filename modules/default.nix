@@ -4,6 +4,7 @@
     (inputs.import-tree ./shell)
     (inputs.import-tree ./browsers)
     (inputs.import-tree ./dev)
+    (inputs.import-tree ./media)
     ./editors
     ./git.nix
     ./ghostty.nix
@@ -15,7 +16,6 @@
     ./hypridle.nix
     ./hyprlock.nix
     ./swaync.nix
-    ./mpv.nix
     ./rofi.nix
     ./webapps.nix
     ./noctalia.nix
