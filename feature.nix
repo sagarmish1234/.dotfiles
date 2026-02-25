@@ -40,7 +40,7 @@
   };
 
   editor = {
-    zed = true;
+    zed = false;
     vscode = true;
     intellij = true;
     nvim = true;

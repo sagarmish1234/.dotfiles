@@ -6,15 +6,16 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./services
   ];
   #Use Cachyos kernel
-  nixpkgs.overlays = [inputs.nix-cachyos-kernel.overlays.pinned];
-  programs.gdk-pixbuf.modulePackages = [pkgs.librsvg];
+  nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
+  programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
 
   programs.hyprland = {
     enable = true;
@@ -36,16 +37,26 @@
   #     thunar-volman
   #   ];
   # };
-  system.stateVersion = "25.11";
-  networking.hostName = "nixos"; # Define your hostname.
+  system.stateVersion = "25.11"; # Define your hostname.
   xdg.terminal-exec = {
     enable = true;
     settings = {
-      default = ["ghostty.desktop"];
+      default = [ "ghostty.desktop" ];
     };
   };
-  # Enable networking
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    useNetworkd = true;
+  };
+
+  systemd.network.wait-online.enable = false;
+  systemd.services = {
+    NetworkManager-wait-online.enable = false;
+    # use systemctl restart instead of a stop and a delayed start
+    systemd-networkd.stopIfChanged = false;
+    systemd-resolved.stopIfChanged = false;
+  };
   environment.variables.QT_QPA_PLATFORM = "wayland";
 
   hardware.bluetooth = {

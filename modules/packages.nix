@@ -10,7 +10,6 @@ in
 {
   programs = {
     # firefox.enable = true;
-    eza.enable = true;
     yazi.enable = true;
     btop.enable = true;
   };
@@ -18,7 +17,6 @@ in
   home.packages = with pkgs; [
     libsForQt5.qtwayland
     nautilus
-    fzf
     launch-tui
     launch-wofi
     jetbrains.idea
