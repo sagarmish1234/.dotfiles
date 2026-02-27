@@ -1,9 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
-    ./modules
+    (inputs.import-tree ./modules)
   ];
-  home.packages = [ pkgs.dconf ];
 
   # Firefox Wayland fixes
   home.sessionVariables.MOZ_ENABLE_WAYLAND = "1";

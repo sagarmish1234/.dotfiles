@@ -30,7 +30,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:vic/import-tree";
-    catppuccin.url = "github:catppuccin/nix";
   };
   # Hello world
   outputs =
@@ -63,7 +62,6 @@
                   inputs.stylix.homeModules.stylix
                   inputs.nvf.homeManagerModules.default
                   inputs.noctalia.homeModules.default
-                  inputs.catppuccin.homeModules.catppuccin
                 ];
               };
             };
