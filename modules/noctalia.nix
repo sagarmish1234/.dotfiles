@@ -1,4 +1,8 @@
-{...}: {
+{ inputs, ... }:
+{
+  imports = [
+    inputs.noctalia.homeModules.default
+  ];
   programs.noctalia-shell = {
     enable = true;
     # systemd.enable = true;
@@ -12,7 +16,7 @@
         enableClipboardHistory = false;
         iconMode = "tabler";
         ignoreMouseInput = false;
-        pinnedApps = [];
+        pinnedApps = [ ];
         position = "center";
         screenshotAnnotationTool = "";
         showCategories = true;
@@ -25,7 +29,7 @@
 
       audio = {
         cavaFrameRate = 30;
-        mprisBlacklist = [];
+        mprisBlacklist = [ ];
         preferredPlayer = "";
         visualizerType = "linear";
         volumeFeedback = false;
@@ -42,10 +46,10 @@
         hideOnOverview = false;
         marginHorizontal = 9;
         marginVertical = 9;
-        monitors = [];
+        monitors = [ ];
         outerCorners = true;
         position = "top";
-        screenOverrides = [];
+        screenOverrides = [ ];
         showCapsule = false;
         showOutline = false;
         useSeparateOpacity = false;
@@ -130,12 +134,12 @@
 
           right = [
             {
-              blacklist = [];
+              blacklist = [ ];
               colorizeIcons = false;
               drawerEnabled = true;
               hidePassive = false;
               id = "Tray";
-              pinned = [];
+              pinned = [ ];
             }
             {
               hideWhenZero = false;
@@ -242,16 +246,16 @@
 
         shortcuts = {
           left = [
-            {id = "Network";}
-            {id = "Bluetooth";}
-            {id = "WallpaperSelector";}
-            {id = "NoctaliaPerformance";}
+            { id = "Network"; }
+            { id = "Bluetooth"; }
+            { id = "WallpaperSelector"; }
+            { id = "NoctaliaPerformance"; }
           ];
           right = [
-            {id = "Notifications";}
-            {id = "PowerProfile";}
-            {id = "KeepAwake";}
-            {id = "NightLight";}
+            { id = "Notifications"; }
+            { id = "PowerProfile"; }
+            { id = "KeepAwake"; }
+            { id = "NightLight"; }
           ];
         };
       };
@@ -259,7 +263,7 @@
       desktopWidgets = {
         enabled = false;
         gridSnap = false;
-        monitorWidgets = [];
+        monitorWidgets = [ ];
       };
 
       dock = {
@@ -271,9 +275,9 @@
         enabled = false;
         floatingRatio = 1;
         inactiveIndicators = false;
-        monitors = [];
+        monitors = [ ];
         onlySameOutput = true;
-        pinnedApps = [];
+        pinnedApps = [ ];
         pinnedStatic = false;
         position = "bottom";
         size = 1;
@@ -361,7 +365,7 @@
         enabled = true;
         location = "top_right";
         lowUrgencyDuration = 3;
-        monitors = [];
+        monitors = [ ];
         normalUrgencyDuration = 8;
         overlayLayer = true;
         respectExpireTimeout = false;
@@ -393,7 +397,7 @@
           2
         ];
         location = "top_right";
-        monitors = [];
+        monitors = [ ];
         overlayLayer = true;
       };
 
@@ -496,7 +500,7 @@
         fillColor = "#000000";
         fillMode = "crop";
         hideWallpaperFilenames = false;
-        monitorDirectories = [];
+        monitorDirectories = [ ];
         overviewEnabled = false;
         panelPosition = "follow_bar";
         randomIntervalSec = 300;

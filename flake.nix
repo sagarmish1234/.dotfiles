@@ -30,6 +30,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:vic/import-tree";
+
+    astal.url = "github:aylur/astal";
+    ags.url = "github:aylur/ags";
   };
   # Hello world
   outputs =
@@ -61,7 +64,6 @@
                   ./home.nix
                   inputs.stylix.homeModules.stylix
                   inputs.nvf.homeManagerModules.default
-                  inputs.noctalia.homeModules.default
                 ];
               };
             };
