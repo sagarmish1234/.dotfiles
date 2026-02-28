@@ -10,7 +10,6 @@ in
 {
   programs = {
     # firefox.enable = true;
-    yazi.enable = true;
     btop.enable = true;
   };
   # stylix.targets.firefox.profileNames = ["Sagar"];
@@ -34,5 +33,6 @@ in
     typst
     localsend
     lazydocker
+    ani-cli
   ];
 }

@@ -16,5 +16,6 @@ lib.mkIf feature.dev.javascript {
     #nodePackages.nodemon
     #deno
     bun
+    typescript-go
   ];
 }
