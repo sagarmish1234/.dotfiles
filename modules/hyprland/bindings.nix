@@ -38,22 +38,22 @@
       "SUPER, RETURN, exec, $terminal"
 
       # End active session
-      "SUPER, L, exec, hyprlock"
+      "SUPER SHIFT, DELETE, exec, hyprlock"
       "SUPER CTRL, ESCAPE, exec, reboot"
       "SUPER SHIFT CTRL, ESCAPE, exec, systemctl poweroff"
       "SUPER, ESCAPE, exec, wlogout"
 
       # Control tiling
-      "SUPER, J, togglesplit, # dwindle"
+      "SUPER, I, togglesplit, # dwindle"
       "SUPER, P, pseudo, # dwindle"
       "SUPER, T, togglefloating,"
       "SUPER SHIFT, Plus, fullscreen,"
 
       # Move focus with mainMod + arrow keys
-      "SUPER, left, movefocus, l"
-      "SUPER, right, movefocus, r"
-      "SUPER, up, movefocus, u"
-      "SUPER, down, movefocus, d"
+      "SUPER, H,  movefocus, l"
+      "SUPER, J,  movefocus, d"
+      "SUPER, K,  movefocus, u"
+      "SUPER, L,  movefocus, r"
 
       # Switch workspaces with mainMod + [0-9]
       "SUPER, 1, workspace, 1"
@@ -83,10 +83,10 @@
       "SUPER SHIFT, 0, movetoworkspace, 10"
 
       # Swap active window with the one next to it with mainMod + SHIFT + arrow keys
-      "SUPER SHIFT, left, swapwindow, l"
-      "SUPER SHIFT, right, swapwindow, r"
-      "SUPER SHIFT, up, swapwindow, u"
-      "SUPER SHIFT, down, swapwindow, d"
+      "SUPER SHIFT, H, swapwindow, l"
+      "SUPER SHIFT, L, swapwindow, r"
+      "SUPER SHIFT, K, swapwindow, u"
+      "SUPER SHIFT, J, swapwindow, d"
 
       # Resize active window
       "SUPER, minus, resizeactive, -100 0"
