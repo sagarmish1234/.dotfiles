@@ -44,6 +44,12 @@ in
     # Run: nix-prefetch-url <url>
   };
 
+  home.file."Pictures/Wallpapers/void.png".source = pkgs.fetchurl {
+    url = "https://github.com/atraxsrc/tokyonight-wallpapers/blob/main/void_original.png?raw=true";
+    sha256 = "sha256-32LpCcZqf68QTMWtOFJkgg7Ev8Psi+cGc7bzvYHU9mM=";
+    # Run: nix-prefetch-url <url>
+  };
+
   # Hyprland configuration
   wayland.windowManager.hyprland = {
     enable = true;
