@@ -8,4 +8,19 @@
   # stylix.targets.firefox.profileNames = ["Sagar"];
   stylix.targets.emacs.enable = false;
   stylix.targets.noctalia-shell.enable = false;
+
+  # Ensure Stylix does not override icon settings
+  stylix.targets.gtk.enable = false;
+
+  gtk = {
+    enable = true;
+    theme = {
+      package = pkgs.tokyo-night-gtk;
+      name = "Tokyonight-Dark";
+    };
+    iconTheme = {
+      package = pkgs.candy-icons;
+      name = "candy-icons";
+    };
+  };
 }
