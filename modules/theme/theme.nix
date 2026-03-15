@@ -22,6 +22,7 @@
     };
     polarity = "dark";
   };
+  # stylix.targets.firefox.profileNames = ["Sagar"];
   stylix.targets.gtk.enable = false;
   stylix.targets.emacs.enable = false;
   stylix.targets.noctalia-shell.enable = false;
