@@ -10,7 +10,6 @@ in {
     # firefox.enable = true;
     btop.enable = true;
   };
-  # stylix.targets.firefox.profileNames = ["Sagar"];
   home.packages = with pkgs; [
     libsForQt5.qtwayland
     nautilus

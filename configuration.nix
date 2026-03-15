@@ -11,7 +11,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./services
+    (inputs.import-tree ./services)
   ];
   #Use Cachyos kernel
   nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
