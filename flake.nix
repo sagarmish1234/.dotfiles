@@ -45,11 +45,10 @@
       feature = import ./feature.nix;
     in
     {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         specialArgs = {
-          inherit inputs;
-          inherit feature;
+          inherit inputs feature system;
         };
         modules = [
           ./configuration.nix
@@ -59,18 +58,12 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "bak";
-              users.sagar = {
-                imports = [
-                  ./home.nix
-                  inputs.stylix.homeModules.stylix
-                  inputs.nvf.homeManagerModules.default
-                ];
-              };
-            };
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-              inherit feature;
-              system = "x86_64-linux";
+              extraSpecialArgs = specialArgs;
+              users.sagar.imports = [
+                ./home.nix
+                inputs.stylix.homeModules.stylix
+                inputs.nvf.homeManagerModules.default
+              ];
             };
           }
         ];
