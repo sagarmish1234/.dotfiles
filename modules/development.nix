@@ -99,7 +99,6 @@
     # fx
     watchexec
     entr
-    tmux
     tmuxinator
     asciinema
     tokei
