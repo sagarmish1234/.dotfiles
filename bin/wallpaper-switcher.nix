@@ -54,6 +54,7 @@ pkgs.writeShellApplication {
       --transition-duration 2
 
     echo "$NEXT_WALLPAPER" > "$STATE_FILE"
+    mkdir -p "$HOME/.cache"
     ln -sf "$NEXT_WALLPAPER" "$HOME/.cache/current_wallpaper"
   '';
 }
