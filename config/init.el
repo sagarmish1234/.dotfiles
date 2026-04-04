@@ -578,3 +578,42 @@
   (evil-collection-init))
 (with-eval-after-load 'magit
   (add-hook 'magit-mode-hook #'evil-normal-state))
+(use-package vterm
+  :commands vterm
+  :config
+  (setq vterm-shell "/etc/profiles/per-user/sagar/bin/fish")) ;; use fish
+(my/leader
+  "'" '(vterm :which-key "terminal"))
+(with-eval-after-load 'evil
+  (define-key vterm-mode-map (kbd "<escape>") #'vterm-send-escape)
+
+  ;; Switch to normal mode
+  (evil-define-key 'insert vterm-mode-map (kbd "C-c") #'evil-normal-state)
+
+  ;; Go back to insert mode
+  (evil-define-key 'normal vterm-mode-map (kbd "i") #'evil-insert-state))
+(defun my/open-terminal ()
+  (interactive)
+  (let ((buffer (get-buffer-create "*vterm*")))
+    (display-buffer
+     buffer
+     '((display-buffer-in-side-window)
+       (side . bottom)
+       (window-height . 0.3)))
+    (select-window (get-buffer-window buffer)) ;; 👈 focus it
+    (unless (get-buffer-process buffer)
+      (vterm buffer))
+    (evil-insert-state))) ;; 👈 start typing immediately
+(defun my/toggle-terminal ()
+  (interactive)
+  (if-let ((buf (get-buffer "*vterm*")))
+      (if-let ((win (get-buffer-window buf)))
+          (delete-window win)
+        (progn
+          (display-buffer buf)
+          (select-window (get-buffer-window buf))
+          (evil-insert-state)))
+    (my/open-terminal)))
+(my/leader
+  "'" '(my/toggle-terminal :which-key "terminal"))
+(add-hook 'vterm-mode-hook #'evil-insert-state)

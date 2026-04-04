@@ -9,6 +9,9 @@ lib.mkIf feature.editor.emacs {
   programs.emacs = {
     enable = true;
     package = pkgs.emacs-pgtk;
+    extraPackages = epkgs: [
+    epkgs.vterm
+  ];
   };
   services.emacs = {
     enable = true;
