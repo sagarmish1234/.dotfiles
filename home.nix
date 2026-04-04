@@ -1,11 +1,13 @@
-{ pkgs, inputs, ... }:
-let
+{
+  pkgs,
+  inputs,
+  ...
+}: let
   unstable = import inputs.nixpkgs-unstable {
     system = pkgs.system;
     config.allowUnfree = true;
   };
-in
-{
+in {
   imports = [
     (inputs.import-tree ./modules)
   ];
@@ -20,4 +22,5 @@ in
   targets.genericLinux.enable = true;
   # enable Hyprland
   home.stateVersion = "25.11";
+  home.file.".emacs.d/init.el".source = ./config/init.el;
 }
