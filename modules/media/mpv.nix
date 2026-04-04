@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.mpv = {
     enable = true;
     bindings = {
@@ -30,6 +31,7 @@
       profile = "high-quality";
       ytdl-format = "bestvideo+bestaudio";
       cache-default = 4000000;
+      target-colorspace-hint = "no";
     };
   };
 }
