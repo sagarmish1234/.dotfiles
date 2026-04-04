@@ -30,10 +30,12 @@ in
 
   # Optional: Download a Catppuccin Mocha wallpaper
   home.file."Pictures/Wallpapers/Clearday.jpg".source = ../assets/wallpapers/Clearday.jpg;
-  home.file."Pictures/Wallpapers/shaded_landscape.png".source = ../assets/wallpapers/shaded_landscape.png;
+  home.file."Pictures/Wallpapers/shaded_landscape.png".source =
+    ../assets/wallpapers/shaded_landscape.png;
   home.file."Pictures/Wallpapers/Cloudsnight.jpg".source = ../assets/wallpapers/Cloudsnight.jpg;
   home.file."Pictures/Wallpapers/void.png".source = ../assets/wallpapers/void.png;
-
+  home.file."Pictures/Wallpapers/anime-paper-1.png".source = ../assets/wallpapers/anime-paper-1.png;
+  home.file."Pictures/Wallpapers/anime-paper-2.jpg".source = ../assets/wallpapers/anime-paper-2.jpg;
   # Hyprland configuration
   wayland.windowManager.hyprland = {
     enable = true;

@@ -208,7 +208,7 @@
         manualSunrise = "06:30";
         manualSunset = "18:30";
         monitorForColors = "";
-        predefinedScheme = "Catppuccin";
+        predefinedScheme = "Tokyo Night";
         schedulingMode = "off";
         useWallpaperColors = false;
       };

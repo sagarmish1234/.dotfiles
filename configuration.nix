@@ -29,7 +29,6 @@
     exfatprogs
   ];
 
-  services.gvfs.enable = true;
   # programs.thunar = {
   #   enable = true;
   #   plugins = with pkgs.xfce; [
@@ -41,8 +40,12 @@
 
   networking = {
     hostName = "nixos";
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      wifi.powersave = false;
+    };
     useNetworkd = true;
+
   };
 
   systemd.network.wait-online.enable = false;

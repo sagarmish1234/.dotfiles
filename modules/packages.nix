@@ -2,10 +2,12 @@
   pkgs,
   inputs,
   ...
-}: let
-  launch-tui = import ../bin/launch-tui.nix {inherit pkgs;};
-  launch-wofi = import ../bin/launch-wofi.nix {inherit pkgs;};
-in {
+}:
+let
+  launch-tui = import ../bin/launch-tui.nix { inherit pkgs; };
+  launch-wofi = import ../bin/launch-wofi.nix { inherit pkgs; };
+in
+{
   programs = {
     # firefox.enable = true;
     btop.enable = true;
