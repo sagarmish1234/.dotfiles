@@ -20,7 +20,7 @@
 
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
-
+(setq warning-minimum-level :error)
 ;; -------------------------------
 ;; UI
 ;; -------------------------------
@@ -504,3 +504,77 @@
 
 (with-eval-after-load 'evil
   (define-key evil-visual-state-map (kbd "=") #'my/format-region))
+
+(use-package lsp-java
+  :after lsp
+  :config
+  (add-hook 'java-mode-hook #'lsp)
+
+  ;; Performance tuning (VERY IMPORTANT)
+  (setq lsp-java-server-install-dir "~/.emacs.d/jdtls/"
+        lsp-java-vmargs
+        '("-noverify"
+          "-Xmx2G"
+          "-XX:+UseG1GC"
+          "-XX:+UseStringDeduplication"
+          "-XX:+UseCompressedOops")))
+(setq lsp-java-save-action-organize-imports t)
+(my/local-leader
+  :keymaps 'java-mode-map
+
+  "m" '(:ignore t :which-key "Java")
+
+  "o" '(lsp-java-organize-imports :which-key "organize imports")
+  "r" '(lsp-rename :which-key "rename")
+  "a" '(lsp-execute-code-action :which-key "code action")
+
+  "b" '(lsp-java-build-project :which-key "build project")
+  "t" '(lsp-java-run-tests :which-key "run tests"))
+
+
+(add-hook 'java-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook #'lsp-format-buffer nil t)))
+(my/leader
+  "ss" '(consult-line :which-key "search in file")
+  "sp" '(consult-ripgrep :which-key "search project"))
+
+(my/leader
+  "cs" '(lsp-workspace-symbol :which-key "workspace symbol"))
+
+(setq lsp-headerline-breadcrumb-enable t)
+(setq lsp-modeline-code-actions-enable t)
+(setq lsp-modeline-diagnostics-enable t)
+
+(setq gc-cons-threshold (* 100 1000 1000))
+(setq read-process-output-max (* 1024 1024))
+(use-package doom-modeline
+  :init
+  (doom-modeline-mode 1)
+  :custom
+  (doom-modeline-height 28)
+  (doom-modeline-bar-width 4)
+  (doom-modeline-minor-modes nil)
+  (doom-modeline-enable-word-count nil)
+  (doom-modeline-buffer-file-name-style 'truncate-upto-project)
+  (doom-modeline-icon t))
+
+(use-package magit
+  :commands magit-status
+  :config
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
+
+
+(use-package magit
+  :commands magit-status
+  :config
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
+(my/leader
+  "g"  '(:ignore t :which-key "git")
+  "gs" '(magit-status :which-key "status"))
+(use-package evil-collection
+  :after (evil magit)
+  :config
+  (evil-collection-init))
+(with-eval-after-load 'magit
+  (add-hook 'magit-mode-hook #'evil-normal-state))

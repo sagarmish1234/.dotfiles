@@ -22,5 +22,4 @@ in {
   targets.genericLinux.enable = true;
   # enable Hyprland
   home.stateVersion = "25.11";
-  home.file.".emacs.d/init.el".source = ./config/init.el;
 }
