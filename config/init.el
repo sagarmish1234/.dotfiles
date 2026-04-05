@@ -578,42 +578,66 @@
   (evil-collection-init))
 (with-eval-after-load 'magit
   (add-hook 'magit-mode-hook #'evil-normal-state))
+;; =========================================================
+;; 🖥️ VTERM — Proper Toggle + Bottom Split (Doom-like)
+;; =========================================================
+
 (use-package vterm
   :commands vterm
   :config
-  (setq vterm-shell "/etc/profiles/per-user/sagar/bin/fish")) ;; use fish
-(my/leader
-  "'" '(vterm :which-key "terminal"))
-(with-eval-after-load 'evil
-  (define-key vterm-mode-map (kbd "<escape>") #'vterm-send-escape)
+  ;; Use fish shell
+  (setq vterm-shell "/etc/profiles/per-user/sagar/bin/fish"))
 
-  ;; Switch to normal mode
-  (evil-define-key 'insert vterm-mode-map (kbd "C-c") #'evil-normal-state)
+;; ---------------------------------------------------------
+;; Force vterm to always open at the bottom
+;; ---------------------------------------------------------
+(add-to-list 'display-buffer-alist
+             '("\\*vterm\\*"
+               (display-buffer-in-side-window)
+               (side . bottom)
+               (window-height . 0.3)))
 
-  ;; Go back to insert mode
-  (evil-define-key 'normal vterm-mode-map (kbd "i") #'evil-insert-state))
+(defvar my/vterm-buffer-name "*vterm*")
+
 (defun my/open-terminal ()
+  "Open or reuse a persistent vterm."
   (interactive)
-  (let ((buffer (get-buffer-create "*vterm*")))
-    (display-buffer
-     buffer
-     '((display-buffer-in-side-window)
-       (side . bottom)
-       (window-height . 0.3)))
-    (select-window (get-buffer-window buffer)) ;; 👈 focus it
-    (unless (get-buffer-process buffer)
-      (vterm buffer))
-    (evil-insert-state))) ;; 👈 start typing immediately
+  (let ((buf (get-buffer my/vterm-buffer-name)))
+    (unless (and buf (buffer-live-p buf))
+      ;; create it ONLY if it doesn't exist
+      (setq buf (vterm my/vterm-buffer-name)))
+    
+    ;; always display it using your bottom rule
+    (display-buffer buf)
+    (select-window (get-buffer-window buf t))
+    (evil-insert-state)))
+
 (defun my/toggle-terminal ()
+  "Toggle persistent vterm."
   (interactive)
-  (if-let ((buf (get-buffer "*vterm*")))
-      (if-let ((win (get-buffer-window buf)))
-          (delete-window win)
-        (progn
-          (display-buffer buf)
-          (select-window (get-buffer-window buf))
-          (evil-insert-state)))
-    (my/open-terminal)))
+  (let ((buf (get-buffer my/vterm-buffer-name)))
+    (if (and buf (get-buffer-window buf t))
+        ;; if visible → close
+        (delete-window (get-buffer-window buf t))
+      ;; else → open/reuse
+      (my/open-terminal))))
+;; ---------------------------------------------------------
+;; Keybinding (ONLY ONE — no duplicates!)
+;; ---------------------------------------------------------
 (my/leader
   "'" '(my/toggle-terminal :which-key "terminal"))
+
+;; ---------------------------------------------------------
+;; Better behavior inside terminal
+;; ---------------------------------------------------------
+(with-eval-after-load 'vterm
+  ;; ESC goes to terminal, not Emacs
+  (define-key vterm-mode-map (kbd "<escape>") #'vterm-send-escape)
+
+  ;; Evil integration
+  (with-eval-after-load 'evil
+    (evil-define-key 'insert vterm-mode-map (kbd "C-c") #'evil-normal-state)
+    (evil-define-key 'normal vterm-mode-map (kbd "i") #'evil-insert-state)))
+
+;; Always start typing immediately
 (add-hook 'vterm-mode-hook #'evil-insert-state)
