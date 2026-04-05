@@ -34,5 +34,6 @@ in
     lazydocker
     ani-cli
     psmisc
+    nil
   ];
 }

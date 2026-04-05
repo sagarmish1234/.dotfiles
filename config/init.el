@@ -682,3 +682,246 @@
   "gp" '(git-gutter:previous-hunk :which-key "prev hunk")
   "gr" '(git-gutter:revert-hunk :which-key "revert hunk")
   "gh" '(git-gutter:popup-hunk  :which-key "preview hunk"))
+
+
+;; =========================================================
+;; ❄️ NIX MODE — Syntax + Editing
+;; =========================================================
+
+(use-package nix-mode
+  :mode "\\.nix\\'")
+
+(add-hook 'nix-mode-hook #'lsp)
+
+(add-hook 'nix-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook
+                      (lambda ()
+                        (when (eq major-mode 'nix-mode)
+                          (shell-command-on-region
+                           (point-min) (point-max)
+                           "nixfmt" t t)))
+                      nil t)))
+;; =========================================================
+;; 🧠 ORG MODE — Notes, Tasks, Agenda System
+;; =========================================================
+
+(use-package org
+  :straight nil  ;; org is built-in with Emacs
+  :config
+
+  ;; -------------------------------------------------------
+  ;; 📁 Directory Setup
+  ;; -------------------------------------------------------
+  ;; All org files will live here
+  (setq org-directory "~/org/")
+
+  ;; Files used in agenda view (task tracking)
+  (setq org-agenda-files
+        '("~/org/tasks.org"
+          "~/org/agenda.org"))
+
+  ;; -------------------------------------------------------
+  ;; ✨ Visual & Editing Enhancements
+  ;; -------------------------------------------------------
+
+  ;; Indent content based on heading level
+  (setq org-startup-indented t)
+
+  ;; Hide markers like *bold* → bold
+  (setq org-hide-emphasis-markers t)
+
+  ;; Pretty symbols (e.g., \alpha → α)
+  (setq org-pretty-entities t)
+
+  ;; Highlight full heading line
+  (setq org-fontify-whole-heading-line t)
+
+  ;; Press ENTER to follow links
+  (setq org-return-follows-link t)
+
+  ;; TAB to fold/unfold sections
+  (define-key org-mode-map (kbd "TAB") #'org-cycle)
+
+  ;; -------------------------------------------------------
+  ;; ✅ TODO Workflow
+  ;; -------------------------------------------------------
+
+  ;; Define task states
+  (setq org-todo-keywords
+        '((sequence
+           "TODO(t)"
+           "IN-PROGRESS(i)"
+           "WAITING(w)"
+           "|"
+           "DONE(d)"
+           "CANCELLED(c)")))
+
+  ;; Add timestamp when marking DONE
+  (setq org-log-done 'time)
+  )
+
+;; =========================================================
+;; ⚡ ORG CAPTURE — Quick Notes & Tasks
+;; =========================================================
+
+(setq org-capture-templates
+      '(
+
+        ;; 📝 Capture a task
+        ;; Usage: SPC o c → t
+        ("t" "Task" entry
+         (file "~/org/tasks.org")
+         "* TODO %?\n  %U\n")
+
+        ;; 📘 Capture a note
+        ;; Usage: SPC o c → n
+        ("n" "Note" entry
+         (file "~/org/notes.org")
+         "* %?\n  %U\n")
+
+        ))
+
+;; =========================================================
+;; 🎨 UI IMPROVEMENTS (Optional but recommended)
+;; =========================================================
+
+;; Modern clean visuals (headings, bullets)
+(use-package org-modern
+  :hook (org-mode . org-modern-mode))
+
+;; Center content like a writing app
+(use-package visual-fill-column
+  :hook (org-mode . my/org-visual-setup))
+
+(defun my/org-visual-setup ()
+  "Center Org buffer for better readability."
+  (visual-fill-column-mode 1)
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t))
+
+;; =========================================================
+;; 🔑 KEYBINDINGS (Leader Key Integration)
+;; =========================================================
+
+(my/leader
+  ;; Org main group
+  "o"  '(:ignore t :which-key "org")
+
+  ;; Open agenda (dashboard of tasks)
+  "oa" '(org-agenda :which-key "agenda")
+
+  ;; Capture new task/note
+  "oc" '(org-capture :which-key "capture")
+
+  ;; Toggle TODO state
+  "ot" '(org-todo :which-key "todo toggle")
+
+  ;; Schedule a task
+  "os" '(org-schedule :which-key "schedule")
+
+  ;; Add deadline
+  "od" '(org-deadline :which-key "deadline")
+  )
+
+;; =========================================================
+;; 🧪 OPTIONAL — ORG BABEL (Run code inside org)
+;; =========================================================
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (shell  . t)
+   (emacs-lisp . t)))
+
+;; Prevent confirmation prompt when running code
+(setq org-confirm-babel-evaluate nil)
+
+;; =========================================================
+;; 📌 QUICK START GUIDE
+;; =========================================================
+
+;; 1. Create folder:
+;;    mkdir ~/org
+;;
+;; 2. Create files:
+;;    tasks.org
+;;    agenda.org
+;;    notes.org
+;;
+;; 3. Common usage:
+;;
+;;    SPC o c → capture task/note
+;;    SPC o a → open agenda
+;;    SPC o t → toggle TODO
+;;
+;; 4. Example task:
+;;
+;;    * TODO Build B+ Tree
+;;    * IN-PROGRESS Learn Rust ownership
+;;
+;; =========================================================
+;; ✅ RESULT
+;; - Notes system
+;; - Task tracking
+;; - Agenda dashboard
+;; - Clean UI
+;; - Fast capture workflow
+;; =========================================================
+(setq org-startup-with-inline-images t)
+(setq org-image-actual-width '(400))
+
+(add-hook 'org-babel-after-execute-hook
+          #'org-display-inline-images)
+;; =========================================================
+;; 🖼️ ORG — Insert image from URL (auto-download)
+;; =========================================================
+
+(defun my/org-insert-image-from-url (url)
+  "Download image from URL and insert as org link."
+  (interactive "sImage URL: ")
+  (let* ((img-dir (concat (file-name-directory (buffer-file-name)) "images/"))
+         (filename (concat img-dir (file-name-nondirectory url))))
+    
+    ;; create images directory if not exists
+    (unless (file-exists-p img-dir)
+      (make-directory img-dir t))
+    
+    ;; download image
+    (url-copy-file url filename t)
+    
+    ;; insert org link
+    (insert (format "[[file:%s]]" filename))
+    
+    ;; display inline
+    (org-display-inline-images)))
+(my/leader
+  "oi" '(my/org-insert-image-from-url :which-key "insert image from url"))
+
+(defun my/deploy-commit-push-init-el ()
+  "Copy init.el, commit ONLY that file, and push."
+  (interactive)
+  (require 'magit)
+  (let* ((source user-init-file)
+         (target "~/.dotfiles/config/init.el")
+         (default-directory "~/.dotfiles/")
+         (commit-msg (read-string "Commit message: ")))
+
+    ;; Save current buffer
+    (save-buffer)
+
+    ;; Copy file
+    (copy-file source target t)
+
+    ;; Stage ONLY this file
+    (magit-call-git "add" target)
+
+    ;; Commit ONLY staged file
+    (magit-call-git "commit" "-m" commit-msg)
+
+    ;; Push to current branch
+    (magit-call-git "push")
+
+    (message "init.el deployed, committed, and pushed! 🚀")))
+(my/leader
+  "fd" '(my/deploy-commit-push-init-el :which-key "deploy config"))
