@@ -31,9 +31,17 @@
 
 (set-face-attribute 'default nil :font "JetBrainsMono NF" :height 110)
 
-;; Tokyo Night theme
-(use-package doom-themes
-  :config (load-theme 'doom-tokyo-night t))
+;; =========================================================
+;; 🎨 CATPPUCCIN THEME
+;; =========================================================
+
+(use-package catppuccin-theme
+  :config
+  ;; Choose your flavor
+  (setq catppuccin-flavor 'mocha) ;; latte | frappe | macchiato | mocha
+
+  ;; Load theme
+  (load-theme 'catppuccin t))
 
 ;; Line numbers
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
@@ -278,7 +286,7 @@
   ;; Buffers
   "b"  '(:ignore t :which-key "buffers")
   "bb" '(consult-buffer :which-key "switch buffer")
-  "bd" '(kill-buffer :which-key "kill buffer")
+  "bd" '(kill-current-buffer :which-key "kill buffer")
 
   ;; Search
   "s"  '(:ignore t :which-key "search")
@@ -641,3 +649,36 @@
 
 ;; Always start typing immediately
 (add-hook 'vterm-mode-hook #'evil-insert-state)
+(use-package git-gutter
+  :config
+  ;; Enable globally
+  (global-git-gutter-mode +1)
+
+  ;; Update interval (faster feedback)
+  (setq git-gutter:update-interval 0.2)
+
+  ;; Symbols (you can tweak these)
+  (setq git-gutter:modified-sign "~") ;; modified
+  (setq git-gutter:added-sign    "+") ;; added
+  (setq git-gutter:deleted-sign  "-") ;; deleted
+
+  ;; Better visuals in fringe
+  (set-face-foreground 'git-gutter:modified "orange")
+  (set-face-foreground 'git-gutter:added    "green")
+  (set-face-foreground 'git-gutter:deleted  "red"))
+
+(use-package git-gutter-fringe
+  :after git-gutter
+  :config
+  (require 'git-gutter-fringe)
+
+  ;; thinner, cleaner indicators
+  (define-fringe-bitmap 'git-gutter-fr:added    [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted  [128 192 224 240] nil nil 'bottom))
+(my/leader
+  "g"  '(:ignore t :which-key "git")
+  "gn" '(git-gutter:next-hunk :which-key "next hunk")
+  "gp" '(git-gutter:previous-hunk :which-key "prev hunk")
+  "gr" '(git-gutter:revert-hunk :which-key "revert hunk")
+  "gh" '(git-gutter:popup-hunk  :which-key "preview hunk"))
