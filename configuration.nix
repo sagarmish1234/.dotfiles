@@ -102,7 +102,7 @@
     };
     # kernelPackages = pkgs.linuxKernel.packagesFor pkgs.cachyosKernels.linux-cachyos-latest;
     # Kernel
-    kernelPackages = pkgs.linuxPackages_6_18;
+    kernelPackages = pkgs.linuxPackages_testing;
   };
 
   # Set your time zone.
