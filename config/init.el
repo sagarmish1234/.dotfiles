@@ -920,6 +920,8 @@ Fixes vs. naive version:
   1. Explicitly saves init.el regardless of which buffer is active.
   2. Passes a repo-relative path to `git add` (tilde paths confuse git).
   3. Aborts the push if the commit step fails (e.g. nothing to commit)."
+
+
   (interactive)
   (require 'magit)
   (let* ((source            user-init-file)
