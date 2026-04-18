@@ -17,7 +17,6 @@ let
   };
 in
 {
-  # CRITICAL: This puts the theme files into /run/current-system/sw/share/sddm/themes/
   environment.systemPackages = [
     customAstronaut
     pkgs.kdePackages.qtmultimedia # Astronaut requires this to load Main.qml properly

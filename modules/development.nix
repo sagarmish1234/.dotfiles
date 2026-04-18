@@ -29,8 +29,8 @@
     #   dbeaver-bin
 
     # Container tools
-    docker
-    docker-compose
+    # docker
+    # docker-compose
     # podman
     # buildah
     # skopeo

@@ -11,7 +11,8 @@
       tlp = true;
     };
     virtualization = {
-      docker = true;
+      docker = false;
+      podman = true;
     };
   };
 
