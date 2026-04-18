@@ -25,7 +25,6 @@ in
     spotify
     imv
     hyprshot
-    quickshell
     qt6.qtdeclarative
     wl-clipboard
     wiremix
@@ -35,5 +34,7 @@ in
     ani-cli
     psmisc
     nil
+    # aria2
+    # transmission_4-qt6
   ];
 }

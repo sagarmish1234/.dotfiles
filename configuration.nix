@@ -160,7 +160,9 @@
       "docker"
     ];
   };
-
+  environment.variables = {
+    PATH = [ "~/.cargo/bin/" ];
+  };
   nixpkgs.config.allowUnfree = true;
   environment.pathsToLink = [
     "/share/applications"

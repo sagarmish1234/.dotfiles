@@ -5,7 +5,7 @@
     printing = true;
     displayManager = {
       sdm = false;
-      greetd = true;
+      greetd = false;
     };
     batteryManager = {
       tlp = true;
