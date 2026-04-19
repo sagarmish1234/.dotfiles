@@ -34,6 +34,7 @@ in
     ani-cli
     psmisc
     nil
+    simple-scan
     # aria2
     # transmission_4-qt6
   ];

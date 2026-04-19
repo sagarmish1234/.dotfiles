@@ -158,6 +158,8 @@
       "networkmanager"
       "wheel"
       "docker"
+      "scanner"
+      "lp"
     ];
   };
   environment.variables = {
@@ -168,4 +170,17 @@
     "/share/applications"
     "/share/xdg-desktop-portal"
   ];
+
+  hardware.sane.enable = true;
+  hardware.sane.extraBackends = [ pkgs.hplipWithPlugin ];
+
+  # Enable the CUPS printing service with HP drivers
+  services.printing.drivers = [ pkgs.hplipWithPlugin ];
+
+  # Add your user to the 'scanner' and 'lp' groups to grant hardware access
+
+  # Recommended for network-connected HP printers
+  services.avahi.enable = true;
+  services.avahi.nssmdns4 = true;
+  services.avahi.openFirewall = true;
 }
