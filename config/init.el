@@ -310,8 +310,14 @@
   (corfu-auto    t)    ; trigger completion automatically
   (corfu-cycle   t)    ; wrap around the candidate list
   (corfu-preview-current t)
-  (corfu-preselect 'prompt))
-
+  (corfu-preselect 'first)
+  ;; Confirm with RET
+  (corfu-confirm-with-key 'return))
+;; After your corfu use-package block
+(with-eval-after-load 'corfu
+  (define-key corfu-map (kbd "RET") #'corfu-insert)
+  (define-key corfu-map (kbd "TAB") #'corfu-next)      ;; TAB → next
+  (define-key corfu-map (kbd "<backtab>") #'corfu-previous)) ;; Shift+TAB → previous
 ;; ── Cape — additional completion-at-point backends for Corfu ─────────────
 (use-package cape
   :init
@@ -947,6 +953,11 @@ Fixes vs. naive version:
       (message "Nothing to commit — deploy skipped."))))
 
 
+(use-package evil-mc
+  :after evil
+  :config
+  (global-evil-mc-mode 1))
+
 ;;; =========================================================================
 ;;; 20. PERFORMANCE
 ;;; =========================================================================
@@ -957,3 +968,16 @@ Fixes vs. naive version:
       read-process-output-max  (* 1024 1024))       ; 1 MB — improves LSP throughput
 
 ;;; init.el ends here
+;;; =========================================================================
+;;; ELECTRIC PAIR — auto-close brackets, quotes, and braces
+;;; =========================================================================
+;; Built-in. Automatically inserts the closing pair when you type an opener.
+;; Works for: () [] {} "" '' `` and more.
+
+(electric-pair-mode 1)
+
+;; Don't auto-pair < > in most modes (causes noise in text/org)
+(setq electric-pair-inhibit-predicate
+      (lambda (c)
+        (if (char-equal c ?<) t
+          (electric-pair-default-inhibit c))))
