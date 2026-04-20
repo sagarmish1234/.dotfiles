@@ -27,6 +27,7 @@
     gsettings-desktop-schemas
     polkit
     exfatprogs
+    linuxHeaders
   ];
 
   # programs.thunar = {
@@ -164,6 +165,7 @@
   };
   environment.variables = {
     PATH = [ "~/.cargo/bin/" ];
+    BINDGEN_EXTRA_CLANG_ARGS = "-I${pkgs.linuxHeaders}/include";
   };
   nixpkgs.config.allowUnfree = true;
   environment.pathsToLink = [
