@@ -15,6 +15,8 @@ in
   home.packages = with pkgs; [
     libsForQt5.qtwayland
     nautilus
+    lm_sensors
+    nvtopPackages.full
     launch-tui
     launch-wofi
     jetbrains.idea
@@ -35,6 +37,7 @@ in
     psmisc
     nil
     simple-scan
+    rclone
     # aria2
     # transmission_4-qt6
   ];

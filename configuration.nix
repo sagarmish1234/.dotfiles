@@ -28,6 +28,7 @@
     polkit
     exfatprogs
     linuxHeaders
+    asusctl
   ];
 
   # programs.thunar = {
@@ -38,6 +39,7 @@
   #   ];
   # };
   system.stateVersion = "25.11"; # Define your hostname.
+  services.asusd.enable = true;
 
   networking = {
     hostName = "nixos";
@@ -57,6 +59,8 @@
     systemd-resolved.stopIfChanged = false;
   };
   environment.variables.QT_QPA_PLATFORM = "wayland";
+
+  programs.fuse.userAllowOther = true;
 
   hardware.bluetooth = {
     enable = true;
@@ -103,7 +107,10 @@
     };
     # kernelPackages = pkgs.linuxKernel.packagesFor pkgs.cachyosKernels.linux-cachyos-latest;
     # Kernel
-    kernelPackages = pkgs.linuxPackages_testing;
+    kernelPackages = pkgs.linuxPackages_6_18;
+
+    blacklistedKernelModules = [ ];
+    kernelModules = [ "asus-wmi" "asus-nb-wmi" ];
 
     plymouth = {
       enable = true;
@@ -123,6 +130,7 @@
       "quiet"
       "udev.log_level=3"
       "systemd.show_status=auto"
+      "acpi_enforce_resources=lax"
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key

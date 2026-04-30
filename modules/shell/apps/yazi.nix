@@ -23,7 +23,7 @@
       shellWrapperName = "y";
 
       settings = {
-        mgr = {
+        manager = {
           sort_by = "natural";
           sort_dir_first = true;
           show_hidden = false;
@@ -73,7 +73,7 @@
       '';
 
       keymap = {
-        mgr.prepend_keymap = [
+        manager.prepend_keymap = [
           {
             on = "M";
             run = "plugin mount";
@@ -91,6 +91,11 @@
             ];
             run = "plugin chmod";
             desc = "Chmod on selected files";
+          }
+          {
+            on = "gr";
+            run = "cd ${config.home.homeDirectory}/GoogleDrive";
+            desc = "Go to Google Drive";
           }
           {
             on = "<C-n>";
