@@ -5,7 +5,7 @@ lib.mkIf feature.services.batteryManager.tlp {
     enable = true;
     settings = {
       # CPU Scaling Governor
-      CPU_SCALING_GOVERNOR_ON_AC = "performance"; # When plugged in
+      CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # When plugged in
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave"; # On battery
 
       # Battery Charge Thresholds (for long-term health)
@@ -15,6 +15,7 @@ lib.mkIf feature.services.batteryManager.tlp {
       START_CHARGE_THRESH_BAT1 = 80;
       STOP_CHARGE_THRESH_BAT1 = 80;
       # Other common settings
+      CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
       CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
       CPU_BOOST_ON_BAT = 0; # Disable CPU boost on battery
       USB_AUTOSUSPEND = 1; # Enable USB autosuspend

@@ -159,6 +159,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.thermald.enable = true;
 
   users.users.sagar = {
     isNormalUser = true;

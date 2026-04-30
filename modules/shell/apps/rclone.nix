@@ -1,8 +1,5 @@
 { pkgs, config, ... }:
 {
-  # Create the mount point directory
-  home.file."GoogleDrive/.keep".text = "";
-
   systemd.user.services.rclone-googledrive = {
     Unit = {
       Description = "rclone: Remote FUSE filesystem for Google Drive";
@@ -26,7 +23,8 @@
                  "--vfs-cache-max-size 10G " +
                  "--dir-cache-time 72h " +
                  "--drive-chunk-size 64M " +
-                 "--allow-other";
+                 "--allow-other " +
+                 "--allow-non-empty";
       ExecStop = "fusermount -u ${config.home.homeDirectory}/GoogleDrive";
       Restart = "on-failure";
       RestartSec = "10s";
