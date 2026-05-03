@@ -32,7 +32,8 @@
       "SUPER SHIFT, PRINT, exec, hyprshot -m region"
 
       # Launch file manager
-      "SUPER SHIFT, F, exec, $browser"
+      "SUPER, E, exec, $fileManager"
+      "SUPER, B, exec, $browser"
 
       "SUPER, W, killactive,"
       "SUPER, RETURN, exec, $terminal"

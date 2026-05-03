@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   stylix = {
     enable = true;
@@ -23,5 +23,11 @@
       package = pkgs.candy-icons;
       name = "candy-icons";
     };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme.name = lib.mkForce "gtk";
+    style.name = lib.mkForce "adwaita-dark";
   };
 }

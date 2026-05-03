@@ -3,15 +3,10 @@
   feature,
   pkgs,
   inputs,
+  unstable,
   ...
 }:
 
-let
-  unstable = import inputs.nixpkgs-unstable {
-    system = pkgs.stdenv.hostPlatform.system;
-    config.allowUnfree = true;
-  };
-in
 lib.mkIf feature.dev.rust {
   home.packages = with unstable; [
 

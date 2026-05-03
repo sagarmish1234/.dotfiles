@@ -22,20 +22,16 @@
   };
 
   environment.systemPackages =
-    let
-      unstable = import inputs.nixpkgs-unstable {
-        system = pkgs.stdenv.hostPlatform.system;
-        config.allowUnfree = true;
-      };
-    in
     with pkgs;
     [
-      wlogout
+      # System and Hardware tools
+      msr-tools
+      lshw
+      lm_sensors
       glib
       gsettings-desktop-schemas
       polkit
       exfatprogs
-      linuxHeaders
       asusctl
       dmidecode
     ];
@@ -211,8 +207,6 @@
     ];
   };
   environment.variables = {
-    PATH = [ "~/.cargo/bin/" ];
-    BINDGEN_EXTRA_CLANG_ARGS = "-I${pkgs.linuxHeaders}/include";
     # Nvidia Wayland Optimizations
     __GL_GSYNC_ALLOWED = "0";
     __GL_VRR_ALLOWED = "0";

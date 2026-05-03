@@ -13,8 +13,7 @@ in
     btop.enable = true;
   };
   home.packages = with pkgs; [
-    libsForQt5.qtwayland
-    nautilus
+    wlogout
     nvtopPackages.full
     launch-tui
     launch-wofi
@@ -22,15 +21,12 @@ in
     chromium
     gh
     qbittorrent
-    lshw
     spotify
     imv
     hyprshot
-    qt6.qtdeclarative
     wl-clipboard
     wiremix
     typst
-    msr-tools
     localsend
     lazydocker
     ani-cli
@@ -41,4 +37,5 @@ in
     # aria2
     # transmission_4-qt6
   ];
+  home.sessionPath = [ "$HOME/.cargo/bin" ];
 }

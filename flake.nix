@@ -43,9 +43,13 @@
     }@inputs:
     let
       feature = import ./feature.nix;
+      system = "x86_64-linux";
+      unstable = import inputs.nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
       specialArgs = {
-        inherit inputs feature;
-        system = "x86_64-linux";
+        inherit inputs feature unstable system;
       };
     in
     {

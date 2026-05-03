@@ -27,9 +27,6 @@
       # Make Chromium use XCompose and all Wayland
       "CHROMIUM_FLAGS,\"--enable-features=UseOzonePlatform --ozone-platform=wayland --gtk-version=4\""
 
-      # Make .desktop files available for wofi
-      "XDG_DATA_DIRS,$XDG_DATA_DIRS:$HOME/.local/state/home-manager/gcroots/current-home/home-path/share/applications"
-
       # Use XCompose file
       "XCOMPOSEFILE,~/.XCompose"
       "EDITOR,nvim"
