@@ -1,40 +1,34 @@
 
 ;;; init.el --- Personal Emacs Configuration -*- lexical-binding: t; -*-
-;;
-;; Author: Sagar
-;; Description: A clean, Evil-based Emacs config with LSP, Org, Vterm,
-;;              Git integration, and language support for Rust, Java, and Nix.
-;;
-;; ┌─────────────────────────────────────────────────────────────────────────┐
-;; │  TABLE OF CONTENTS                                                      │
-;; │                                                                         │
-;; │  1.  Bootstrap (straight.el + use-package)                              │
-;; │  2.  UI & Appearance                                                    │
-;; │  3.  Theme (Catppuccin)                                                 │
-;; │  4.  Evil Mode (Vim keybindings)                                        │
-;; │  5.  Leader Key (general.el)                                            │
-;; │  6.  Which-key (keybinding hints)                                       │
-;; │  7.  Minibuffer & Completion (Vertico, Orderless, Corfu, Cape)          │
-;; │  8.  LSP (Language Server Protocol)                                     │
-;; │  9.  Formatter System                                                   │
-;; │  10. Projectile (project management)                                    │
-;; │  11. Dired (file manager)                                               │
-;; │  12. Vterm (terminal emulator)                                          │
-;; │  13. Git (Magit + git-gutter)                                           │
-;; │  14. Language: Rust                                                     │
-;; │  15. Language: Java                                                     │
-;; │  16. Language: Nix                                                      │
-;; │  17. Org Mode (notes, tasks, agenda)                                    │
-;; │  18. Modeline (doom-modeline)                                           │
-;; │  19. Miscellaneous (icons, comments, keybindings)                       │
-;; │  20. Performance                                                        │
-;; └─────────────────────────────────────────────────────────────────────────┘
+
+;;; =========================================================================
+;;; 0. PERFORMANCE OPTIMIZATIONS (EARLY)
+;;; =========================================================================
+
+;; Increase GC threshold during startup to prevent pauses
+(setq gc-cons-threshold 100000000) ;; 100MB
+
+;; Increase the amount of data which Emacs reads from the process
+(setq read-process-output-max (* 1024 1024)) ;; 1MB
+
+;; Temporarily disable file-name-handler-alist to speed up loading
+(defvar my/file-name-handler-alist-cache file-name-handler-alist)
+(setq file-name-handler-alist nil)
+
+;; Restore GC and file-name-handler after startup
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold 16777216 ;; 16MB
+                  file-name-handler-alist my/file-name-handler-alist-cache)))
 
 ;;; =========================================================================
 ;;; 1. BOOTSTRAP — straight.el + use-package
 ;;; =========================================================================
 ;; straight.el is a functional, reproducible package manager that replaces
 ;; the built-in package.el. It installs packages directly from source (git).
+
+;; Optimization: Tell straight.el not to check for modifications on every start
+(setq straight-check-for-modifications '(check-on-save find-when-checking))
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -55,6 +49,9 @@
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
 
+;; Fix Org version mismatch: Load Org as early as possible via straight
+(straight-use-package 'org)
+
 ;; Suppress warnings below :error to keep *Warnings* buffer quiet
 (setq warning-minimum-level :error)
 
@@ -64,6 +61,7 @@
 ;;; =========================================================================
 
 ;; Minimal chrome — remove bars we don't need
+;; (Already partially handled in early-init.el)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -115,7 +113,7 @@
 ;; evil-collection sets sensible Evil bindings for many built-in modes
 ;; (dired, magit, xref, help, etc.)
 (use-package evil-collection
-  :after (evil magit)
+  :after evil
   :config
   (evil-collection-init))
 
@@ -240,6 +238,7 @@
 ;; listing completions for the key sequence you've started.
 
 (use-package which-key
+  :defer 0
   :config
   (which-key-mode)
 
@@ -289,6 +288,7 @@
 
 ;; ── Orderless — fuzzy/space-separated completion matching ────────────────
 (use-package orderless
+  :defer t
   :init
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
@@ -299,13 +299,13 @@
   :init (marginalia-mode))
 
 ;; ── Consult — enhanced search & navigation commands ─────────────────────
-(use-package consult)
+(use-package consult
+  :defer t)
 (setq consult-preview-key "M-.")  ; Preview on M-. rather than automatically
 
 ;; ── Corfu — in-buffer popup completion (replaces company) ────────────────
 (use-package corfu
-  :init
-  (global-corfu-mode)
+  :hook (after-init . global-corfu-mode)
   :custom
   (corfu-auto    t)    ; trigger completion automatically
   (corfu-cycle   t)    ; wrap around the candidate list
@@ -330,7 +330,7 @@
 
 ;; ── Flycheck — on-the-fly syntax checking ────────────────────────────────
 (use-package flycheck
-  :init (global-flycheck-mode))
+  :hook (prog-mode . flycheck-mode))
 
 ;; Navigate between errors with ]d / [d (Evil style)
 (with-eval-after-load 'evil
@@ -349,8 +349,10 @@
 ;; completions, diagnostics, go-to-definition, rename, code actions, etc.
 
 (use-package lsp-mode
-  :commands lsp
-  :hook ((rust-mode . lsp))
+  :commands (lsp lsp-deferred)
+  :hook ((rust-mode . lsp-deferred)
+         (java-mode . lsp-deferred)
+         (nix-mode . lsp-deferred))
   :init
   (setq lsp-keymap-prefix "C-c l")
   :config
@@ -395,7 +397,7 @@
 (defun my/lsp-setup ()
   "Start LSP unless we're in an Emacs Lisp buffer."
   (unless (derived-mode-p 'emacs-lisp-mode)
-    (lsp)))
+    (lsp-deferred)))
 
 (add-hook 'prog-mode-hook #'my/lsp-setup)
 
@@ -656,8 +658,8 @@ Priority: (1) mode-specific entry in `my/formatters'
 
 ;; ── git-gutter — per-line diff indicators in the fringe ──────────────────
 (use-package git-gutter
+  :hook (prog-mode . git-gutter-mode)
   :config
-  (global-git-gutter-mode +1)
   (setq git-gutter:update-interval 0.2  ; refresh quickly on save
         git-gutter:modified-sign   "~"
         git-gutter:added-sign      "+"
@@ -957,15 +959,6 @@ Fixes vs. naive version:
   :after evil
   :config
   (global-evil-mc-mode 1))
-
-;;; =========================================================================
-;;; 20. PERFORMANCE
-;;; =========================================================================
-;; Increase the GC threshold during normal use to reduce GC pauses.
-;; (The default 800 KB is far too low for modern packages like LSP.)
-
-(setq gc-cons-threshold        (* 100 1000 1000)  ; 100 MB
-      read-process-output-max  (* 1024 1024))       ; 1 MB — improves LSP throughput
 
 ;;; init.el ends here
 ;;; =========================================================================
