@@ -18,7 +18,7 @@
 
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = true;
+    powerManagement.finegrained = false;
 
     # Enable dynamic power management.
     # Dynamic Boost balances power between the CPU and the GPU for improved
@@ -37,9 +37,14 @@
     # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    # Enable Coolbits for overclocking support
+    # 28 = 16 (Overclocking) + 8 (Fan control) + 4 (Thermal monitor)
+    # xconfig.coolbits = 28; # This is sometimes needed in X11
   };
+  # Adding coolbits via services.xserver.screenSection as it's the standard NixOS way
+  services.xserver.screenSection = ''
+    Option "Coolbits" "28"
+  '';
   hardware.nvidia.prime = {
     offload = {
       enable = true;

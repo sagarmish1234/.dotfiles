@@ -43,14 +43,16 @@
     }@inputs:
     let
       feature = import ./feature.nix;
+      specialArgs = {
+        inherit inputs feature;
+        system = "x86_64-linux";
+      };
     in
     {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs feature system;
-        };
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        inherit specialArgs;
         modules = [
+          { nixpkgs.hostPlatform = "x86_64-linux"; }
           ./configuration.nix
           home-manager.nixosModules.default
           {

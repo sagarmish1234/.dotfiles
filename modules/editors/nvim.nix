@@ -197,7 +197,7 @@ lib.mkIf feature.editor.nvim {
         };
         java.enable = true;
         rust.enable = true;
-        ts.enable = true; # TypeScript
+        typescript.enable = true; # TypeScript
         typst.enable = true;
         qml.enable = true;
       };

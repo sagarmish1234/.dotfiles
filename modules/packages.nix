@@ -15,7 +15,6 @@ in
   home.packages = with pkgs; [
     libsForQt5.qtwayland
     nautilus
-    lm_sensors
     nvtopPackages.full
     launch-tui
     launch-wofi
@@ -31,6 +30,7 @@ in
     wl-clipboard
     wiremix
     typst
+    msr-tools
     localsend
     lazydocker
     ani-cli

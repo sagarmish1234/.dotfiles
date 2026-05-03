@@ -5,7 +5,8 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     polarity = "dark";
   };
-  # stylix.targets.firefox.profileNames = ["Sagar"];
+  stylix.targets.firefox.profileNames = ["default"];
+  stylix.targets.zen-browser.profileNames = ["default"];
   stylix.targets.emacs.enable = false;
   stylix.targets.noctalia-shell.enable = false;
 
