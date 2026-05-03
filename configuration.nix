@@ -82,6 +82,12 @@
         "flakes"
       ];
       auto-optimise-store = true;
+      # Build optimization
+
+      cores = 0;
+      max-jobs = "auto";
+      min-free = 128 * 1024 * 1024; # 128MB
+      max-free = 1024 * 1024 * 1024; # 1GB
 
       # Binary caches
       substituters = [
@@ -89,12 +95,14 @@
         "https://nix-community.cachix.org"
         "https://hyprland.cachix.org"
         "https://attic.xuyh0120.win/lantian"
+        "https://cache.garnix.io"
       ];
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
     };
 
@@ -115,7 +123,7 @@
       efi.canTouchEfiVariables = true;
     };
     # Kernel
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackagesFor inputs.nix-cachyos-kernel.packages.${pkgs.stdenv.hostPlatform.system}.linux-cachyos-bore-lto;
 
     extraModulePackages = [ ];
 
@@ -152,7 +160,6 @@
       "nvme_load=YES"
       "nvidia-drm.modeset=1"
       "asus_wmi.fnlock_default=0"
-      "intel_pstate=disable"
     ];
     # Hide the OS choice for bootloaders.
     # It's still possible to open the bootloader list by pressing any key
@@ -160,6 +167,15 @@
     loader.timeout = 0;
 
   };
+
+  zramSwap = {
+    enable = true;
+    priority = 100;
+    memoryPercent = 50;
+    algorithm = "zstd";
+  };
+
+  services.fstrim.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Kolkata";
@@ -197,6 +213,11 @@
   environment.variables = {
     PATH = [ "~/.cargo/bin/" ];
     BINDGEN_EXTRA_CLANG_ARGS = "-I${pkgs.linuxHeaders}/include";
+    # Nvidia Wayland Optimizations
+    __GL_GSYNC_ALLOWED = "0";
+    __GL_VRR_ALLOWED = "0";
+    NVD_BACKEND = "direct";
+    LIBVA_DRIVER_NAME = "nvidia";
   };
   nixpkgs.config.allowUnfree = true;
   environment.pathsToLink = [
