@@ -93,9 +93,14 @@
             desc = "Chmod on selected files";
           }
           {
-            on = "gr";
+            on = [ "g" "d" ];
             run = "cd ${config.home.homeDirectory}/GoogleDrive";
             desc = "Go to Google Drive";
+          }
+          {
+            on = [ "p" "s" ];
+            run = ''shell 'du -sh "$@" | less' --block'';
+            desc = "Calculate directory size";
           }
           {
             on = "<C-n>";
