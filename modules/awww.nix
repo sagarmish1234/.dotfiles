@@ -36,6 +36,13 @@ in
   home.file."Pictures/Wallpapers/void.png".source = ../assets/wallpapers/void.png;
   home.file."Pictures/Wallpapers/anime-paper-1.png".source = ../assets/wallpapers/anime-paper-1.png;
   home.file."Pictures/Wallpapers/anime-paper-2.jpg".source = ../assets/wallpapers/anime-paper-2.jpg;
+  home.file."Pictures/Wallpapers/anime-girl-1.jpg".source = ../assets/wallpapers/anime-girl-1.jpg;
+  home.file."Pictures/Wallpapers/anime-coffee-girl.jpg".source = ../assets/wallpapers/anime-coffee-girl.jpg;
+  home.file."Pictures/Wallpapers/sad-anime-girl.png".source = ../assets/wallpapers/sad-anime-girl.png;
+  home.file."Pictures/Wallpapers/window-samurai.jpg".source = ../assets/wallpapers/window-samurai.jpg;
+  home.file."Pictures/Wallpapers/your-name-comet.png".source = ../assets/wallpapers/your-name-comet.png;
+  home.file."Pictures/Wallpapers/your-name-hug.jpg".source = ../assets/wallpapers/your-name-hug.jpg;
+  home.file."Pictures/Wallpapers/your-name-hands.jpg".source = ../assets/wallpapers/your-name-hands.jpg;
   # Hyprland configuration
   wayland.windowManager.hyprland = {
     enable = true;
