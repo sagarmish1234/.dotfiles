@@ -21,20 +21,18 @@
     xwayland.enable = true;
   };
 
-  environment.systemPackages =
-    with pkgs;
-    [
-      # System and Hardware tools
-      msr-tools
-      lshw
-      lm_sensors
-      glib
-      gsettings-desktop-schemas
-      polkit
-      exfatprogs
-      asusctl
-      dmidecode
-    ];
+  environment.systemPackages = with pkgs; [
+    # System and Hardware tools
+    msr-tools
+    lshw
+    lm_sensors
+    glib
+    gsettings-desktop-schemas
+    polkit
+    exfatprogs
+    asusctl
+    dmidecode
+  ];
 
   # programs.thunar = {
   #   enable = true;
@@ -119,7 +117,7 @@
       efi.canTouchEfiVariables = true;
     };
     # Kernel
-    kernelPackages = pkgs.linuxPackagesFor inputs.nix-cachyos-kernel.packages.${pkgs.stdenv.hostPlatform.system}.linux-cachyos-bore-lto;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     extraModulePackages = [ ];
 
@@ -193,7 +191,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  # services.thermald.enable = true;
+  services.thermald.enable = false;
 
   users.users.sagar = {
     isNormalUser = true;
@@ -232,54 +230,44 @@
   services.avahi.nssmdns4 = true;
   services.avahi.openFirewall = true;
 
-  # services.throttled = {
-  #   enable = true;
-  #   extraConfig = ''
-  #     [GENERAL]
-  #     Enabled: True
-  #     Sysfs_Power_Path: /sys/class/power_supply/ACAD/online
+  services.throttled = {
+    enable = true;
+    extraConfig = ''
+      [GENERAL]
+      Enabled: True
+      Sysfs_Power_Path: /sys/class/power_supply/ACAD/online
 
-  #     [AC]
-  #     Update_Rate_s: 5
-  #     PL1_TDP_W: 90
-  #     PL1_Duration_s: 28
-  #     PL2_TDP_W: 125
-  #     PL2_Duration_S: 0.002
-  #     Trip_Temp_C: 98
-  #     cTDP: 2
-  #     Disable_BDPROCHOT: True
+      [AC]
+      Update_Rate_s: 5
+      PL1_TDP_W: 90
+      PL1_Duration_s: 28
+      PL2_TDP_W: 125
+      PL2_Duration_S: 0.002
+      Trip_Temp_C: 98
+      cTDP: 2
+      Disable_BDPROCHOT: True
 
-  #     [BATTERY]
-  #     Update_Rate_s: 30
-  #     PL1_TDP_W: 40
-  #     PL1_Duration_s: 28
-  #     PL2_TDP_W: 50
-  #     PL2_Duration_S: 0.002
-  #     Trip_Temp_C: 85
-  #     cTDP: 1
-  #     Disable_BDPROCHOT: True
+      [BATTERY]
+      Update_Rate_s: 30
+      PL1_TDP_W: 40
+      PL1_Duration_s: 28
+      PL2_TDP_W: 50
+      PL2_Duration_S: 0.002
+      Trip_Temp_C: 85
+      cTDP: 1
+      Disable_BDPROCHOT: True
 
-  #     [UNDERVOLT]
-  #     # CPU core voltage offset (mV)
-  #     CORE: -60
-  #     # Integrated GPU voltage offset (mV)
-  #     GPU: 0
-  #     # CPU cache voltage offset (mV)
-  #     CACHE: -60
-  #     # System Agent voltage offset (mV)
-  #     UNCORE: 0
-  #     # Analog I/O voltage offset (mV)
-  #     ANALOGIO: 0
-  #   '';
-  # };
-
-  systemd.services.unlock-cpu-freq = {
-    description = "Unlock CPU frequency scaling max";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.msr-tools}/bin/wrmsr -a 0x1FC 0x24005c && for i in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo performance > \"$i\"; done && for i in /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq; do echo 5000000 > \"$i\"; done && echo 1 > /sys/devices/system/cpu/cpufreq/boost || true'";
-      RemainAfterExit = true;
-    };
+      [UNDERVOLT]
+      # CPU core voltage offset (mV)
+      CORE: -60
+      # Integrated GPU voltage offset (mV)
+      GPU: 0
+      # CPU cache voltage offset (mV)
+      CACHE: -60
+      # System Agent voltage offset (mV)
+      UNCORE: 0
+      # Analog I/O voltage offset (mV)
+      ANALOGIO: 0
+    '';
   };
 }
