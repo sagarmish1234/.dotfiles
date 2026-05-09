@@ -10,6 +10,8 @@
     # C/C++
     gcc
     cmake
+    pkg-config
+    openssl
     #clang
     #cmake
     #gnumake
@@ -31,6 +33,7 @@
     # Container tools
     # docker
     # docker-compose
+    podman-compose
     # podman
     # buildah
     # skopeo

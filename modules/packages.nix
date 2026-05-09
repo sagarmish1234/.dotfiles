@@ -34,6 +34,7 @@ in
     nil
     simple-scan
     rclone
+    dbeaver-bin
     # aria2
     # transmission_4-qt6
   ];
