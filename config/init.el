@@ -117,11 +117,11 @@
   :config
   (evil-collection-init))
 
-;; evil-nerd-commenter — toggle comments with gcc / gc<motion>
-(use-package evil-nerd-commenter
+;; evil-commentary — toggle comments with gcc / gc<motion> (LazyVim style)
+(use-package evil-commentary
   :after evil
   :config
-  (evilnc-default-hotkeys))
+  (evil-commentary-mode))
 
 
 ;;; =========================================================================
@@ -779,6 +779,25 @@ Priority: (1) mode-specific entry in `my/formatters'
   "a" '(lsp-execute-code-action :which-key "code action")
   "f" '(lsp-format-buffer       :which-key "format"))
 
+
+;;; =========================================================================
+;;; 16. YAML MODE
+;;; =========================================================================
+;; yaml-mode provides syntax highlighting and indentation for YAML files.
+
+(use-package yaml-mode
+  :mode ("\\.ya?ml\\'" . yaml-mode)
+  :config
+  ;; Format YAML buffers on save using LSP if available
+  (add-hook 'yaml-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook #'lsp-format-buffer nil t))))
+
+;; Local leader bindings for YAML (SPC m ...)
+(my/local-leader
+  :keymaps 'yaml-mode-map
+  "a" '(lsp-execute-code-action :which-key "code action")
+  "f" '(lsp-format-buffer       :which-key "format"))
 
 ;;; =========================================================================
 ;;; 17. ORG MODE — notes, tasks, and agenda
