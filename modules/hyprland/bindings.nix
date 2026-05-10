@@ -10,7 +10,7 @@
     bind = [
 
       # "SUPER SHIFT, SPACE, exec, pkill -SIGUSR1 waybar"
-      "SUPER, SPACE, exec, ~/.config/rofi/launchers/type-1/launcher.sh"
+      "SUPER, SPACE, exec, noctalia-shell ipc call launcher toggle"
       "SUPER, F, fullscreen, 0" # Fullscreen (maximize)
       "SUPER, M, fullscreen, 1" # Maximize (keep gaps and bar)
       # "SUPER CTRL, SPACE, exec, ~/.local/share/omarchy/bin/swaybg-next"
@@ -42,7 +42,7 @@
       "SUPER SHIFT, DELETE, exec, hyprlock"
       "SUPER CTRL, ESCAPE, exec, reboot"
       "SUPER SHIFT CTRL, ESCAPE, exec, systemctl poweroff"
-      "SUPER, ESCAPE, exec, wlogout"
+      "SUPER, ESCAPE, exec, noctalia-shell ipc call sessionMenu toggle"
 
       # Control tiling
       "SUPER, I, togglesplit, # dwindle"

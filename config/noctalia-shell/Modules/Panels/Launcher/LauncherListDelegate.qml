@@ -200,7 +200,7 @@ NBox {
           NIcon {
             anchors.centerIn: parent
             icon: modelData.badgeIcon || ""
-            pointSize: Style.fontSizeS
+            pointSize: Math.round(Style.fontSizeS * 0.8)
             color: Color.mOnSurfaceVariant
           }
         }
@@ -213,7 +213,7 @@ NBox {
 
         NText {
           text: modelData.name || "Unknown"
-          pointSize: Style.fontSizeL
+          pointSize: Math.round(Style.fontSizeL * 0.8)
           font.weight: Style.fontWeightBold
           color: entry.isSelected ? Color.mOnHover : Color.mOnSurface
           elide: Text.ElideRight
@@ -225,7 +225,7 @@ NBox {
 
         NText {
           text: modelData.description || ""
-          pointSize: Style.fontSizeS
+          pointSize: Math.round(Style.fontSizeS * 0.8)
           color: entry.isSelected ? Color.mOnHover : Color.mOnSurfaceVariant
           elide: Text.ElideRight
           maximumLineCount: 1

@@ -1,10 +1,34 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     inputs.noctalia.homeModules.default
   ];
   programs.noctalia-shell = {
     enable = true;
+    package = inputs.noctalia.packages.${pkgs.system}.default.overrideAttrs (old: {
+      buildInputs = (old.buildInputs or [ ]) ++ [
+        pkgs.qt6.qtsvg
+        pkgs.qt6.qtwayland
+        pkgs.adwaita-qt
+        pkgs.adwaita-qt6
+        pkgs.libadwaita
+        pkgs.gnome-themes-extra
+      ];
+      preFixup =
+        (old.preFixup or "")
+        + ''
+          qtWrapperArgs+=(
+            --set XDG_ICON_THEME candy-icons
+            --set GTK_THEME Adwaita:dark
+            --set QT_QPA_PLATFORMTHEME gtk3
+            --prefix XDG_DATA_DIRS : "${pkgs.candy-icons}/share"
+            --prefix XDG_DATA_DIRS : "${pkgs.adwaita-icon-theme}/share"
+            --prefix XDG_DATA_DIRS : "${pkgs.hicolor-icon-theme}/share"
+            --prefix GTK_PATH : "${pkgs.gnome-themes-extra}/lib/gtk-2.0"
+            --prefix GTK_PATH : "${pkgs.gnome-themes-extra}/lib/gtk-3.0"
+          )
+        '';
+    });
     # systemd.enable = true;
     settings = {
       appLauncher = {
@@ -14,7 +38,7 @@
         customLaunchPrefixEnabled = false;
         enableClipPreview = true;
         enableClipboardHistory = false;
-        iconMode = "tabler";
+        iconMode = "native";
         ignoreMouseInput = false;
         pinnedApps = [ ];
         position = "center";
@@ -173,7 +197,7 @@
               id = "Brightness";
             }
             {
-              colorizeDistroLogo = true;
+              colorizeDistroLogo = false;
               colorizeSystemIcon = "none";
               customIconPath = "";
               enableColorization = false;
@@ -417,23 +441,23 @@
         powerOptions = [
           {
             action = "lock";
-            enabled = false;
+            enabled = true;
           }
           {
             action = "suspend";
-            enabled = false;
+            enabled = true;
           }
           {
             action = "hibernate";
-            enabled = false;
+            enabled = true;
           }
           {
             action = "reboot";
-            enabled = false;
+            enabled = true;
           }
           {
             action = "logout";
-            enabled = false;
+            enabled = true;
           }
           {
             action = "shutdown";
@@ -476,8 +500,14 @@
 
       templates = {
         activeTemplates = [
-          "GTK"
-          "Qt"
+          {
+            enabled = true;
+            id = "gtk";
+          }
+          {
+            enabled = true;
+            id = "qt";
+          }
         ];
         enableUserTheming = true;
       };

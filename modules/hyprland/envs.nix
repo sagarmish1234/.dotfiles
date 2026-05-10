@@ -15,6 +15,9 @@
       "XCURSOR_THEME,Adwaita"
       "HYPRCURSOR_THEME,Adwaita"
 
+      # Icon theme
+      "XDG_ICON_THEME,candy-icons"
+
       # Force all apps to use Wayland
       "GDK_BACKEND,wayland"
       "QT_QPA_PLATFORM,wayland"

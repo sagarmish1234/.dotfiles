@@ -115,16 +115,20 @@ async def sync_system_appearance(mode: str, *, update_gtk_theme: bool = True) ->
     if update_gtk_theme and not theme_available:
         print(f"Theme '{target_theme}' not found, skipping GTK theme set")
 
+    icon_theme = "candy-icons"
+
     if has_gsettings:
         schemas = await run_command("gsettings", "list-schemas")
         if schemas and "org.gnome.desktop.interface" in schemas:
             await run_command("gsettings", "set", "org.gnome.desktop.interface", "color-scheme", f"prefer-{mode}")
+            await run_command("gsettings", "set", "org.gnome.desktop.interface", "icon-theme", f"{icon_theme}")
             if theme_available:
                 await run_command("gsettings", "set", "org.gnome.desktop.interface", "gtk-theme", f"{target_theme}")
             return
 
     if has_dconf:
         await run_command("dconf", "write", "/org/gnome/desktop/interface/color-scheme", f"'prefer-{mode}'")
+        await run_command("dconf", "write", "/org/gnome/desktop/interface/icon-theme", f"'{icon_theme}'")
         if theme_available:
             await run_command("dconf", "write", "/org/gnome/desktop/interface/gtk-theme", f"'{target_theme}'")
 

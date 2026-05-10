@@ -188,12 +188,12 @@ Item {
         text: modelData.name || "Unknown"
         pointSize: {
           if (launcher.providerHasDisplayString && modelData.displayString) {
-            return Style.fontSizeS * Style.uiScaleRatio;
+            return Math.round(Style.fontSizeS * 0.8 * Style.uiScaleRatio);
           }
           // Scale font size relative to cell width for low res, but cap at maximum
-          const cellBasedSize = gridEntry.width * 0.1;
-          const baseSize = Style.fontSizeXS * Style.uiScaleRatio;
-          const maxSize = Style.fontSizeS * Style.uiScaleRatio;
+          const cellBasedSize = gridEntry.width * 0.08;
+          const baseSize = Math.round(Style.fontSizeXS * 0.8 * Style.uiScaleRatio);
+          const maxSize = Math.round(Style.fontSizeS * 0.8 * Style.uiScaleRatio);
           return Math.min(Math.max(cellBasedSize, baseSize), maxSize);
         }
         font.weight: Style.fontWeightSemiBold
