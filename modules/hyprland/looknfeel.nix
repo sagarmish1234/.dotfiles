@@ -80,5 +80,10 @@
       disable_hyprland_logo = true;
       disable_splash_rendering = true;
     };
+
+    layerrule = [
+      "blur, ^noctalia-.*"
+      "ignorealpha 0.6, ^noctalia-.*"
+    ];
   };
 }

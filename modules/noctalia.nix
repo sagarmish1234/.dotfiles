@@ -142,14 +142,20 @@
               pinned = [ ];
             }
             {
+              id = "Network";
+            }
+            {
               hideWhenZero = false;
               hideWhenZeroUnread = false;
               id = "NotificationHistory";
               showUnreadBadge = true;
             }
             {
+              id = "Bluetooth";
+            }
+            {
               deviceNativePath = "";
-              displayMode = "onhover";
+              displayMode = "icon-always";
               hideIfIdle = false;
               hideIfNotDetected = true;
               id = "Battery";
@@ -220,11 +226,11 @@
             id = "profile-card";
           }
           {
-            enabled = true;
+            enabled = false;
             id = "shortcuts-card";
           }
           {
-            enabled = true;
+            enabled = false;
             id = "audio-card";
           }
           {
@@ -249,7 +255,6 @@
             { id = "Network"; }
             { id = "Bluetooth"; }
             { id = "WallpaperSelector"; }
-            { id = "NoctaliaPerformance"; }
           ];
           right = [
             { id = "Notifications"; }
@@ -291,6 +296,7 @@
         boxRadiusRatio = 1;
         compactLockScreen = false;
         dimmerOpacity = 0;
+        enableBlurBehind = true;
         enableLockScreenCountdown = true;
         enableShadows = true;
         forceBlackScreenCorners = false;
@@ -411,23 +417,23 @@
         powerOptions = [
           {
             action = "lock";
-            enabled = true;
+            enabled = false;
           }
           {
             action = "suspend";
-            enabled = true;
+            enabled = false;
           }
           {
             action = "hibernate";
-            enabled = true;
+            enabled = false;
           }
           {
             action = "reboot";
-            enabled = true;
+            enabled = false;
           }
           {
             action = "logout";
-            enabled = true;
+            enabled = false;
           }
           {
             action = "shutdown";
@@ -485,8 +491,9 @@
         fontFixed = "JetBrainsMono Nerd Font Mono";
         fontFixedScale = 1;
         networkPanelView = "wifi";
-        panelBackgroundOpacity = 0.90;
+        panelBackgroundOpacity = 0.65;
         panelsAttachedToBar = true;
+        translucentWidgets = true;
         settingsPanelMode = "attached";
         tooltipsEnabled = true;
         wifiDetailsViewMode = "grid";

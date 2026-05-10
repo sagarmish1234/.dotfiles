@@ -35,6 +35,7 @@ in
     simple-scan
     rclone
     dbeaver-bin
+    nodePackages.mermaid-cli
     # aria2
     # transmission_4-qt6
   ];
