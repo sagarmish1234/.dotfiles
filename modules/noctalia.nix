@@ -327,6 +327,9 @@
         iRadiusRatio = 1;
         language = "";
         lockOnSuspend = true;
+        lockScreenBlur = 0.8;
+        lockScreenTint = 0.2;
+        lockScreenWallpaper = "/home/sagar/.cache/current_wallpaper";
         lockScreenCountdownDuration = 10000;
         radiusRatio = 1;
         scaleRatio = 1;

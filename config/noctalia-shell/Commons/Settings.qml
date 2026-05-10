@@ -337,6 +337,7 @@ Singleton {
       property list<string> lockScreenMonitors: [] // holds lock screen visibility per monitor
       property real lockScreenBlur: 0.0
       property real lockScreenTint: 0.0
+      property string lockScreenWallpaper: ""
       property JsonObject keybinds: JsonObject {
         property list<string> keyUp: ["Up"]
         property list<string> keyDown: ["Down"]

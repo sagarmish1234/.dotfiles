@@ -66,7 +66,9 @@ Item {
       return;
     }
 
-    const originalPath = WallpaperService.getWallpaper(screen.name) || "";
+    const lockWallpaper = Settings.data.general.lockScreenWallpaper || "";
+    const originalPath = lockWallpaper !== "" ? Settings.preprocessPath(lockWallpaper) : (WallpaperService.getWallpaper(screen.name) || "");
+    
     if (originalPath === "") {
       resolvedWallpaperPath = "";
       return;
@@ -111,7 +113,7 @@ Item {
 
   Image {
     id: lockBgImage
-    visible: source !== "" && Settings.data.wallpaper.enabled && !Settings.data.wallpaper.useSolidColor && (!PowerProfileService.noctaliaPerformanceMode || !Settings.data.noctaliaPerformance.disableWallpaper)
+    visible: source !== "" && (Settings.data.wallpaper.enabled || Settings.data.general.lockScreenWallpaper !== "") && !Settings.data.wallpaper.useSolidColor && (!PowerProfileService.noctaliaPerformanceMode || !Settings.data.noctaliaPerformance.disableWallpaper)
     anchors.fill: parent
     fillMode: Image.PreserveAspectCrop
     source: resolvedWallpaperPath
