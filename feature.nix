@@ -1,6 +1,5 @@
 {
   services = {
-    vpn = true;
     audio = true;
     bluetooth = true;
     printing = true;
