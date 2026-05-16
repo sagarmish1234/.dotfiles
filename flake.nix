@@ -33,12 +33,14 @@
 
     astal.url = "github:aylur/astal";
     ags.url = "github:aylur/ags";
+    catppuccin.url = "github:catppuccin/nix";
   };
   # Hello world
   outputs =
     {
       nixpkgs,
       home-manager,
+      catppuccin,
       ...
     }@inputs:
     let
@@ -59,6 +61,7 @@
           { nixpkgs.hostPlatform = "x86_64-linux"; }
           ./configuration.nix
           home-manager.nixosModules.default
+          # catppuccin.nixosModules.catppuccin
           {
             home-manager = {
               useGlobalPkgs = true;

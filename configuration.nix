@@ -41,6 +41,13 @@
   #     thunar-volman
   #   ];
   # };
+  # Catppuccin configuration
+  # catppuccin = {
+  #   enable = true;
+  #   flavor = "mocha";
+  #   accent = "mauve";
+  # };
+
   system.stateVersion = "25.11"; # Define your hostname.
   services.asusd.enable = true;
 

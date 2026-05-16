@@ -15,7 +15,7 @@
       directory = {
         truncation_length = 3;
         truncation_symbol = "…/";
-        repo_root_style = "bold #${config.lib.stylix.colors.base0D}";
+        repo_root_style = "bold #${config.lib.stylix.colors.base0E}";
         repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) ";
       };
 

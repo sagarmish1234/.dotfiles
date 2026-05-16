@@ -22,6 +22,9 @@
       "size 70% 70%, class:^(sagar\\.nixos\\..*)$"
       "center, class:^(sagar\\.nixos\\..*)$"
 
+      # Ensure terminal text is readable (Opaque text, transparent background handled by Ghostty)
+      "opacity 1.0 1.0, class:^(com.mitchellh.ghostty|ghostty)$"
+
       # Just dash of transparency
       "opacity 0.97 0.9, class:.*"
       # Normal chrome Youtube tabs

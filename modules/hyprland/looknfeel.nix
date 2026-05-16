@@ -10,6 +10,9 @@
 
       border_size = 2;
 
+      "col.active_border" = "rgb(${config.lib.stylix.colors.base0E})";
+      "col.inactive_border" = "rgb(${config.lib.stylix.colors.base02})";
+
       resize_on_border = false;
 
       allow_tearing = false;
@@ -20,6 +23,8 @@
 
     decoration = {
       rounding = 4;
+      active_opacity = 0.9;
+      inactive_opacity = 0.8;
 
       shadow = {
         enabled = false;
@@ -30,10 +35,16 @@
 
       blur = {
         enabled = true;
-        size = 5;
-        passes = 2;
+        size = 8;
+        passes = 3;
+        new_optimizations = true;
+        ignore_opacity = true;
+        xray = true;
 
+        contrast = 0.8916;
+        brightness = 0.8172;
         vibrancy = 0.1696;
+        noise = 0.0117;
       };
     };
 
