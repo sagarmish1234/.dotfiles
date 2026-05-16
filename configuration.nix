@@ -133,7 +133,7 @@
     extraModprobeConfig = "";
 
     plymouth = {
-      enable = true;
+      enable = false;
       theme = "green_blocks";
       themePackages = with pkgs; [
         # By default we would install all themes
