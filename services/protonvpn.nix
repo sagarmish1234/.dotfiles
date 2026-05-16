@@ -1,5 +1,5 @@
 { pkgs, lib, feature, ... }:
 lib.mkIf feature.services.protonvpn {
-  # ProtonVPN CLI for region switching
-  environment.systemPackages = [ pkgs.protonvpn-cli ];
+  # ProtonVPN for region switching (GUI package also provides CLI)
+  environment.systemPackages = [ pkgs.protonvpn-gui ];
 }
