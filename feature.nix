@@ -3,7 +3,6 @@
     audio = true;
     bluetooth = true;
     printing = true;
-    protonvpn = true;
     displayManager = {
       sdm = false;
       greetd = false;
