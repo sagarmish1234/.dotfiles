@@ -9,8 +9,8 @@
       # "wl-clip-persist --clipboard regular & clipse -listen"
 
       # "dropbox-cli start"  # Uncomment to run Dropbox
-      "hypridle"
-      "noctalia-shell"
+      # "hypridle"
+      # "noctalia-shell"
     ];
 
     # exec = [

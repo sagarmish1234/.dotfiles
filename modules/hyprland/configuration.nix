@@ -11,6 +11,7 @@
     ./looknfeel.nix
     ./windows.nix
   ];
+  wayland.windowManager.hyprland.systemd.enable = true;
   wayland.windowManager.hyprland.settings = {
     # Default applications
     "$terminal" = lib.mkDefault "ghostty";

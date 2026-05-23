@@ -29,7 +29,7 @@
           )
         '';
     });
-    # systemd.enable = true;
+    systemd.enable = true;
     settings = {
       appLauncher = {
         autoPasteClipboard = false;
