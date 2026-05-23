@@ -17,8 +17,8 @@
   };
 
   shell = {
-    xonsh = true;
-    fish = false;
+    xonsh = false;
+    fish = true;
     zsh = false;
     bash = true;
   };
