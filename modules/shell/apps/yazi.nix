@@ -4,8 +4,32 @@
   config,
   ...
 }:
+let
+  yazi-script = pkgs.writeShellScriptBin "yazi" ''
+    # Start rclone service if not active
+    ${pkgs.systemd}/bin/systemctl --user is-active --quiet rclone-googledrive.service || ${pkgs.systemd}/bin/systemctl --user start rclone-googledrive.service
+
+    # Run the real yazi
+    ${pkgs.yazi}/bin/yazi "$@"
+
+    # If this is the last yazi instance, stop the service
+    if [ "$(${pkgs.procps}/bin/pgrep -u $(id -u) -x yazi | wc -l)" -le 1 ]; then
+      ${pkgs.systemd}/bin/systemctl --user stop rclone-googledrive.service
+    fi
+  '';
+  yazi-wrapped = pkgs.symlinkJoin {
+    name = "yazi-wrapped";
+    paths = [
+      yazi-script
+      pkgs.yazi
+    ];
+  };
+in
 {
-  home.packages = [ pkgs.exiftool ];
+  home.packages = [
+    pkgs.exiftool
+    yazi-wrapped
+  ];
   programs = {
     fish.functions = {
       yy = {
@@ -20,6 +44,7 @@
 
     yazi = {
       enable = true;
+      package = yazi-wrapped;
       shellWrapperName = "y";
 
       settings = {

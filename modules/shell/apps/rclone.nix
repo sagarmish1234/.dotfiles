@@ -11,12 +11,13 @@
       Wants = [ "network-online.target" ];
     };
     Install = {
-      WantedBy = [ "default.target" ];
+      # WantedBy = [ "default.target" ];
     };
     Service = {
       Type = "simple";
       ExecStartPre = [
         "${pkgs.coreutils}/bin/mkdir -p ${config.home.homeDirectory}/GoogleDrive"
+        "-/run/wrappers/bin/fusermount3 -u ${config.home.homeDirectory}/GoogleDrive"
       ];
       ExecStart =
         "${pkgs.rclone}/bin/rclone mount sagar-google-drive: ${config.home.homeDirectory}/GoogleDrive "
@@ -32,12 +33,12 @@
       Restart = "on-failure";
       RestartSec = "10s";
       Environment = [
-        "PATH=${lib.makeBinPath [
+        "PATH=/run/wrappers/bin:${lib.makeBinPath [
           pkgs.fuse3
           pkgs.fuse
           pkgs.coreutils
           pkgs.rclone
-        ]}:/run/wrappers/bin"
+        ]}"
       ];
     };
   };

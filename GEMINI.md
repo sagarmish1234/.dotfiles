@@ -45,4 +45,11 @@ nix-collect-garbage -d
 *   **Feature Toggles**: When adding a new module or service, add a corresponding toggle in `feature.nix` and use `lib.mkIf feature.category.name` to guard its implementation.
 *   **Modularity**: Prefer small, focused Nix files over large monolithic ones. Use `import-tree` to automatically include modules from the `modules/` and `services/` directories.
 *   **Surgical Edits**: When modifying existing configurations, maintain the established style of using function arguments (e.g., `{ pkgs, lib, inputs, feature, ... }`).
+*   **On-Demand Mounting**: For cloud storage like Google Drive, prefer on-demand mounting via application wrappers rather than global systemd services. Use `pkgs.symlinkJoin` to override the application binary while preserving its desktop metadata and icons.
 *   **Theming**: Use the `stylix` options where possible to ensure visual consistency across the system.
+
+## Troubleshooting & Known Fixes
+
+### Rclone Google Drive Mounting
+*   **Permission Issues**: Always use `/run/wrappers/bin/fusermount3` instead of the Nix store path to ensure SUID permissions for FUSE mounts.
+*   **Launcher Visibility**: When wrapping applications (like Yazi), ensure you use `pkgs.symlinkJoin` to include the original package's `share/` directory, otherwise the application will disappear from graphical launchers (Noctalia, etc.).
