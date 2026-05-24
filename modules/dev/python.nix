@@ -2,10 +2,11 @@
   pkgs,
   lib,
   feature,
+  unstable,
   ...
 }:
 lib.mkIf feature.dev.python {
-  home.packages = with pkgs; [
+  home.packages = with unstable; [
     python3
     python313Packages.markdown
     # python3Packages.pip

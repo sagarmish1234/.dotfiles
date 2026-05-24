@@ -2,6 +2,7 @@
   pkgs,
   lib,
   feature,
+  unstable,
   ...
 }:
 lib.mkIf feature.terminal.ghostty {
@@ -9,6 +10,7 @@ lib.mkIf feature.terminal.ghostty {
   xdg.terminal-exec.settings.default = ["ghostty.desktop"];
   programs.ghostty = {
     enable = true;
+    package = unstable.ghostty;
     enableFishIntegration = true;
     settings = {
       command = "${pkgs.fish}/bin/fish";

@@ -2,10 +2,11 @@
   pkgs,
   lib,
   feature,
+  unstable,
   ...
 }:
 lib.mkIf feature.dev.javascript {
-  home.packages = with pkgs; [
+  home.packages = with unstable; [
     # nodejs
     #nodePackages.pnpm
     #nodePackages.yarn

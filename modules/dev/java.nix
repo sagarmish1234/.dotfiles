@@ -2,14 +2,15 @@
   lib,
   feature,
   pkgs,
+  unstable,
   ...
 }:
 lib.mkIf feature.dev.java {
   programs.java = {
     enable = true;
-    package = pkgs.openjdk25;
+    package = unstable.openjdk25;
   };
-  home.packages = with pkgs; [
+  home.packages = with unstable; [
     # openjdk25
     # openjdk21
     maven

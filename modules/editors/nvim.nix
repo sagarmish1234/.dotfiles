@@ -2,6 +2,7 @@
   pkgs,
   lib,
   feature,
+  unstable,
   ...
 }:
 lib.mkIf feature.editor.nvim {

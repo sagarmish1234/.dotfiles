@@ -2,11 +2,12 @@
   lib,
   feature,
   pkgs,
+  unstable,
   ...
 }:
 lib.mkIf feature.editor.zed {
   # ... other configurations
-  home.packages = with pkgs; [
+  home.packages = with unstable; [
     nixd
     nil
   ];
@@ -20,6 +21,7 @@ lib.mkIf feature.editor.zed {
   # };
   programs.zed-editor = {
     enable = true;
+    package = unstable.zed-editor;
     extensions = [
       "nix"
       "toml"
