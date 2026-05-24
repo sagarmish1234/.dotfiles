@@ -29,8 +29,8 @@ in
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/return-youtube-dislike/latest.xpi";
           installation_mode = "force_installed";
         };
-        "vpn@protonvpn.com" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/proton-vpn-free-vpn/latest.xpi";
+        "browsec@browsec.com" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/browsec/latest.xpi";
           installation_mode = "force_installed";
         };
       };
@@ -39,7 +39,41 @@ in
       id = 0;
       name = "default";
       isDefault = true;
-      inherit (defaults) settings search;
+      inherit (defaults) search;
+      settings = defaults.settings // {
+        "browser.uiCustomization.state" = builtins.toJSON {
+          placements = {
+            widget-overflow-fixed-list = [ ];
+            nav-bar = [
+              "back-button"
+              "forward-button"
+              "stop-reload-button"
+              "urlbar-container"
+              "downloads-button"
+              "browsec_browsec_com-browser-action"
+            ];
+            toolbar-menubar = [ "menubar-items" ];
+            TabsToolbar = [
+              "tabbrowser-tabs"
+              "new-tab-button"
+              "alltabs-button"
+            ];
+            PersonalToolbar = [ "personal-bookmarks" ];
+          };
+          seen = [
+            "browsec_browsec_com-browser-action"
+            "developer-button"
+          ];
+          dirtyAreaCache = [
+            "nav-bar"
+            "PersonalToolbar"
+            "toolbar-menubar"
+            "TabsToolbar"
+          ];
+          currentVersion = 18;
+          newElementCount = 4;
+        };
+      };
     };
   };
 }
