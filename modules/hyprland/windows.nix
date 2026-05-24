@@ -39,10 +39,23 @@
       "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
 
       # Fix browser popups disappearing immediately
-      "stayfocused,class:^$,title:^$"
-      "stayfocused,class:^zen-beta$,title:^$"
-      "noanim,class:^$,title:^$"
-      "noanim,class:^zen-beta$,title:^$"
+      "stayfocused, class:^$, title:^$"
+      "noanim, class:^$, title:^$"
+      "noinitialfocus, class:^$, title:^$"
+      "float, class:^$, title:^$"
+      "pin, class:^$, title:^$"
+      "rounding 0, class:^$, title:^$"
+      "noblur, class:^$, title:^$"
+      "noshadow, class:^$, title:^$"
+      "opacity 1.0 override 1.0 override, class:^$, title:^$"
+
+      # Specifically for Zen
+      "stayfocused, class:^zen-beta$, title:^$"
+      "noanim, class:^zen-beta$, title:^$"
+      "float, class:^zen-beta$, title:^$"
+      "pin, class:^zen-beta$, title:^$"
+      "noinitialfocus, class:^zen-beta$, title:^$"
+      "opacity 1.0 override 1.0 override, class:^zen-beta$, title:^$"
 
       # Float in the middle for clipse clipboard manager
       "float, class:(clipse)"
