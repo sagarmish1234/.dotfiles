@@ -61,7 +61,13 @@ To unlock your secrets on a new machine:
     echo "YOUR_AGE_KEY_HERE" > ~/.config/sops/age/keys.txt
     chmod 600 ~/.config/sops/age/keys.txt
     ```
-3.  **Rebuild**: Run the NixOS rebuild command. The system will now be able to decrypt your Google Drive tokens, SSH keys, and other secrets.
+3.  **Rebuild**: Run the NixOS rebuild command. The system will now be able to decrypt your **Google Drive tokens**, **GitHub CLI authentication**, **Git identity (email)**, and other secrets.
+
+### Managed Secrets
+The following secrets are currently managed via `sops-nix` in `secrets/rclone.yaml`:
+*   `rclone_conf`: Google Drive authentication tokens.
+*   `github_hosts`: GitHub CLI OAuth tokens (stored in `~/.config/gh/hosts.yml`).
+*   `git_email`: Personal Git email for commit identity.
 
 ### Adding New Secrets
 1.  Create/Edit a file in `secrets/` (e.g., `secrets/api-keys.yaml`).
