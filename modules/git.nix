@@ -2,11 +2,14 @@
 {
   programs.git = {
     enable = true;
+    userName = "Sagar Mishra";
+    userEmail = "sagarmish1234@gmail.com"; # Fallback
+    # sops-nix will override this if configured
     settings = {
-      user = {
-        name = "Sagar Mishra";
-        email = "sagarmish1234@gmail.com";
-      };
+      # user = {
+      #   name = "Sagar Mishra";
+      #   email = "sagarmish1234@gmail.com";
+      # };
       alias = {
         a = "add";
         b = "branch";

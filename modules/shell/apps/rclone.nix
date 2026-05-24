@@ -9,6 +9,15 @@
     sopsFile = ../../../secrets/rclone.yaml;
   };
 
+  sops.secrets.github_hosts = {
+    path = "${config.home.homeDirectory}/.config/gh/hosts.yml";
+    sopsFile = ../../../secrets/rclone.yaml;
+  };
+
+  sops.secrets.git_email = {
+    sopsFile = ../../../secrets/rclone.yaml;
+  };
+
   systemd.user.services.rclone-googledrive = {
     Unit = {
       Description = "rclone: Remote FUSE filesystem for Google Drive";
