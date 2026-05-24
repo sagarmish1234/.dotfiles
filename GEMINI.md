@@ -48,6 +48,30 @@ nix-collect-garbage -d
 *   **On-Demand Mounting**: For cloud storage like Google Drive, prefer on-demand mounting via application wrappers rather than global systemd services. Use `pkgs.symlinkJoin` to override the application binary while preserving its desktop metadata and icons.
 *   **Theming**: Use the `stylix` options where possible to ensure visual consistency across the system.
 
+## Secret Management & Hardware Migration
+
+The project uses **sops-nix** for secure, reproducible secret management. Secrets are stored in encrypted YAML files in the `secrets/` directory and decrypted on-the-fly by NixOS/Home Manager.
+
+### Moving to New Hardware
+To unlock your secrets on a new machine:
+1.  **Retrieve Master Key**: Open your **Bitwarden** vault and find the Secure Note titled `"NixOS Sops Master Key"`.
+2.  **Install Key**: On the new machine, create the directory and save the key:
+    ```bash
+    mkdir -p ~/.config/sops/age
+    echo "YOUR_AGE_KEY_HERE" > ~/.config/sops/age/keys.txt
+    chmod 600 ~/.config/sops/age/keys.txt
+    ```
+3.  **Rebuild**: Run the NixOS rebuild command. The system will now be able to decrypt your Google Drive tokens, SSH keys, and other secrets.
+
+### Adding New Secrets
+1.  Create/Edit a file in `secrets/` (e.g., `secrets/api-keys.yaml`).
+2.  Add it to `.sops.yaml` if it matches a new pattern.
+3.  Encrypt/Edit using `sops`:
+    ```bash
+    nix shell nixpkgs#sops -c sops secrets/api-keys.yaml
+    ```
+4.  Reference the secret in your Nix modules using `sops.secrets.name`.
+
 ## Troubleshooting & Known Fixes
 
 ### Rclone Google Drive Mounting
