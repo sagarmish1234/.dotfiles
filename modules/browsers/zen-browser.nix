@@ -25,10 +25,6 @@ in
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/clearurls/latest.xpi";
           installation_mode = "force_installed";
         };
-        "{762f9885-ad34-4054-9467-3367184478b0}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/return-youtube-dislike/latest.xpi";
-          installation_mode = "force_installed";
-        };
         "browsec@browsec.com" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/browsec/latest.xpi";
           installation_mode = "force_installed";
