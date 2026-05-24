@@ -6,6 +6,9 @@
   programs.noctalia-shell = {
     enable = true;
     package = inputs.noctalia.packages.${pkgs.system}.default.overrideAttrs (old: {
+      patches = (old.patches or [ ]) ++ [
+        ./patches/noctalia-shell-custom.patch
+      ];
       buildInputs = (old.buildInputs or [ ]) ++ [
         pkgs.qt6.qtsvg
         pkgs.qt6.qtwayland
