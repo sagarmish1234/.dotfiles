@@ -4,6 +4,11 @@
   lib,
   ...
 }: {
+  sops.secrets.rclone_conf = {
+    path = "${config.home.homeDirectory}/.config/rclone/rclone.conf";
+    sopsFile = ../../../secrets/rclone.yaml;
+  };
+
   systemd.user.services.rclone-googledrive = {
     Unit = {
       Description = "rclone: Remote FUSE filesystem for Google Drive";
@@ -21,7 +26,6 @@
       ];
       ExecStart =
         "${pkgs.rclone}/bin/rclone mount sagar-google-drive: ${config.home.homeDirectory}/GoogleDrive "
-        + "--config ${config.xdg.configHome}/rclone/rclone.conf "
         + "--vfs-cache-mode full "
         + "--vfs-cache-max-age 24h "
         + "--vfs-cache-max-size 10G "

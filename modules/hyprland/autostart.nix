@@ -10,7 +10,7 @@
 
       # "dropbox-cli start"  # Uncomment to run Dropbox
       # "hypridle"
-      # "noctalia-shell"
+      "noctalia-shell"
     ];
 
     # exec = [

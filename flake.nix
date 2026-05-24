@@ -34,6 +34,7 @@
     astal.url = "github:aylur/astal";
     ags.url = "github:aylur/ags";
     catppuccin.url = "github:catppuccin/nix";
+    sops-nix.url = "github:Mic92/sops-nix";
   };
   # Hello world
   outputs =
@@ -41,6 +42,7 @@
       nixpkgs,
       home-manager,
       catppuccin,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -61,6 +63,7 @@
           { nixpkgs.hostPlatform = "x86_64-linux"; }
           ./configuration.nix
           home-manager.nixosModules.default
+          sops-nix.nixosModules.sops
           # catppuccin.nixosModules.catppuccin
           {
             home-manager = {
@@ -72,6 +75,7 @@
                 ./home.nix
                 inputs.stylix.homeModules.stylix
                 inputs.nvf.homeManagerModules.default
+                sops-nix.homeManagerModules.sops
               ];
             };
           }

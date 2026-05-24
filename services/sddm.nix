@@ -27,6 +27,9 @@ in
     wayland.enable = true;
     package = pkgs.kdePackages.sddm; # Qt6 version
     theme = "sddm-astronaut-theme";
-    extraPackages = [ customAstronaut ];
+    extraPackages = [
+      customAstronaut
+      pkgs.pipewire
+    ];
   };
 }

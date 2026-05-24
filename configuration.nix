@@ -182,7 +182,7 @@
   time.timeZone = "Asia/Kolkata";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_IN";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_IN";
@@ -198,7 +198,13 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.colord.enable = true;
+  services.upower.enable = true;
   services.thermald.enable = false;
+
+  services.resolved.extraConfig = ''
+    MulticastDNS=no
+  '';
 
   users.users.sagar = {
     isNormalUser = true;
