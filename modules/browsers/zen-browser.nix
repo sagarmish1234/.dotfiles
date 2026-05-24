@@ -29,6 +29,10 @@ in
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/return-youtube-dislike/latest.xpi";
           installation_mode = "force_installed";
         };
+        "vpn@protonvpn.com" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/proton-vpn-free-vpn/latest.xpi";
+          installation_mode = "force_installed";
+        };
       };
     };
     profiles.default = {
