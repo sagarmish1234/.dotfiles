@@ -284,4 +284,21 @@
     "findbar.highlightAll" = true;
     "layout.word_select.eat_space_to_next_word" = false;
   };
+
+  bookmarks = [
+    {
+      name = "Toolbar";
+      toolbar = true;
+      bookmarks = [
+        {
+          name = "NixOS Search";
+          url = "https://search.nixos.org/packages";
+        }
+        {
+          name = "GitHub";
+          url = "https://github.com/";
+        }
+      ];
+    }
+  ];
 }

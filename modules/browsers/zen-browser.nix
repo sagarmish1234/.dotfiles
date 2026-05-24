@@ -35,7 +35,7 @@ in
       id = 0;
       name = "default";
       isDefault = true;
-      inherit (defaults) search;
+      inherit (defaults) search bookmarks;
       settings = defaults.settings // {
         "browser.uiCustomization.state" = builtins.toJSON {
           placements = {
