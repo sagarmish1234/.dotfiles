@@ -372,9 +372,8 @@
               }
               {
                 name = "Animepahe";
-                url = "https://animepahe.ru/";
-              }
-            ];
+                url = "https://animepahe.pw/";
+                }            ];
           }
         ];
       };
