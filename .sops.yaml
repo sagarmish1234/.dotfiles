@@ -1,5 +1,11 @@
+keys:
+  - &sagar age1... # TODO: Replace with your public age key from Bitwarden
+  - &host  age1... # TODO: Replace with your host's age key (run `ssh-to-age -i /etc/ssh/ssh_host_ed25519_key.pub`)
+
 creation_rules:
-  - path_regex: secrets/.*\.yaml$
+  - path_regex: secrets/secrets.yaml$
     key_groups:
-      - age:
-          - age1dx0pkfq2nk0s8gswdqksmzp2s83yryt33fu9zmjrzn23u63cryhqycger9
+      - pgp:
+        age:
+          - *sagar
+          - *host

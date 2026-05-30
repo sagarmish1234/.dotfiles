@@ -1,86 +1,98 @@
-# Project Overview: Sagar's NixOS Dotfiles
+# NixOS Dotfiles Configuration
 
-This repository contains a modular and highly customized NixOS configuration managed via **Nix Flakes** and **Home Manager**. It provides a cohesive desktop experience centered around **Hyprland** and a custom shell UI component named **Noctalia**.
+> [!IMPORTANT]
+> **MANDATE:** All information contained in this file or known by the model about NixOS and Flakes may be outdated. You MUST always search the internet for the latest recommendations, best practices, and official documentation before proposing or making changes.
 
-## Architecture
+This project manages a NixOS system configuration using Nix Flakes with a modular architecture. It is designed for maintainability and scalability, allowing for easy addition of new hosts, users, and features.
 
-The project follows a modular structure where features can be easily toggled and configurations are separated by scope:
+> [!WARNING]
+> **GIT AWARENESS:** Because this project is a Git repository, Nix Flakes operate in "strict mode." **Any new file you create MUST be added to the Git index (e.g., `git add .`) before Nix can see it.** If you get a "file not found" error for a file that clearly exists, it is likely because it hasn't been added to Git.
 
-*   **`flake.nix`**: The central entry point. It manages external dependencies (inputs) and defines the `nixos` system configuration. Now uses the official `noctalia-dev/noctalia-shell` repository.
-*   **`modules/patches/`**: Contains surgical patches applied to external inputs (e.g., `noctalia-shell-custom.patch` for UI scaling and lock screen wallpaper support).
-*   **`feature.nix`**: A centralized "toggle" file used to enable or disable specific services, desktop components, editors, and development environments across the entire configuration.
-*   **`configuration.nix`**: The core NixOS system configuration. It handles hardware, bootloader, networking, and system-level services. It imports modular services from the `./services` directory.
-*   **`home.nix`**: The primary Home Manager configuration. It manages user-specific applications, dotfiles, and desktop settings. It imports modular components from the `./modules` directory.
-*   **`modules/`**: Contains user-level Home Manager modules (e.g., `hyprland`, `waybar`, `git`, `theme`, and various application configs).
-*   **`services/`**: Contains system-level NixOS service modules (e.g., `nvidia`, `docker`, `audio`, `tlp`).
-*   **`bin/`**: Custom utility scripts defined as Nix expressions (`pkgs.writeShellApplication`).
-*   **`config/`**: Directory for application-specific configuration files (e.g. `ags`, `init.el`).
-*   **`assets/`**: Local assets like wallpapers.
+## Project Overview
 
-## Key Technologies
+- **Main Technologies:** Nix, NixOS, Nix Flakes, Home Manager, sops-nix.
+- **Architecture:** Modular Multi-host with centralized secrets management.
+    - `hosts/`: Machine-specific configurations (e.g., hardware definitions, hostnames).
+    - `modules/`: Reusable logic and features (e.g., core system settings, desktop environment).
+    - `users/`: User-specific configurations via Home Manager.
+    - `secrets/`: Encrypted secrets managed by `sops-nix`.
 
-*   **OS/Package Manager**: NixOS, Nix Flakes, Home Manager.
-*   **Window Manager**: Hyprland (Wayland).
-*   **Shell UI**: Noctalia Shell (Migrated to official repository with local surgical patches).
-*   **Theming**: Stylix (consistent theming across apps).
-*   **Development**: Support for Rust, Java, Python, Go, and JavaScript via `direnv` and Nix shells.
-*   **Hardware Support**: Optimized for Asus laptops with Nvidia graphics (`asusd`, `supergfxd`).
+## Structure
 
-## Building and Management
+- `/flake.nix`: Entry point for the flake configuration, defining inputs like `nixpkgs`, `home-manager`, and `sops-nix`.
+- `/hosts/nixos/`: Configuration for the main `nixos` host.
+    - `default.nix`: Host-specific entry point, imports modules and user configs.
+    - `hardware.nix`: Hardware scan results.
+- `/modules/core/`: Essential system settings.
+    - `default.nix`: Locale, time, networking, experimental features, fonts.
+    - `secrets.nix`: `sops-nix` configuration.
+- `/modules/desktop/`: Desktop environment configuration.
+    - `default.nix`: Common desktop services (X11, Printing, Pipewire).
+    - `hyprland.nix`: Hyprland window manager setup (currently enabled).
+    - `gnome.nix`: GNOME desktop setup (currently disabled).
+- `/users/sagar/`: Configuration for the user `sagar`.
+    - `default.nix`: System-level user settings.
+    - `home.nix`: Home Manager configuration (Hyprland, Kitty, Ghostty, Starship, Fish).
+- `/secrets/secrets.yaml`: Encrypted secrets file.
 
-To apply changes to the system and user configuration:
+## Key Commands
 
-```bash
-# Apply changes (rebuild and switch)
-sudo nixos-rebuild switch --flake .#nixos
+### System Management
 
-# Update all flake inputs
-nix flake update
+- **Apply Configuration:**
+  ```bash
+  sudo nixos-rebuild switch --flake .#nixos
+  ```
+- **Test Configuration (without applying):**
+  ```bash
+  sudo nixos-rebuild test --flake .#nixos
+  ```
+- **Dry Run:**
+  ```bash
+  nixos-rebuild dry-activate --flake .#nixos
+  ```
+- **Check Flake Validity:**
+  ```bash
+  nix flake check
+  ```
+- **Update Lock File:**
+  ```bash
+  nix flake update
+  ```
 
-# Garbage collection (clean up old generations)
-nix-collect-garbage -d
-```
+### Secrets Management (sops-nix)
+
+- **Edit Secrets:**
+  ```bash
+  sops secrets/secrets.yaml
+  ```
+
+## Package Management Rules
+
+When adding new packages, follow these rules to maintain consistency:
+
+1.  **System-wide Essentials:** Add to `modules/core/default.nix` under `environment.systemPackages` only for critical CLI tools (e.g., `git`, `vim`, `wget`, `rsync`).
+2.  **User-specific Applications (Home Manager):** **This is the preferred location.** Add to `users/sagar/home.nix` under `home.packages` for most GUI apps and user tools.
+3.  **Programs with Dedicated Options:** If a program has a specific Home Manager or NixOS module (e.g., `programs.firefox.enable = true`), use that in `users/sagar/home.nix` instead of adding the package to `home.packages`.
+4.  **Fonts:** Add to `modules/core/default.nix` under `fonts.packages`.
+5.  **Desktop-specific Tools:** Add to the relevant module in `modules/desktop/` (e.g., `hyprland.nix`) only if the package is a system-level dependency for that environment. Otherwise, prefer Home Manager.
+6.  **Browser & Heavy System Apps:** Add to `users/sagar/default.nix` under `users.users.sagar.packages` if the package needs specific system-level integrations (e.g., `firefox`).
+7.  **Complex Configurations:** If a package requires custom settings, interactive configuration, or more than a few lines of setup, **do not** add it to `home.nix` or `default.nix` directly. Instead:
+    - Create a dedicated file: `users/sagar/programs/<name>.nix` for Home Manager apps, or a new module in `modules/` for system services.
+    - Import the new file in the corresponding `home.nix` or `default.nix`.
+    - This keeps the main configuration files clean and modular.
 
 ## Development Conventions
 
-*   **Feature Toggles**: When adding a new module or service, add a corresponding toggle in `feature.nix` and use `lib.mkIf feature.category.name` to guard its implementation.
-*   **Modularity**: Prefer small, focused Nix files over large monolithic ones. Use `import-tree` to automatically include modules from the `modules/` and `services/` directories.
-*   **Surgical Edits**: When modifying existing configurations, maintain the established style of using function arguments (e.g., `{ pkgs, lib, inputs, feature, ... }`).
-*   **On-Demand Mounting**: For cloud storage like Google Drive, prefer on-demand mounting via application wrappers rather than global systemd services. Use `pkgs.symlinkJoin` to override the application binary while preserving its desktop metadata and icons.
-*   **Theming**: Use the `stylix` options where possible to ensure visual consistency across the system.
+- **Modularity:** Prefer adding new functionality as modules in `/modules` rather than adding to a host's `default.nix`.
+- **Git Awareness:** Nix Flakes are Git-aware. If the project is initialized as a Git repository, any new files MUST be added to the Git index (`git add <file>`) before Nix can see them.
+- **Experimental Features:** The project relies on `nix-command` and `flakes`, which are enabled in `modules/core/default.nix`.
+- **Formatting:** Use `nixfmt-rfc-style` for formatting Nix files.
 
-## Secret Management & Hardware Migration
+## TODO / Future Improvements
 
-The project uses **sops-nix** for secure, reproducible secret management. Secrets are stored in encrypted YAML files in the `secrets/` directory and decrypted on-the-fly by NixOS/Home Manager.
-
-### Moving to New Hardware
-To unlock your secrets on a new machine:
-1.  **Retrieve Master Key**: Open your **Bitwarden** vault and find the Secure Note titled `"NixOS Sops Master Key"`.
-2.  **Install Key**: On the new machine, create the directory and save the key:
-    ```bash
-    mkdir -p ~/.config/sops/age
-    echo "YOUR_AGE_KEY_HERE" > ~/.config/sops/age/keys.txt
-    chmod 600 ~/.config/sops/age/keys.txt
-    ```
-3.  **Rebuild**: Run the NixOS rebuild command. The system will now be able to decrypt your **Google Drive tokens**, **GitHub CLI authentication**, **Git identity (email)**, and other secrets.
-
-### Managed Secrets
-The following secrets are currently managed via `sops-nix` in `secrets/rclone.yaml`:
-*   `rclone_conf`: Google Drive authentication tokens.
-*   `github_hosts`: GitHub CLI OAuth tokens (stored in `~/.config/gh/hosts.yml`).
-*   `git_email`: Personal Git email for commit identity.
-
-### Adding New Secrets
-1.  Create/Edit a file in `secrets/` (e.g., `secrets/api-keys.yaml`).
-2.  Add it to `.sops.yaml` if it matches a new pattern.
-3.  Encrypt/Edit using `sops`:
-    ```bash
-    nix shell nixpkgs#sops -c sops secrets/api-keys.yaml
-    ```
-4.  Reference the secret in your Nix modules using `sops.secrets.name`.
-
-## Troubleshooting & Known Fixes
-
-### Rclone Google Drive Mounting
-*   **Permission Issues**: Always use `/run/wrappers/bin/fusermount3` instead of the Nix store path to ensure SUID permissions for FUSE mounts.
-*   **Launcher Visibility**: When wrapping applications (like Yazi), ensure you use `pkgs.symlinkJoin` to include the original package's `share/` directory, otherwise the application will disappear from graphical launchers (Noctalia, etc.).
+- [x] Fully integrate Home Manager for user-specific dotfile management.
+- [x] Implement a secrets management solution (`sops-nix`).
+- [x] Initialize Git repository to track configuration changes.
+- [ ] Set up automated backup for critical data.
+- [ ] Configure a persistent storage solution if moving to an impermanence setup.
