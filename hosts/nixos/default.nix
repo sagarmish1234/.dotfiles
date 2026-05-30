@@ -27,7 +27,7 @@
   # Modern initrd with systemd
   boot.initrd.systemd.enable = true;
   boot.initrd.verbose = false;
-  boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+  boot.initrd.kernelModules = [ ];
 
   # Performance-oriented kernel parameters
   boot.kernelParams = [
@@ -38,10 +38,14 @@
     "fastboot"
     "nowatchdog"
     "nvidia-drm.modeset=1"
-    "8250.nr_uarts=1"
+    "8250.nr_uarts=0"
     "tpm_tis.interrupts=0"
     "rd.systemd.show_status=false"
     "rd.udev.log_level=3"
+    "loglevel=3"
+    "libahci.ignore_sss=1"
+    "systemd.show_status=auto"
+    "udev.log_priority=3"
   ];
 
   # This value determines the NixOS release from which the default

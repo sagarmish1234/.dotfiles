@@ -19,6 +19,6 @@ in
   # Link the wallpapers to the directory used by Noctalia
   home.file."Pictures/Wallpapers" = {
     source = catppuccin-wallpapers;
-    recursive = true;
+    recursive = false;
   };
 }
