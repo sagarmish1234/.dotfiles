@@ -17,8 +17,16 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Use stable kernel for better NVIDIA compatibility.
-  boot.kernelPackages = pkgs.linuxPackages;
+  # Use XanMod kernel for better responsiveness.
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+
+  # Performance-oriented kernel parameters
+  boot.kernelParams = [
+    "quiet"
+    "splash"
+    "pcie_aspm=performance"
+    "nvme_load=1"
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

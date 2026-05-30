@@ -3,6 +3,7 @@
 {
   imports = [
     ./tlp.nix
+    ./performance.nix
   ];
 
   # Set your time zone.
