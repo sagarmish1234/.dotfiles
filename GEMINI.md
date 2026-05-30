@@ -13,26 +13,30 @@ This project manages a NixOS system configuration using Nix Flakes with a modula
 - **Main Technologies:** Nix, NixOS, Nix Flakes, Home Manager, sops-nix.
 - **Architecture:** Modular Multi-host with centralized secrets management.
     - `hosts/`: Machine-specific configurations (e.g., hardware definitions, hostnames).
-    - `modules/`: Reusable logic and features (e.g., core system settings, desktop environment).
-    - `users/`: User-specific configurations via Home Manager.
+    - `modules/core/`: Essential system-wide settings (locale, networking, drivers).
+    - `modules/desktop/`: Desktop environment and display manager setup.
+    - `users/sagar/`: User-level system settings and Home Manager configuration.
+    - `users/sagar/programs/`: Modular Home Manager program configurations (Hyprland, Ghostty, etc.).
     - `secrets/`: Encrypted secrets managed by `sops-nix`.
 
 ## Structure
 
-- `/flake.nix`: Entry point for the flake configuration, defining inputs like `nixpkgs`, `home-manager`, and `sops-nix`.
+- `/flake.nix`: Entry point for the flake configuration, defining inputs and mapping host/user configs.
 - `/hosts/nixos/`: Configuration for the main `nixos` host.
-    - `default.nix`: Host-specific entry point, imports modules and user configs.
+    - `default.nix`: Host-specific entry point, imports core and desktop modules.
     - `hardware.nix`: Hardware scan results.
 - `/modules/core/`: Essential system settings.
     - `default.nix`: Locale, time, networking, experimental features, fonts.
     - `secrets.nix`: `sops-nix` configuration.
+    - `nvidia.nix`: NVIDIA driver and compatibility settings.
 - `/modules/desktop/`: Desktop environment configuration.
     - `default.nix`: Common desktop services (X11, Printing, Pipewire).
-    - `hyprland.nix`: Hyprland window manager setup (currently enabled).
-    - `gnome.nix`: GNOME desktop setup (currently disabled).
+    - `hyprland.nix`: System-level Hyprland setup.
+    - `sddm.nix`: SDDM display manager with custom themes.
 - `/users/sagar/`: Configuration for the user `sagar`.
-    - `default.nix`: System-level user settings.
-    - `home.nix`: Home Manager configuration (Hyprland, Kitty, Ghostty, Starship, Fish).
+    - `default.nix`: System-level user settings (shell, default packages).
+    - `home.nix`: Home Manager entry point, imports program-specific modules.
+    - `programs/`: Individual `.nix` files for each managed application (e.g., `hyprland.nix`, `noctalia.nix`, `yazi.nix`).
 - `/secrets/secrets.yaml`: Encrypted secrets file.
 
 ## Key Commands
@@ -72,19 +76,19 @@ This project manages a NixOS system configuration using Nix Flakes with a modula
 When adding new packages, follow these rules to maintain consistency:
 
 1.  **System-wide Essentials:** Add to `modules/core/default.nix` under `environment.systemPackages` only for critical CLI tools (e.g., `git`, `vim`, `wget`, `rsync`).
-2.  **User-specific Applications (Home Manager):** **This is the preferred location.** Add to `users/sagar/home.nix` under `home.packages` for most GUI apps and user tools.
-3.  **Programs with Dedicated Options:** If a program has a specific Home Manager or NixOS module (e.g., `programs.firefox.enable = true`), use that in `users/sagar/home.nix` instead of adding the package to `home.packages`.
+2.  **User-specific Applications (Home Manager):** **This is the preferred location.** Add to `users/sagar/home.nix` under `home.packages` for simple GUI apps and user tools.
+3.  **Programs with Dedicated Options:** If a program has a specific Home Manager or NixOS module (e.g., `programs.firefox.enable = true`), use that in `users/sagar/home.nix` or a dedicated file in `users/sagar/programs/`.
 4.  **Fonts:** Add to `modules/core/default.nix` under `fonts.packages`.
-5.  **Desktop-specific Tools:** Add to the relevant module in `modules/desktop/` (e.g., `hyprland.nix`) only if the package is a system-level dependency for that environment. Otherwise, prefer Home Manager.
+5.  **Desktop-specific Tools:** Add to the relevant module in `modules/desktop/` (e.g., `hyprland.nix`) only if the package is a system-level dependency for that environment.
 6.  **Browser & Heavy System Apps:** Add to `users/sagar/default.nix` under `users.users.sagar.packages` if the package needs specific system-level integrations (e.g., `firefox`).
-7.  **Complex Configurations:** If a package requires custom settings, interactive configuration, or more than a few lines of setup, **do not** add it to `home.nix` or `default.nix` directly. Instead:
-    - Create a dedicated file: `users/sagar/programs/<name>.nix` for Home Manager apps, or a new module in `modules/` for system services.
-    - Import the new file in the corresponding `home.nix` or `default.nix`.
+7.  **Complex Configurations:** If a package requires custom settings, interactive configuration, or more than a few lines of setup, **do not** add it to `home.nix` directly. Instead:
+    - Create a dedicated file: `users/sagar/programs/<name>.nix`.
+    - Import the new file in `users/sagar/home.nix`.
     - This keeps the main configuration files clean and modular.
 
 ## Development Conventions
 
-- **Modularity:** Prefer adding new functionality as modules in `/modules` rather than adding to a host's `default.nix`.
+- **Modularity:** Always prefer adding new functionality as a dedicated file in `users/sagar/programs/` (for user apps) or `modules/` (for system services).
 - **Git Awareness:** Nix Flakes are Git-aware. If the project is initialized as a Git repository, any new files MUST be added to the Git index (`git add <file>`) before Nix can see them.
 - **Experimental Features:** The project relies on `nix-command` and `flakes`, which are enabled in `modules/core/default.nix`.
 - **Formatting:** Use `nixfmt-rfc-style` for formatting Nix files.
