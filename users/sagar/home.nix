@@ -20,6 +20,7 @@
     ./programs/ripgrep.nix
     ./programs/tealdeer.nix
     ./programs/webapps.nix
+    ./programs/zen.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should manage.
