@@ -8,6 +8,13 @@ let
     hash = "sha256-n3SIMQxeB/ADMsGA3CJDIgx7FhfXiFh4mFXkwo+sCy0=";
   };
 
+  noctalia-official-plugins-src = pkgs.fetchFromGitHub {
+    owner = "noctalia-dev";
+    repo = "noctalia-plugins";
+    rev = "main";
+    hash = "sha256-ePWMazPbuSl4Gw43kF6il645got10McPBXZ4ll93n7s=";
+  };
+
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
   jq = "${pkgs.jq}/bin/jq";
 
@@ -63,6 +70,7 @@ in
   ];
 
   xdg.configFile."noctalia/plugins/tabber".source = "${noctalia-plugins}/tabber";
+  xdg.configFile."noctalia/plugins/wallcards".source = "${noctalia-official-plugins-src}/wallcards";
 
   programs.noctalia-shell = {
     enable = true;
