@@ -70,4 +70,7 @@
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
+
+  # Security
+  security.pam.services.hyprlock = {};
 }

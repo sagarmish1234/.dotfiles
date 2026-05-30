@@ -436,14 +436,14 @@ xdg.configFile."noctalia/plugins.json".text = builtins.toJSON {
 
       hooks = {
         darkModeChange = "";
-        enabled = false;
+        enabled = true;
         performanceModeDisabled = "";
         performanceModeEnabled = "";
         screenLock = "";
         screenUnlock = "";
         session = "";
         startup = "";
-        wallpaperChange = "";
+        wallpaperChange = "ln -sf \"$1\" /home/sagar/.cache/current_wallpaper";
       };
 
       location = {

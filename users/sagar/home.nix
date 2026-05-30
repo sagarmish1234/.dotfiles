@@ -6,6 +6,8 @@
     ./programs/wallpapers.nix
     ./programs/zoxide.nix
     ./programs/hyprland.nix
+    ./programs/hypridle.nix
+    ./programs/hyprlock.nix
     ./programs/wayland.nix
     ./programs/theme.nix
     ./programs/mpv.nix

@@ -44,6 +44,7 @@
   # Catppuccin specific program settings
   catppuccin.kvantum.enable = true;
   catppuccin.hyprland.enable = false;
+  catppuccin.hyprlock.enable = false;
   catppuccin.starship.enable = true;
   catppuccin.fish.enable = true;
   catppuccin.bat.enable = true;

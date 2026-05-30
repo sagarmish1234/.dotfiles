@@ -58,6 +58,8 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+    systemd.enable = true;
+    systemd.variables = [ "--all" ];
     configType = "hyprlang";
     extraConfig = ''
       debug:disable_logs = false
@@ -170,6 +172,7 @@
         "$mod, T, togglefloating"
         "$mod, P, pseudo"
         "$mod, I, layoutmsg, togglesplit"
+        "$mod CTRL, L, exec, loginctl lock-session"
 
         # Alt+Tab (Noctalia Tabber plugin) - fullscreen-aware
         "ALT, TAB, exec, hypr-tabswitch next"
