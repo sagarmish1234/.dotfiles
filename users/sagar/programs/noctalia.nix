@@ -71,7 +71,29 @@ in
 
   xdg.configFile."noctalia/plugins/tabber".source = "${noctalia-plugins}/tabber";
   xdg.configFile."noctalia/plugins/wallcards".source = "${noctalia-official-plugins-src}/wallcards";
-
+xdg.configFile."noctalia/plugins.json".text = builtins.toJSON {
+    sources = [
+      {
+        enabled = true;
+        name = "Noctalia Plugins";
+        url = "https://github.com/noctalia-dev/noctalia-plugins";
+      }
+      {
+        enabled = true;
+        name = "Tabber";
+        url = "https://github.com/whereareiam/noctalia-plugins";
+      }
+    ];
+    states = {
+      tabber = {
+        enabled = true;
+      };
+      wallcards = {
+        enabled = true;
+      };
+    };
+    version = 2;
+  };
   programs.noctalia-shell = {
     enable = true;
     package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
@@ -82,6 +104,7 @@ in
         pkgs.qt6.qtsvg
         pkgs.qt6.qtwayland
         pkgs.adwaita-qt
+        pkgs.qt6.qt5compat
         pkgs.adwaita-qt6
         pkgs.libadwaita
         pkgs.gnome-themes-extra
@@ -607,7 +630,7 @@ in
       };
 
       wallpaper = {
-        automationEnabled = true;
+        automationEnabled = false;
         directory = "/home/sagar/Pictures/Wallpapers";
         enableMultiMonitorDirectories = false;
         enabled = true;

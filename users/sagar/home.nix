@@ -3,6 +3,7 @@
 {
   imports = [
     ./programs/noctalia.nix
+    ./programs/wallpapers.nix
     ./programs/zoxide.nix
     ./programs/hyprland.nix
     ./programs/wayland.nix
@@ -34,6 +35,9 @@
     candy-icons
     unzip
     vscode 
+    ffmpeg
+    mpvpaper
+    imagemagick
   ];
 
   programs.ghostty = {
