@@ -599,15 +599,15 @@ in
       };
 
       wallpaper = {
-        automationEnabled = false;
+        automationEnabled = true;
         directory = "/home/sagar/Pictures/Wallpapers";
         enableMultiMonitorDirectories = false;
-        enabled = false;
+        enabled = true;
         fillColor = "#000000";
         fillMode = "crop";
         hideWallpaperFilenames = false;
         monitorDirectories = [ ];
-        overviewEnabled = false;
+        overviewEnabled = true;
         panelPosition = "follow_bar";
         randomIntervalSec = 300;
         setWallpaperOnAllMonitors = true;
