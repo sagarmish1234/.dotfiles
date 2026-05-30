@@ -20,10 +20,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprshell = {
-      url = "github:H3rmt/hyprshell?ref=hyprshell-release";
-    };
-
     catppuccin.url = "github:catppuccin/nix";
     thorium.url = "github:Rishabh5321/custom-packages-flake";
   };
