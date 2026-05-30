@@ -162,6 +162,7 @@
         "$mod, ESCAPE, exec, noctalia-shell ipc call sessionMenu toggle"
         "$mod, RETURN, exec, ghostty"
         "$mod, SPACE, exec, noctalia-shell ipc call launcher toggle"
+        "$mod SHIFT, W, exec, noctalia-shell ipc call plugin:wallcards toggle"
         "$mod SHIFT, Q, exit"
         "$mod, W, killactive"
         "$mod, F, fullscreen, 0"
