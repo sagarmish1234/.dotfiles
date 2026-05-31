@@ -23,9 +23,13 @@
     catppuccin.url = "github:catppuccin/nix";
     thorium.url = "github:Rishabh5321/custom-packages-flake";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    catppuccin-zen = {
+      url = "github:catppuccin/zen-browser";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, sops-nix, catppuccin, thorium, zen-browser, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, sops-nix, catppuccin, thorium, zen-browser, catppuccin-zen, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };

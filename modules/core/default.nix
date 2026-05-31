@@ -34,6 +34,7 @@
     wget
     fish
     psmisc
+    linuxPackages.cpupower
   ];
 
   # Enable Flakes and modern Nix commands

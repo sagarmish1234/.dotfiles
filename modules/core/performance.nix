@@ -3,9 +3,41 @@
 {
   # sched_ext (scx) for better desktop responsiveness (2026 standard)
   services.scx = {
-    enable = true;
+    enable = false;
     scheduler = "scx_lavd";
-    extraArgs = [ "--autopower" ];
+  };
+
+  # Thermal and Throttling fixes
+  services.thermald.enable = false;
+  services.throttled = {
+    enable = true;
+    extraConfig = ''
+      [GENERAL]
+      Enabled: True
+      Sysfs_Power_Path: /sys/class/power_supply/AC*/online
+      Autoreload: True
+
+      [BATTERY]
+      Update_Rate_s: 30
+      PL1_Tdp_W: 45
+      PL1_Duration_s: 28
+      PL2_Tdp_W: 65
+      PL2_Duration_S: 0.002
+      Trip_Temp_C: 90
+      cTDP: 0
+      Disable_BDPROCHOT: True
+
+      [AC]
+      Update_Rate_s: 1
+      PL1_Tdp_W: 65
+      PL1_Duration_s: 28
+      PL2_Tdp_W: 90
+      PL2_Duration_S: 0.002
+      Trip_Temp_C: 95
+      HWP_Mode: True
+      cTDP: 0
+      Disable_BDPROCHOT: True
+    '';
   };
 
   # Memory Management: ZRAM and MGLRU
