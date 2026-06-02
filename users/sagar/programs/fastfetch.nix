@@ -1,12 +1,13 @@
 { ... }:
 {
+  # Fastfetch: A fast, highly customizable system information tool.
   programs.fastfetch = {
     enable = true;
     settings = {
       "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
 
       logo = {
-        type = "small";
+        type = "small"; # Use a compact logo to save space.
         padding = {
           top = 1;
           left = 2;
@@ -17,64 +18,38 @@
         separator = "  ";
         color = {
           keys = "magenta";
-          title = "#b4befe";
+          title = "#b4befe"; # Catppuccin Lavender.
           separator = "#585b70";
         };
       };
 
+      # Modules: Select which information to display.
       modules = [
         {
           type = "title";
           color = {
-            user = "#b4befe";
-            host = "#f5c2e7";
+            user = "#b4befe"; # Lavender.
+            host = "#f5c2e7"; # Pink.
           };
         }
 
         "break"
 
-        {
-          type = "os";
-          key = "󰣇 OS";
-        }
-        {
-          type = "kernel";
-          key = " Kernel";
-        }
-        {
-          type = "uptime";
-          key = "󰅐 Uptime";
-        }
+        { type = "os"; key = "󰣇 OS"; }
+        { type = "kernel"; key = " Kernel"; }
+        { type = "uptime"; key = "󰅐 Uptime"; }
 
         "break"
 
-        {
-          type = "wm";
-          key = " WM";
-        }
-        {
-          type = "terminal";
-          key = " Terminal";
-        }
-        {
-          type = "shell";
-          key = " Shell";
-        }
+        { type = "wm"; key = " WM"; }
+        { type = "terminal"; key = " Terminal"; }
+        { type = "shell"; key = " Shell"; }
 
         "break"
 
-        {
-          type = "cpu";
-          key = " CPU";
-        }
-        {
-          type = "gpu";
-          key = "󰍛 GPU";
-        }
-        {
-          type = "memory";
-          key = "󰑭 Memory";
-        }
+        { type = "cpu"; key = " CPU"; }
+        { type = "gpu"; key = "󰍛 GPU"; }
+        { type = "memory"; key = "󰑭 Memory"; }
 
         "break"
 
@@ -88,7 +63,7 @@
 
         {
           type = "colors";
-          symbol = "●";
+          symbol = "●"; # Show the color palette as a row of dots.
         }
       ];
     };

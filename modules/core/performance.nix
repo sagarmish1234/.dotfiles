@@ -1,14 +1,15 @@
 { config, lib, pkgs, ... }:
 
 {
-  # sched_ext (scx) for better desktop responsiveness (2026 standard)
+  # Sched-ext (scx): Modern BPF-based CPU schedulers for the Linux kernel.
+  # These can significantly improve desktop responsiveness under load.
   services.scx = {
-    enable = false;
-    scheduler = "scx_lavd";
+    enable = false; # Disabled by default; enable if using a kernel that supports it (like XanMod/Cachy).
+    scheduler = "scx_lavd"; # LAVD is designed for latency-sensitive desktop workloads.
   };
 
-  # Thermal and Throttling fixes
-  services.thermald.enable = false;
+  # Thermal Management: Fixes throttling issues on Intel CPUs by adjusting PL1/PL2 power limits.
+  services.thermald.enable = false; # Often conflicts with 'throttled'.
   services.throttled = {
     enable = true;
     extraConfig = ''
@@ -19,109 +20,109 @@
 
       [BATTERY]
       Update_Rate_s: 30
-      PL1_Tdp_W: 45
+      PL1_Tdp_W: 65      # Sustained power limit on battery (increased from 45).
       PL1_Duration_s: 28
-      PL2_Tdp_W: 65
+      PL2_Tdp_W: 80      # Burst power limit on battery (increased from 65).
       PL2_Duration_S: 0.002
-      Trip_Temp_C: 90
-      cTDP: 0
-      Disable_BDPROCHOT: True
+      Trip_Temp_C: 90    # Throttling temperature on battery.
+      Disable_BDPROCHOT: True # Prevent CPU from throttling due to external signals (like battery heat).
 
       [AC]
       Update_Rate_s: 1
-      PL1_Tdp_W: 65
+      PL1_Tdp_W: 90      # Higher sustained power when plugged in (increased from 65).
       PL1_Duration_s: 28
-      PL2_Tdp_W: 90
+      PL2_Tdp_W: 135     # Higher burst power when plugged in (increased from 90).
       PL2_Duration_S: 0.002
-      Trip_Temp_C: 95
-      HWP_Mode: True
-      cTDP: 0
+      Trip_Temp_C: 95    # Allow higher temperatures on AC.
+      HWP_Mode: True     # Enable Intel Hardware P-States.
       Disable_BDPROCHOT: True
     '';
   };
 
-  # Memory Management: ZRAM and MGLRU
+  # Memory Management: ZRAM (Compressed RAM swap).
   zramSwap = {
     enable = true;
-    algorithm = "zstd";
-    memoryPercent = 50;
+    algorithm = "zstd"; # Zstandard offers excellent compression/speed ratio.
+    memoryPercent = 50; # Use up to 50% of RAM as compressed swap space.
   };
 
+  # Kernel Runtime Parameters (sysctl): Low-level system tuning.
   boot.kernel.sysctl = {
-    # MGLRU and memory management
-    "vm.swappiness" = 180; # Favor ZRAM over disk swap
-    "vm.watermark_boost_factor" = 0;
+    # Memory: Favor ZRAM swap (swappiness=180) to keep apps in memory longer.
+    "vm.swappiness" = 180;
+    "vm.watermark_boost_factor" = 0;   # Reduce background memory reclaiming.
     "vm.watermark_scale_factor" = 125;
-    "vm.page-cluster" = 0;
+    "vm.page-cluster" = 0;             # Disable multi-page swap-in (good for SSD/ZRAM).
     
-    # TCP/Network optimizations
-    "net.core.rmem_max" = 16777216;
-    "net.core.wmem_max" = 16777216;
+    # Network: Optimize for high-speed, low-latency connections.
+    "net.core.rmem_max" = 16777216;    # Increase max receive buffer size.
+    "net.core.wmem_max" = 16777216;    # Increase max send buffer size.
     "net.ipv4.tcp_rmem" = "4096 87380 16777216";
     "net.ipv4.tcp_wmem" = "4096 65536 16777216";
-    "net.ipv4.tcp_congestion_control" = "bbr";
-    "net.core.default_qdisc" = "fq";
-    "net.ipv4.tcp_fastopen" = 3;
-    "net.ipv4.tcp_slow_start_after_idle" = 0;
-    "net.ipv4.tcp_mtu_probing" = 1;
+    "net.ipv4.tcp_congestion_control" = "bbr"; # Use Google's BBR for better throughput.
+    "net.core.default_qdisc" = "fq";            # Fair Queuing for BBR.
+    "net.ipv4.tcp_fastopen" = 3;                # Speed up TCP handshakes.
+    "net.ipv4.tcp_slow_start_after_idle" = 0;   # Don't restart slow start after idle.
+    "net.ipv4.tcp_mtu_probing" = 1;             # Automatically detect the best MTU.
   };
 
-  # Process prioritization
+  # Ananicy: Auto-Nice daemon. Automatically sets process priorities based on rules.
   services.ananicy = {
     enable = true;
-    package = pkgs.ananicy-cpp;
-    rulesProvider = pkgs.ananicy-rules-cachyos;
+    package = pkgs.ananicy-cpp; # Faster C++ implementation.
+    rulesProvider = pkgs.ananicy-rules-cachyos; # Excellent community rules for desktop/gaming.
   };
 
-  # GameMode for high-performance bursts
+  # GameMode: System-level optimizations (governor, priority) for games.
   programs.gamemode.enable = true;
 
-  # Store optimization
+  # Nix Store: Optimize storage by hard-linking identical files.
   nix.settings = {
     auto-optimise-store = true;
-    min-free = 128000000; # 128MB
-    max-free = 1000000000; # 1GB
+    min-free = 128000000;  # Keep at least 128MB free.
+    max-free = 1000000000; # Clean up until 1GB is free.
   };
 
+  # Garbage Collection: Automatically delete old system generations every week.
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 14d";
   };
 
-  # SSD optimization
+  # SSD: Periodic TRIM to maintain performance and lifespan.
   services.fstrim.enable = true;
 
-  # OOM Killer
+  # OOM Killer: Earlyoom kills processes before the system hangs due to memory exhaustion.
   services.earlyoom = {
     enable = true;
-    freeMemThreshold = 5;
-    freeSwapThreshold = 5;
+    freeMemThreshold = 5;  # Kill at 5% free memory.
+    freeSwapThreshold = 5; # Kill at 5% free swap.
   };
 
-  # Performance governor settings via TLP (already enabled, but let's ensure performance on AC)
+  # TLP Tweaks: Performance-specific overrides for TLP.
   services.tlp.settings = {
     CPU_SCALING_GOVERNOR_ON_AC = "performance";
     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
     CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
     CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
     
-    # Enable SATA Aggressive Link Power Management
+    # SATA Power Management
     SATA_ALPM_ENABLE_ON_AC = "max_performance";
     SATA_ALPM_ENABLE_ON_BAT = "med_power_with_dipm";
     
-    # PCIE ASPM
+    # PCIe ASPM
     PCIE_ASPM_ON_AC = "performance";
     PCIE_ASPM_ON_BAT = "powersave";
   };
 
-  # I/O Scheduler
+  # I/O Schedulers: Set the best algorithm for different storage types.
   services.udev.extraRules = ''
-    # set scheduler for NVMe
+    # NVMe: Use 'kyber' for low latency.
     ACTION=="add|change", KERNEL=="nvme[0-9]n[0-9]", ATTR{queue/scheduler}="kyber"
-    # set scheduler for SSD and eMMC
+    # SSD: Use 'bfq' (Budget Fair Queuing) for smoothness.
     ACTION=="add|change", KERNEL=="sd[a-z]|mmcblk[0-9]*", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="bfq"
-    # set scheduler for HDD
+    # HDD: Use 'bfq' to manage large rotational latency.
     ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
   '';
 }

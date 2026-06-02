@@ -1,58 +1,60 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Enable graphics driver
+  # Graphics: Enable the base graphics infrastructure (Mesa, VA-API).
   hardware.graphics = {
     enable = true;
-    enable32Bit = true;
+    enable32Bit = true; # Required for Steam and 32-bit games.
     extraPackages = with pkgs; [
-      nvidia-vaapi-driver
-      libva-utils
+      nvidia-vaapi-driver # Video Acceleration API for NVIDIA (hardware video decoding).
+      libva-utils         # Tools for verifying VA-API status.
     ];
   };
 
-  # Load nvidia driver for Xorg and Wayland
+  # Driver: Force the X server to use the NVIDIA driver.
   services.xserver.videoDrivers = ["nvidia"];
 
+  # NVIDIA Specific Settings
   hardware.nvidia = {
-    # Modesetting is required.
+    # Modesetting: Required for Wayland (Hyprland) and high-resolution TTY.
     modesetting.enable = true;
 
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+    # Power Management: Experimental features that can sometimes cause suspend/resume issues.
     powerManagement.enable = false;
+    powerManagement.finegrained = false; # Disabling for stability; fine-grained can turn off the GPU.
 
-    # Fine-grained power management. Turns off GPU when not in use.
-    powerManagement.finegrained = false;
-
-    # Use the NVidia open source kernel module
+    # Open Source Modules: Using the proprietary modules for better feature support/performance on older/stable GPUs.
     open = false;
 
-    # Enable the Nvidia settings menu
+    # Settings Menu: Enable the 'nvidia-settings' GUI tool.
     nvidiaSettings = true;
 
-    # Select the appropriate driver version for your GPU.
+    # Package: Use the 'stable' driver branch tied to the current kernel.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
+    # PRIME: Configure Hybrid Graphics (Intel iGPU + NVIDIA dGPU).
     prime = {
+      # Sync Mode: The NVIDIA GPU handles all rendering, providing the best performance but using more battery.
       sync.enable = true;
-      # Bus ID for Intel and NVIDIA GPUs
+      # Bus IDs: Unique hardware addresses found via 'lspci'.
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
     };
   };
 
-  # Environment variables for NVIDIA and Wayland/Hyprland
+  # Environment: Variables to ensure apps use NVIDIA and Wayland correctly.
   environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "nvidia";
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    # WLR_NO_HARDWARE_CURSORS = "1"; # Already in hyprland.nix
-    NVD_BACKEND = "direct";
-    # Required for Firefox hardware acceleration on NVIDIA
+    LIBVA_DRIVER_NAME = "nvidia";       # Hardware acceleration driver.
+    GBM_BACKEND = "nvidia-drm";         # Generic Buffer Management for Wayland.
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia"; # Ensure OpenGL uses NVIDIA.
+    NVD_BACKEND = "direct";             # Backend for the NVIDIA VA-API driver.
+    
+    # Browser: Allow hardware acceleration in Firefox on NVIDIA.
     MOZ_DISABLE_RDD_SANDBOX = "1";
-    # Ensure applications use the NVIDIA GPU
+    
+    # Prime Offload: Ensure applications can access the NVIDIA GPU resources.
     __NV_PRIME_RENDER_OFFLOAD = "1";
     __NV_PRIME_RENDER_OFFLOAD_PROVIDER = "NVIDIA-G0";
-    __VK_LAYER_NV_optimus = "NVIDIA_only";
+    __VK_LAYER_NV_optimus = "NVIDIA_only"; # Force Vulkan to use NVIDIA.
   };
 }

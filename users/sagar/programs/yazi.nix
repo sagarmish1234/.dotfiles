@@ -5,32 +5,23 @@
   ...
 }:
 let
-  # yazi-script = pkgs.writeShellScriptBin "yazi" ''
-  #   # Start rclone service if not active
-  #   ${pkgs.systemd}/bin/systemctl --user is-active --quiet rclone-googledrive.service || ${pkgs.systemd}/bin/systemctl --user start rclone-googledrive.service
-
-  #   # Run the real yazi
-  #   ${pkgs.yazi}/bin/yazi "$@"
-
-  #   # If this is the last yazi instance, stop the service
-  #   if [ "$(${pkgs.procps}/bin/pgrep -u $(id -u) -x yazi | wc -l)" -le 1 ]; then
-  #     ${pkgs.systemd}/bin/systemctl --user stop rclone-googledrive.service
-  #   fi
-  # '';
+  # Wrapped Package: Use symlinkJoin to provide a customized yazi package if needed.
   yazi-wrapped = pkgs.symlinkJoin {
     name = "yazi-wrapped";
     paths = [
-      # yazi-script
       pkgs.yazi
     ];
   };
 in
 {
+  # Packages: Extra tools used by Yazi (like exiftool for metadata).
   home.packages = [
     pkgs.exiftool
     yazi-wrapped
   ];
+
   programs = {
+    # Shell Integration: Create 'yy' as a shortcut for Yazi.
     fish.functions = {
       yy = {
         body = "yazi";
@@ -42,10 +33,11 @@ in
       yy = "yazi";
     };
 
+    # Yazi: Modern terminal file manager with image preview support.
     yazi = {
       enable = true;
       package = yazi-wrapped;
-      shellWrapperName = "y";
+      shellWrapperName = "y"; # Use 'y' to open yazi.
 
       settings = {
         manager = {
@@ -60,12 +52,12 @@ in
           tab_size = 2;
           max_width = 600;
           max_height = 900;
-          image_filter = "triangle";
+          image_filter = "triangle"; # Resizing algorithm.
           image_quality = 75;
           cache_dir = config.xdg.cacheHome;
         };
 
-        # for git plugin
+        # Git Integration: Fetch status for files and directories.
         plugin.prepend_fetchers = [
           {
             id = "git";
@@ -82,17 +74,19 @@ in
         ];
       };
 
+      # Plugins: Extend Yazi with extra functionality.
       plugins = {
         inherit (pkgs.yaziPlugins)
-          chmod
-          full-border
-          git
-          toggle-pane
-          mount
-          starship
+          chmod        # Change file permissions.
+          full-border  # Add borders around the UI.
+          git          # Show git status.
+          toggle-pane  # Maximize/restore preview pane.
+          mount        # Mount/unmount drives.
+          starship     # Use starship prompt in yazi.
           ;
       };
 
+      # Init: Run Lua code when Yazi starts.
       initLua = ''
         require("full-border"):setup()
         require("git"):setup()
@@ -112,18 +106,10 @@ in
             desc = "Maximize or restore the preview pane";
           }
           {
-            on = [
-              "c"
-              "m"
-            ];
+            on = [ "c" "m" ];
             run = "plugin chmod";
             desc = "Chmod on selected files";
           }
-          # {
-          #   on = [ "g" "d" ];
-          #   run = "cd ${config.home.homeDirectory}/GoogleDrive";
-          #   desc = "Go to Google Drive";
-          # }
           {
             on = [ "p" "s" ];
             run = ''shell 'du -sh "$@" | less' --block'';
@@ -132,6 +118,7 @@ in
           {
             on = "<C-n>";
             run = ''shell '${lib.getExe pkgs.ripdrag} "$@" -x 2>/dev/null &' --confirm'';
+            desc = "Drag and drop selected files";
           }
         ];
       };

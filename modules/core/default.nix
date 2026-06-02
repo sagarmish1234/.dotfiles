@@ -1,17 +1,19 @@
 { config, pkgs, ... }:
 
 {
+  # Imports: System-wide modules for specific hardware or services.
   imports = [
-    ./tlp.nix
-    ./performance.nix
+    ./tlp.nix          # Battery optimization and power management.
+    ./performance.nix  # Performance tweaks (CPU governor, etc.).
   ];
 
-  # Set your time zone.
+  # Time Zone: Set to Kolkata for Indian Standard Time.
   time.timeZone = "Asia/Kolkata";
 
-  # Select internationalisation properties.
+  # Locale: Set the primary language to US English.
   i18n.defaultLocale = "en_US.UTF-8";
 
+  # Regional Settings: Use Indian formats for currency, measurements, etc.
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_IN";
     LC_IDENTIFICATION = "en_IN";
@@ -24,29 +26,34 @@
     LC_TIME = "en_IN";
   };
 
-  # Allow unfree packages
+  # Unfree Packages: Allow non-open-source software (like NVIDIA drivers, Discord, etc.).
   nixpkgs.config.allowUnfree = true;
 
-  # Essential System Packages
+  # Essential System Packages: Critical tools available to all users.
   environment.systemPackages = with pkgs; [
-    git
-    vim
-    wget
-    fish
-    psmisc
-    linuxPackages.cpupower
+    git           # Version control.
+    vim           # Text editor.
+    wget          # File downloader.
+    fish          # Modern interactive shell.
+    psmisc        # Process management tools (killall, pstree).
+    linuxPackages.cpupower # Tool to manage CPU power settings.
   ];
 
-  # Enable Flakes and modern Nix commands
+  # Nix Settings: Configure the behavior of the Nix package manager.
   nix.settings = {
+    # Flakes: Enable modern Nix commands and experimental flake support.
     experimental-features = [ "nix-command" "flakes" ];
+    
+    # Binary Caches: Pre-built package repositories to avoid local compilation.
     substituters = [
-      "https://cache.nixos.org"
-      "https://nix-community.cachix.org"
-      "https://hyprland.cachix.org"
-      "https://noctalia.cachix.org"
-      "https://cache.garnix.io"
+      "https://cache.nixos.org"           # Official NixOS cache.
+      "https://nix-community.cachix.org"  # Community-maintained packages.
+      "https://hyprland.cachix.org"       # Optimized Hyprland builds.
+      "https://noctalia.cachix.org"       # Pre-built Noctalia shell packages.
+      "https://cache.garnix.io"           # Continuous integration cache for many flakes.
     ];
+    
+    # Public Keys: Security keys used to verify packages from the caches above.
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
@@ -56,23 +63,26 @@
     ];
   };
 
-  # Networking
+  # Networking: Enable NetworkManager for Wi-Fi and Ethernet management.
   networking.networkmanager.enable = true;
 
-  # Noctalia requirements
+  # Hardware Support:
+  # Bluetooth: Enable the service and keep it powered off by default to save battery.
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = false;
+  # Power: Enable UPower for battery/charging status integration in the shell.
   services.upower.enable = true;
 
-  # Enable Fish shell
+  # Shell: Set Fish as the default interactive shell.
   programs.fish.enable = true;
   environment.shells = with pkgs; [ fish ];
 
-  # Fonts
+  # Fonts: System-wide font availability.
   fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
+    nerd-fonts.jetbrains-mono # Used for the UI, terminal, and shell.
   ];
 
-  # Security
+  # Security:
+  # PAM: Configure PAM to allow hyprlock to authenticate the user.
   security.pam.services.hyprlock = {};
 }

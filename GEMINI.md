@@ -22,6 +22,7 @@ This project manages a NixOS system configuration using Nix Flakes with a modula
 ## Structure
 
 - `/flake.nix`: Entry point for the flake configuration, defining inputs and mapping host/user configs.
+- `/docs/OS_ARCHITECTURE.md`: Deep dive into low-level OS design choices (Kernel, Performance, Hardware).
 - `/hosts/nixos/`: Configuration for the main `nixos` host.
     - `default.nix`: Host-specific entry point, imports core and desktop modules.
     - `hardware.nix`: Hardware scan results.

@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  # Catppuccin Mocha palette
+  # Catppuccin Mocha palette: Defined manually for use in non-nix settings or precise overrides.
   rosewater = "rgb(245, 224, 220)";
   flamingo = "rgb(242, 205, 205)";
   pink = "rgb(245, 194, 231)";
@@ -30,21 +30,23 @@ let
   crust = "rgb(17, 17, 27)";
 in
 {
+  # Hyprlock: The screen locker for the Hyprland ecosystem.
   programs.hyprlock = {
     enable = true;
     settings = {
       general = {
         disable_loading_bar = true;
         hide_cursor = true;
-        grace = 0;
+        grace = 0;           # Time in seconds that the user can unlock without a password.
         no_fade_in = false;
       };
 
+      # Background: Display the current wallpaper with a blur effect.
       background = {
         monitor = "eDP-1";
         path = "${config.home.homeDirectory}/.cache/current_wallpaper";
         color = base;
-        blur_passes = 3;
+        blur_passes = 3;     # Higher values mean smoother, more intense blur.
         blur_size = 8;
         noise = 0.02;
         contrast = 0.9;
@@ -53,6 +55,7 @@ in
         vibrancy_darkness = 0.2;
       };
 
+      # Input Field: The password entry box.
       input-field = {
         monitor = "eDP-1";
         size = "300, 60";
@@ -75,8 +78,9 @@ in
         valign = "center";
       };
 
+      # Labels: On-screen information (Time and Date).
       label = [
-        # Time
+        # Time Label: Updates every second.
         {
           monitor = "eDP-1";
           text = "cmd[update:1000] echo \"$(date +\"%H:%M\")\"";
@@ -87,7 +91,7 @@ in
           halign = "center";
           valign = "center";
         }
-        # Date
+        # Date Label: Updates every minute.
         {
           monitor = "eDP-1";
           text = "cmd[update:60000] echo \"$(date +\"%A, %d %B\")\"";

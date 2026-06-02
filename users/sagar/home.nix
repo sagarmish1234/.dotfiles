@@ -1,128 +1,123 @@
 { config, pkgs, ... }:
 
 {
+  # Imports: Modularly include user-specific program configurations.
+  # This keeps the main home.nix clean.
   imports = [
-    ./programs/noctalia.nix
-    ./programs/wallpapers.nix
-    ./programs/zoxide.nix
-    ./programs/hyprland.nix
-    ./programs/hypridle.nix
-    ./programs/hyprlock.nix
-    ./programs/wayland.nix
-    ./programs/theme.nix
-    ./programs/mpv.nix
-    ./programs/yazi.nix
-    ./programs/bat.nix
-    ./programs/eza.nix
-    ./programs/fastfetch.nix
-    ./programs/fzf.nix
-    # ./programs/rclone.nix
-    ./programs/ripgrep.nix
-    ./programs/tealdeer.nix
-    ./programs/webapps.nix
-    ./programs/zen.nix
+    ./programs/noctalia.nix     # Shell/UI settings.
+    ./programs/wallpapers.nix   # Wallpaper management logic.
+    ./programs/zoxide.nix       # Smarter cd command.
+    ./programs/hyprland.nix     # Window manager config.
+    ./programs/hypridle.nix     # Auto-lock and idle management.
+    ./programs/hyprlock.nix     # Screen locker.
+    ./programs/wayland.nix      # Wayland-specific tools.
+    ./programs/theme.nix        # Global Catppuccin and GTK themes.
+    ./programs/mpv.nix          # Media player.
+    ./programs/yazi.nix         # Terminal file manager.
+    ./programs/bat.nix          # Syntax highlighting for 'cat'.
+    ./programs/eza.nix          # Modern replacement for 'ls'.
+    ./programs/fastfetch.nix    # System info display.
+    ./programs/fzf.nix          # Fuzzy finder.
+    # ./programs/rclone.nix     # Cloud storage sync (disabled).
+    ./programs/ripgrep.nix      # Fast text searching.
+    ./programs/tealdeer.nix     # Simplified man pages (tldr).
+    ./programs/webapps.nix      # Progressive Web Apps / site-specific browsers.
+    ./programs/zen.nix          # Zen Browser configuration.
   ];
 
-  # Home Manager needs a bit of information about you and the paths it should manage.
+  # Home Manager Settings
   home.username = "sagar";
   home.homeDirectory = "/home/sagar";
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
+  # State Version: The Home Manager version used to initialize this setup.
+  # Like system.stateVersion, only change if you know what you are doing.
   home.stateVersion = "26.05"; 
 
-  # The home.packages option allows you to install User packages directly into your environment.
+  # User Packages: Simple CLI tools and GUI apps that don't need complex configs.
   home.packages = with pkgs; [
-    jq
-    candy-icons
-    unzip
-    vscode 
-    ffmpeg
-    mpvpaper
-    imagemagick
+    jq            # JSON processor.
+    candy-icons   # Icon theme used by Noctalia and GTK.
+    unzip         # Archive extractor.
+    vscode        # Code editor.
+    ffmpeg        # Multimedia framework.
+    mpvpaper      # Tool to set video wallpapers via mpv.
+    imagemagick   # Image manipulation tools.
   ];
 
+  # Ghostty: Modern, fast terminal emulator.
   programs.ghostty = {
     enable = true;
     settings = {
+      # Shell: Force use of Fish shell for new windows.
       command = "/run/current-system/sw/bin/fish";
 
-      # Font settings
+      # Typography
       font-family = "JetBrainsMono Nerd Font";
       font-style = "Regular";
       font-size = 12;
 
-      # Window styling
+      # UI/UX
       window-padding-x = 16;
       window-padding-y = 16;
       window-padding-balance = true;
       window-padding-color = "background";
-      confirm-close-surface = false;
-      resize-overlay = "never";
+      confirm-close-surface = false; # Don't ask for confirmation on exit.
+      resize-overlay = "never";      # Hide the '80x24' overlay when resizing.
 
-      # Cursor styling
+      # Cursor
       cursor-style = "block";
       cursor-style-blink = false;
 
-      # Keyboard bindings
-      keybind = [
-        "shift+insert=paste_from_clipboard"
-        "control+insert=copy_to_clipboard"
-        "super+control+shift+alt+arrow_down=resize_split:down,100"
-        "super+control+shift+alt+arrow_up=resize_split:up,100"
-        "super+control+shift+alt+arrow_left=resize_split:left,100"
-        "super+control+shift+alt+arrow_right=resize_split:right,100"
-      ];
-
-      # Transparency
+      # Transparency: Enable slight transparency for a modern look.
       background-opacity = 0.75;
-      window-decoration = false;
+      window-decoration = false; # Borderless window (let Hyprland handle it).
 
-      # Mouse scrolling
+      # Input
       mouse-scroll-multiplier = 0.95;
     };
   };
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
+  # Plain Files: Use 'home.file' to symlink files from the flake to the home directory.
   home.file = {
-    # ".screenrc".source = dotfiles/screenrc;
+    # Example: ".screenrc".source = dotfiles/screenrc;
   };
 
-  # You can also manage environment variables. 
+  # Environment Variables: Set variables for the user session.
   home.sessionVariables = {
     SHELL = "/run/current-system/sw/bin/fish";
   };
 
+  # Bash: Enable Bash and ensure it always execs into Fish for interactive use.
   programs.bash = {
     enable = true;
     initExtra = ''
+      # If not already in fish and not running a single command, switch to fish.
       if [[ $ps_format != *"fish"* && -z "$BASH_EXECUTION_STRING" ]]; then
         exec /run/current-system/sw/bin/fish
       fi
     '';
   };
 
+  # Fish Shell: Modern shell features.
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
-      set fish_greeting # Disable greeting
+      set fish_greeting # Silence the default welcome message.
     '';
   };
 
+  # Starship: A cross-shell prompt that is fast and customizable.
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
-    enableTransience = true;
-    # Add some nice symbols and settings
+    enableTransience = true; # Prompt clears on Enter for a cleaner history.
     settings = {
       add_newline = false;
       character = {
         success_symbol = "[➜](bold green)";
         error_symbol = "[➜](bold red)";
       };
-      # Nerd font symbols preset-like settings
+      # Directory Substitutions: Show nice icons for common folders.
       directory.substitutions = {
         "Documents" = "󰈙 ";
         "Downloads" = "󱑢 ";
@@ -132,6 +127,6 @@
     };
   };
 
-  # Let Home Manager install and manage itself.
+  # Let Home Manager manage its own installation.
   programs.home-manager.enable = true;
 }

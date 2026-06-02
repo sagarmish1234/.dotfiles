@@ -1,19 +1,23 @@
 { config, ... }:
 
 {
+  # Sops-nix: Declarative secrets management.
   sops = {
+    # Default Secrets File: The encrypted YAML file containing your keys/passwords.
     defaultSopsFile = ../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
 
-    # This will automatically import the SSH keys as age keys
+    # Age Key: The private key used to decrypt the secrets.
+    # We use a standard Age key file located in the user's config.
     age.keyFile = "/home/sagar/.config/sops/age/keys.txt";
     
-    # Use the system's SSH host key for decryption at boot
+    # SSH Host Key: This allows the system to decrypt secrets during boot 
+    # using the machine's unique ED25519 host key.
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     
-    # Example secret (uncomment and add to your secrets.yaml later)
+    # Example Secret Definition:
     # secrets."example-password" = {
-    #   neededForUsers = true;
+    #   neededForUsers = true; # Available during the user creation phase.
     # };
   };
 }

@@ -1,16 +1,17 @@
 { pkgs, ... }:
 {
-
+  # Bat: A cat(1) clone with syntax highlighting and Git integration.
   programs = {
     bat = {
       enable = true;
       extraPackages = builtins.attrValues {
         inherit (pkgs.bat-extras)
-          batman
+          batman # Read system man pages using bat's syntax highlighting.
           ;
       };
     };
 
+    # Shell Integration: Use bat/batman to replace standard commands.
     fish.functions = {
       man = {
         body = "batman $argv";
@@ -32,6 +33,7 @@
     };
   };
 
-  # Disable automatic cache generation to speed up activation
+  # Optimization: Disable automatic cache generation to speed up activation.
+  # Manual rebuild via 'bat-rebuild' if you change themes.
   home.activation.batCache = pkgs.lib.mkForce "";
 }
