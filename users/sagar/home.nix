@@ -23,6 +23,7 @@
     ./programs/tealdeer.nix     # Simplified man pages (tldr).
     ./programs/webapps.nix      # Progressive Web Apps / site-specific browsers.
     ./programs/zen.nix          # Zen Browser configuration.
+    ./programs/neovim.nix       # LazyVim-inspired Neovim configuration via nvf.
   ];
 
   # Home Manager Settings
@@ -42,6 +43,7 @@
     ffmpeg        # Multimedia framework.
     mpvpaper      # Tool to set video wallpapers via mpv.
     imagemagick   # Image manipulation tools.
+    lazydocker    # Terminal UI for docker.
   ];
 
   # Ghostty: Modern, fast terminal emulator.
@@ -85,6 +87,7 @@
   # Environment Variables: Set variables for the user session.
   home.sessionVariables = {
     SHELL = "/run/current-system/sw/bin/fish";
+    DOCKER_HOST = "unix:///run/user/1000/podman/podman.sock";
   };
 
   # Bash: Enable Bash and ensure it always execs into Fish for interactive use.
@@ -104,6 +107,18 @@
     interactiveShellInit = ''
       set fish_greeting # Silence the default welcome message.
     '';
+    functions = {
+      nvim = ''
+        if test "$TERM" = "xterm-ghostty" -o -n "$GHOSTTY_BIN_DIR"
+          if test -t 0 -a -t 1
+            # Launch nvim in a new zero-padded Ghostty window using absolute path
+            ghostty --window-padding-x=0 --window-padding-y=0 -e /etc/profiles/per-user/sagar/bin/nvim $argv
+            return
+          end
+        end
+        command nvim $argv
+      '';
+    };
   };
 
   # Starship: A cross-shell prompt that is fast and customizable.

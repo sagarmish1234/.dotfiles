@@ -28,6 +28,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Antigravity CLI
+    antigravity-nix.url = "github:jacopone/antigravity-nix";
+
     # External themes and specialized browsers
     catppuccin.url = "github:catppuccin/nix";
     thorium.url = "github:Rishabh5321/custom-packages-flake";
@@ -36,10 +39,15 @@
       url = "github:catppuccin/zen-browser";
       flake = false; # This input is just raw files (CSS/JS), not a Nix flake itself.
     };
+
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # 'inputs' here are the resolved packages defined above.
-  outputs = { self, nixpkgs, home-manager, sops-nix, catppuccin, thorium, zen-browser, catppuccin-zen, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, sops-nix, catppuccin, thorium, zen-browser, catppuccin-zen, antigravity-nix, ... }@inputs: {
     # Define a system configuration named 'nixos'.
     # Applied via: sudo nixos-rebuild switch --flake .#nixos
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
@@ -61,6 +69,7 @@
             imports = [
               ./users/sagar/home.nix # User-specific Home Manager configuration.
               catppuccin.homeModules.catppuccin # Catppuccin theme for the user.
+              inputs.nvf.homeManagerModules.default
             ];
           };
         }

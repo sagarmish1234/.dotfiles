@@ -61,6 +61,15 @@
   # Blacklist: Explicitly prevent these modules from ever being loaded.
   boot.blacklistedKernelModules = [ "tpm" "tpm_tis" "tpm_crb" ];
 
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
+
   # State Version: The NixOS version the system was originally installed on.
   # NEVER change this unless you have read the release notes and handled migrations.
   system.stateVersion = "26.05";
