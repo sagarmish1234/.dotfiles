@@ -62,6 +62,11 @@
     // Request client-side decorations to be omitted
     prefer-no-csd
 
+    // Global blur configuration
+    blur {
+        passes 5
+    }
+
     screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
     // Window and Layer Rules
