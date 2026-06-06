@@ -137,6 +137,14 @@
     };
   };
 
+  # Git configuration managed by Home Manager
+  programs.git = {
+    enable = true;
+    settings = {
+      credential.helper = "store";
+    };
+  };
+
   # Let Home Manager manage its own installation.
   programs.home-manager.enable = true;
 }

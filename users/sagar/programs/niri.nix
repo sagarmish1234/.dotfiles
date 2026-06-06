@@ -96,7 +96,7 @@
 
     // Enable premium rounded corners and background blur for all windows
     window-rule {
-        geometry-corner-radius 9
+        geometry-corner-radius 7
         clip-to-geometry true
         background-effect {
             blur true
