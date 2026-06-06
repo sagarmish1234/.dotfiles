@@ -64,7 +64,7 @@
 
     // Global blur configuration
     blur {
-        passes 5
+        passes 4
     }
 
     // Skip showing important hotkeys at startup

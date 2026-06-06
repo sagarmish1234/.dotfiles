@@ -20,7 +20,7 @@
     ./programs/eza.nix
     ./programs/fastfetch.nix
     ./programs/fzf.nix
-    ./programs/secrets.nix
+    # ./programs/secrets.nix
     # ./programs/rclone.nix
     ./programs/ripgrep.nix
     ./programs/tealdeer.nix
