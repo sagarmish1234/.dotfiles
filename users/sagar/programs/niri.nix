@@ -91,6 +91,7 @@
         background-effect {
             blur true
         }
+        draw-border-with-background false
     }
 
     // Set transparency for active and inactive windows so blur is visible
