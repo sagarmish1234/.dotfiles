@@ -76,7 +76,8 @@
       cursor-style-blink = false;
 
       # Transparency: Enable slight transparency for a modern look.
-      background-opacity = 0.75;
+      background = "0c0c12";
+      background-opacity = 0.80;
       window-decoration = false; # Borderless window (let Hyprland handle it).
 
       # Input
