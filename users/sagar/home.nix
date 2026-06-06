@@ -48,6 +48,7 @@
     imagemagick # Image manipulation tools.
     lazydocker # Terminal UI for docker.
     xwayland-satellite
+    wl-clipboard # Command-line copy/paste utilities for Wayland.
   ];
 
   # Ghostty: Modern, fast terminal emulator.
