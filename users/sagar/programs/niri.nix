@@ -121,9 +121,9 @@
         Mod+Shift+Q { quit; }
         Mod+W { close-window; }
         Mod+Q { close-window; }
-        Mod+F { maximize-column; }
+        Mod+F { maximize-window-to-edges; }
         Mod+Shift+F { fullscreen-window; }
-        Mod+M { maximize-window-to-edges; }
+        Mod+M { maximize-column; }
         Mod+T { spawn "sh" "-c" "niri msg action toggle-window-floating && niri msg action center-window"; }
         Mod+Ctrl+L { spawn "loginctl" "lock-session"; }
         Mod+O repeat=false { toggle-overview; }
