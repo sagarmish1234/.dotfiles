@@ -20,6 +20,7 @@
     ./programs/eza.nix
     ./programs/fastfetch.nix
     ./programs/fzf.nix
+    ./programs/secrets.nix
     # ./programs/rclone.nix
     ./programs/ripgrep.nix
     ./programs/tealdeer.nix
@@ -49,6 +50,7 @@
     lazydocker # Terminal UI for docker.
     xwayland-satellite
     wl-clipboard # Command-line copy/paste utilities for Wayland.
+    gh
   ];
 
   # Ghostty: Modern, fast terminal emulator.

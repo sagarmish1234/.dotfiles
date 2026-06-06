@@ -67,6 +67,7 @@
               ./users/sagar/home.nix # User-specific Home Manager configuration.
               catppuccin.homeModules.catppuccin # Catppuccin theme for the user.
               inputs.nvf.homeManagerModules.default
+              inputs.sops-nix.homeManagerModules.sops
             ];
           };
         }
