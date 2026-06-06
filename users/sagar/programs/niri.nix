@@ -50,13 +50,21 @@
         // Styled borders matching your Catppuccin theme (Lavender & Mauve linear gradient)
         border {
             width 2
-            active-gradient from="#b4befe" to="#cba6f7" angle=45
+            active-gradient from="#04a5e5" to="#cba6f7" angle=45
             inactive-color "#313244"
         }
 
         focus-ring {
             off
         }
+        shadow {
+              on
+              softness 30
+              spread 5
+              offset x=0 y=5
+              draw-behind-window true
+              color "#00000070"
+          }
     }
 
     // Request client-side decorations to be omitted
@@ -64,7 +72,7 @@
 
     // Global blur configuration
     blur {
-        passes 4
+        passes 5
     }
 
     // Skip showing important hotkeys at startup
@@ -107,12 +115,12 @@
     // Set transparency for active and inactive windows so blur is visible
     window-rule {
         match is-focused=false
-        opacity 0.85
+        opacity 0.80
     }
 
     window-rule {
         match is-focused=true
-        opacity 0.95
+        opacity 0.60
     }
 
     // Startup Applications
