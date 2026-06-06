@@ -104,25 +104,12 @@
       fi
     '';
   };
-
   # Fish Shell: Modern shell features.
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
       set fish_greeting # Silence the default welcome message.
     '';
-    functions = {
-      nvim = ''
-        if test "$TERM" = "xterm-ghostty" -o -n "$GHOSTTY_BIN_DIR"
-          if test -t 0 -a -t 1
-            # Launch nvim in a new zero-padded Ghostty window using absolute path
-            ghostty --window-padding-x=0 --window-padding-y=0 -e /etc/profiles/per-user/sagar/bin/nvim $argv
-            return
-          end
-        end
-        command nvim $argv
-      '';
-    };
   };
 
   # Starship: A cross-shell prompt that is fast and customizable.
