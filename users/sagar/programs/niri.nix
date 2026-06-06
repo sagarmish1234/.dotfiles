@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Define Niri configuration via Home Manager xdg.configFile
   xdg.configFile."niri/config.kdl".text = ''
     // Input device configuration
@@ -8,6 +10,8 @@
         keyboard {
             xkb {
                 layout "us"
+                variant "altgr-intl"
+                options "ctrl:nocaps"
             }
         }
         touchpad {
@@ -28,6 +32,8 @@
 
     // Layout configuration
     layout {
+        background-color "transparent"
+
         // Gap sizing
         gaps 8
 
@@ -66,17 +72,36 @@
         default-window-height { proportion 0.7; }
     }
 
+    // layer-rule {
+    //     match namespace="^noctalia.*$"
+    //     background-effect {
+    //         blur true
+    //     }
+    // }
+
     layer-rule {
-        match namespace="^noctalia.*$"
+        match namespace="^noctalia-overview.*$"
+        place-within-backdrop true
+    }
+
+    // Enable premium rounded corners and background blur for all windows
+    window-rule {
+        geometry-corner-radius 9
+        clip-to-geometry true
         background-effect {
             blur true
         }
     }
 
-    // Enable premium rounded corners for all windows
+    // Set transparency for active and inactive windows so blur is visible
     window-rule {
-        geometry-corner-radius 12
-        clip-to-geometry true
+        match is-focused=false
+        opacity 0.85
+    }
+
+    window-rule {
+        match is-focused=true
+        opacity 0.95
     }
 
     // Startup Applications
@@ -98,7 +123,7 @@
         Mod+F { maximize-column; }
         Mod+Shift+F { fullscreen-window; }
         Mod+M { maximize-window-to-edges; }
-        Mod+T { toggle-window-floating; }
+        Mod+T { spawn "sh" "-c" "niri msg action toggle-window-floating && niri msg action center-window"; }
         Mod+Ctrl+L { spawn "loginctl" "lock-session"; }
         Mod+O repeat=false { toggle-overview; }
 
