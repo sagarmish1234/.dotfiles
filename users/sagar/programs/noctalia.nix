@@ -12,7 +12,7 @@ let
     owner = "noctalia-dev";
     repo = "noctalia-plugins";
     rev = "main";
-    hash = "sha256-ePWMazPbuSl4Gw43kF6il645got10McPBXZ4ll93n7s=";
+    hash = "sha256-jOHmyhHBEk4CjiroB6Ju+5mml1uQtGfMjcuu1fhCSfs=";
   };
 
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
@@ -23,10 +23,10 @@ let
     TARGET="$1"
     # Ensure address starts with 0x
     [[ "$TARGET" != 0x* ]] && TARGET="0x$TARGET"
-    
+
     # Get current active window's fullscreen state
     FW=$(${hyprctl} activewindow -j | ${jq} -r '.fullscreen // 0')
-    
+
     # If activewindow is 0 (e.g. switcher took focus), try to find the most recently active client
     if [ "$FW" -eq 0 ]; then
        FW=$(${hyprctl} clients -j | ${jq} -r '.[] | select(.focusHistoryID == 0) | .fullscreen // 0')
@@ -34,18 +34,18 @@ let
 
     # Focus the target window
     ${hyprctl} dispatch focuswindow "address:$TARGET"
-    
+
     # Wait for Hyprland to process focus change
     sleep 0.12
-    
+
     # Check target window's current state to avoid accidental toggling
     NEW_FW=$(${hyprctl} clients -j | ${jq} -r ".[] | select(.address == \"$TARGET\") | .fullscreen // 0")
-    
+
     # Only apply if previous window was fullscreen and target is not
     if [ "$FW" -ne 0 ] && [ "$FW" -ne "$NEW_FW" ]; then
         ${hyprctl} dispatch fullscreen "$FW"
     fi
-    
+
     # Bring to top
     ${hyprctl} dispatch alterzorder "top,address:$TARGET"
   '';

@@ -4,15 +4,12 @@
   description = "Modern Modular NixOS Flake";
 
   inputs = {
-    # nixpkgs: The primary repository for Nix packages and modules.
-    # We use 'nixos-unstable' for the latest software and hardware support.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    
-    # home-manager: Manages user-specific configuration and dotfiles.
-    # It integrates with NixOS via a module, allowing a single rebuild command.
+    # Updated to follow the stable 26.05 release branch
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+
+    # Updated to track the matching stable 26.05 Home Manager release branch
     home-manager = {
-      url = "github:nix-community/home-manager";
-      # 'inputs.nixpkgs.follows' ensures Home Manager uses the same nixpkgs version as the main flake.
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

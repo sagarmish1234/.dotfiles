@@ -20,21 +20,29 @@
 
       [BATTERY]
       Update_Rate_s: 30
-      PL1_Tdp_W: 65      # Sustained power limit on battery (increased from 45).
+      # Sustained power limit on battery (increased from 45)
+      PL1_Tdp_W: 65
       PL1_Duration_s: 28
-      PL2_Tdp_W: 80      # Burst power limit on battery (increased from 65).
+      # Burst power limit on battery (increased from 65)
+      PL2_Tdp_W: 80
       PL2_Duration_S: 0.002
-      Trip_Temp_C: 90    # Throttling temperature on battery.
-      Disable_BDPROCHOT: True # Prevent CPU from throttling due to external signals (like battery heat).
+      # Throttling temperature on battery
+      Trip_Temp_C: 90
+      # Prevent CPU from throttling due to external signals (like battery heat)
+      Disable_BDPROCHOT: True
 
       [AC]
       Update_Rate_s: 1
-      PL1_Tdp_W: 90      # Higher sustained power when plugged in (increased from 65).
+      # Higher sustained power when plugged in (increased from 65)
+      PL1_Tdp_W: 90
       PL1_Duration_s: 28
-      PL2_Tdp_W: 135     # Higher burst power when plugged in (increased from 90).
+      # Higher burst power when plugged in (increased from 90)
+      PL2_Tdp_W: 135
       PL2_Duration_S: 0.002
-      Trip_Temp_C: 95    # Allow higher temperatures on AC.
-      HWP_Mode: True     # Enable Intel Hardware P-States.
+      # Allow higher temperatures on AC
+      Trip_Temp_C: 95
+      # Enable Intel Hardware P-States
+      HWP_Mode: True
       Disable_BDPROCHOT: True
     '';
   };

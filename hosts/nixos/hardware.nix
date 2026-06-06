@@ -19,30 +19,28 @@
   
   # Root Partition (/)
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/ac2d16ca-ebcb-4057-ae77-498d5d5a3cb4";
+    { device = "/dev/disk/by-uuid/9971bff8-2804-4f06-9967-f94c68511c86";
       fsType = "btrfs";
-      # Options: 'zstd' compression for space/speed, 'noatime' to reduce writes, 'discard=async' for SSD health.
-      options = [ "compress=zstd" "noatime" "discard=async" ];
     };
 
   # Home Subvolume (/home)
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/ac2d16ca-ebcb-4057-ae77-498d5d5a3cb4";
+    { device = "/dev/disk/by-uuid/9971bff8-2804-4f06-9967-f94c68511c86";
       fsType = "btrfs";
-      options = [ "subvol=home" "compress=zstd" "noatime" "discard=async" ];
+      options = [ "subvol=home" ];
     };
 
   # Nix Store Subvolume (/nix)
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/ac2d16ca-ebcb-4057-ae77-498d5d5a3cb4";
+    { device = "/dev/disk/by-uuid/9971bff8-2804-4f06-9967-f94c68511c86";
       fsType = "btrfs";
-      options = [ "subvol=nix" "compress=zstd" "noatime" "discard=async" ];
+      options = [ "subvol=nix" ];
     };
 
   # Boot Partition (/boot)
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/C295-AA9B";
-      fsType = "vfat"; # Required for EFI partitions.
+    { device = "/dev/disk/by-uuid/41CC-2F1B";
+      fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 

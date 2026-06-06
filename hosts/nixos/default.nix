@@ -33,29 +33,36 @@
   # Compression: Zstandard provides a great balance between speed and compression ratio.
   boot.initrd.compressor = "zstd";
   boot.initrd.verbose = false;
-  boot.initrd.kernelModules = [ ]; # Minimal modules for faster initrd phase.
+  # Load NVIDIA modules early in the boot process to ensure Wayland (Niri) displays correctly and avoids a black screen
+  boot.initrd.kernelModules = [
+    "nvidia"
+    "nvidia_modeset"
+    "nvidia_uvm"
+    "nvidia_drm"
+  ];
 
   # Performance and Silence: Kernel parameters for a faster, cleaner boot.
   boot.kernelParams = [
-    "quiet"                   # Suppress non-critical kernel messages.
-    "splash"                  # Enable boot splash (if a theme is present).
-    "pcie_aspm=performance"   # Force PCIe Active State Power Management to performance.
-    "nvme_load=1"             # Ensure NVMe drivers are loaded early.
-    "fastboot"                # Skip certain hardware checks during boot.
-    "nowatchdog"              # Disable hardware watchdog to free up resources.
-    "nmi_watchdog=0"          # Disable NMI watchdog (reduces interrupts).
-    "nvidia-drm.modeset=1"    # Enable Kernel Mode Setting for NVIDIA (required for Wayland).
-    "8250.nr_uarts=0"         # Disable legacy serial ports to speed up initialization.
-    "tpm_tis.interrupts=0"    # Avoid TPM interrupt issues on certain hardware.
-    "tpm.disable=1"           # Disable TPM entirely for speed/simplicity if not needed.
-    "module_blacklist=tpm,tpm_tis,tpm_crb" # Prevent TPM modules from loading.
-    "rd.systemd.show_status=false" # Hide systemd status messages in initrd.
-    "rd.udev.log_level=3"     # Reduce udev logging in initrd.
-    "loglevel=3"              # Only show errors and warnings.
-    "libahci.ignore_sss=1"    # Ignore Staggered Spin-Up (speeds up SATA detection).
-    "systemd.show_status=auto" # Only show systemd status if there is an error.
-    "udev.log_priority=3"     # Reduce udev logging priority.
-    "pci=pcie_bus_perf"       # Optimize PCI Express bus performance.
+    "quiet"
+    "splash"
+    "pcie_aspm=performance"
+    "nvme_load=1"
+    "fastboot"
+    "nowatchdog"
+    "nmi_watchdog=0"
+    "nvidia-drm.modeset=1"
+    "nvidia-drm.fbdev=1" # Enable Nvidia Framebuffer support for Wayland/SDDM rendering
+    "8250.nr_uarts=0"
+    "tpm_tis.interrupts=0"
+    "tpm.disable=1"
+    "module_blacklist=tpm,tpm_tis,tpm_crb"
+    "rd.systemd.show_status=false"
+    "rd.udev.log_level=3"
+    "loglevel=3"
+    "libahci.ignore_sss=1"
+    "systemd.show_status=auto"
+    "udev.log_priority=3"
+    "pci=pcie_bus_perf"
   ];
 
   # Blacklist: Explicitly prevent these modules from ever being loaded.

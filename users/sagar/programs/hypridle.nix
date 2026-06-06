@@ -6,14 +6,8 @@
     enable = true;
     settings = {
       general = {
-        # Lock Command: Command to execute when the session is locked.
-        lock_cmd = "pidof hyprlock || hyprlock"; # Ensure only one instance of hyprlock runs.
-        
-        # Before Sleep: Lock the session automatically before the system suspends or hibernates.
-        before_sleep_cmd = "loginctl lock-session";
-        
-        # After Sleep: Ensure the screen turns back on after the system resumes.
-        after_sleep_cmd = "hyprctl dispatch dpms on";
+        lock_cmd = "pidof hyprlock || hyprlock"; # avoid starting multiple hyprlock instances
+        before_sleep_cmd = "loginctl lock-session"; # lock before suspend
       };
 
       # Listeners: Define actions based on inactivity duration (in seconds).
@@ -25,9 +19,8 @@
         }
         # 5.5 Minutes: Turn off the display (DPMS off) to save power.
         {
-          timeout = 330; 
-          on-timeout = "hyprctl dispatch dpms off";
-          on-resume = "hyprctl dispatch dpms on"; # Turn display back on when activity is detected.
+          timeout = 330; # 5.5min
+          on-timeout = "niri msg action power-off-monitors"; # screen off when timeout has passed
         }
         # 30 Minutes: Suspend the computer.
         {

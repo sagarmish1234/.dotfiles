@@ -4,26 +4,25 @@
   # Imports: Modularly include user-specific program configurations.
   # This keeps the main home.nix clean.
   imports = [
-    ./programs/noctalia.nix     # Shell/UI settings.
-    ./programs/wallpapers.nix   # Wallpaper management logic.
-    ./programs/zoxide.nix       # Smarter cd command.
-    ./programs/hyprland.nix     # Window manager config.
-    ./programs/hypridle.nix     # Auto-lock and idle management.
-    ./programs/hyprlock.nix     # Screen locker.
-    ./programs/wayland.nix      # Wayland-specific tools.
-    ./programs/theme.nix        # Global Catppuccin and GTK themes.
-    ./programs/mpv.nix          # Media player.
-    ./programs/yazi.nix         # Terminal file manager.
-    ./programs/bat.nix          # Syntax highlighting for 'cat'.
-    ./programs/eza.nix          # Modern replacement for 'ls'.
-    ./programs/fastfetch.nix    # System info display.
-    ./programs/fzf.nix          # Fuzzy finder.
-    # ./programs/rclone.nix     # Cloud storage sync (disabled).
-    ./programs/ripgrep.nix      # Fast text searching.
-    ./programs/tealdeer.nix     # Simplified man pages (tldr).
-    ./programs/webapps.nix      # Progressive Web Apps / site-specific browsers.
-    ./programs/zen.nix          # Zen Browser configuration.
-    ./programs/neovim.nix       # LazyVim-inspired Neovim configuration via nvf.
+    ./programs/noctalia.nix
+    ./programs/wallpapers.nix
+    ./programs/zoxide.nix
+    ./programs/niri.nix
+    ./programs/hypridle.nix
+    ./programs/hyprlock.nix
+    ./programs/wayland.nix
+    ./programs/theme.nix
+    ./programs/mpv.nix
+    ./programs/yazi.nix
+    ./programs/bat.nix
+    ./programs/eza.nix
+    ./programs/fastfetch.nix
+    ./programs/fzf.nix
+    # ./programs/rclone.nix
+    ./programs/ripgrep.nix
+    ./programs/tealdeer.nix
+    ./programs/webapps.nix
+    ./programs/zen.nix
   ];
 
   # Home Manager Settings

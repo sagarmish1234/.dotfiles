@@ -3,8 +3,9 @@
 {
   # Imports: Modular desktop components.
   imports = [
-    ./hyprland.nix # Tiling window manager.
-    ./sddm.nix     # Display manager (Login screen).
+    ./niri.nix
+    ./sddm.nix
+    # ./gnome.nix
   ];
 
   # X11: Enable the X Window System. 
