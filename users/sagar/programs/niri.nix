@@ -67,6 +67,11 @@
         passes 5
     }
 
+    // Skip showing important hotkeys at startup
+    hotkey-overlay {
+        skip-at-startup
+    }
+
     screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
     // Window and Layer Rules
