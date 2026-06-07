@@ -150,7 +150,7 @@
           Mod+Shift+Slash { show-hotkey-overlay; }
 
           // Basic Controls
-          Mod+Escape allow-inhibiting=false { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+          Mod+Escape allow-inhibiting=false { spawn-sh "noctalia msg panel-toggle session"; }
           Mod+Return { spawn "ghostty"; }
           Mod+Space { spawn-sh "noctalia msg panel-toggle launcher"; }
           Mod+Shift+W { spawn-sh "noctalia msg panel-toggle wallpaper"; }
