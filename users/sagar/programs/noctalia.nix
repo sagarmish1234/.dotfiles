@@ -1,6 +1,8 @@
-{ inputs, pkgs, ... }:
-
-let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
   noctalia-plugins-src = pkgs.fetchFromGitHub {
     owner = "whereareiam";
     repo = "noctalia-plugins";
@@ -53,7 +55,8 @@ let
   oldLine = ''Quickshell.execDetached(["bash", "-lc", "sleep 0.08; hyprctl dispatch focuswindow 'address:" + windowAddress + "' >/dev/null 2>&1 || true; hyprctl dispatch alterzorder 'top,address:" + windowAddress + "' >/dev/null 2>&1 || true"]);'';
   newLine = ''Quickshell.execDetached(["${switch-script}", windowAddress]);'';
 
-  noctalia-plugins = pkgs.runCommand "noctalia-plugins-patched"
+  noctalia-plugins =
+    pkgs.runCommand "noctalia-plugins-patched"
     {
       inherit oldLine newLine;
     }
@@ -63,15 +66,14 @@ let
       substituteInPlace $out/tabber/Services/TabberController.qml \
         --replace-fail "$oldLine" "$newLine"
     '';
-in
-{
+in {
   imports = [
     inputs.noctalia.homeModules.default
   ];
 
   xdg.configFile."noctalia/plugins/tabber".source = "${noctalia-plugins}/tabber";
   xdg.configFile."noctalia/plugins/wallcards".source = "${noctalia-official-plugins-src}/wallcards";
-xdg.configFile."noctalia/plugins.json".text = builtins.toJSON {
+  xdg.configFile."noctalia/plugins.json".text = builtins.toJSON {
     sources = [
       {
         enabled = true;
@@ -97,18 +99,20 @@ xdg.configFile."noctalia/plugins.json".text = builtins.toJSON {
   programs.noctalia-shell = {
     enable = true;
     package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
-      patches = (old.patches or [ ]) ++ [
-        ./patches/noctalia-shell-custom.patch
-      ];
-      buildInputs = (old.buildInputs or [ ]) ++ [
-        pkgs.qt6.qtsvg
-        pkgs.qt6.qtwayland
-        pkgs.adwaita-qt
-        pkgs.qt6.qt5compat
-        pkgs.adwaita-qt6
-        pkgs.libadwaita
-        pkgs.gnome-themes-extra
-      ];
+      # patches = (old.patches or [ ]) ++ [
+      #   ./patches/noctalia-shell-custom.patch
+      # ];
+      buildInputs =
+        (old.buildInputs or [])
+        ++ [
+          pkgs.qt6.qtsvg
+          pkgs.qt6.qtwayland
+          pkgs.adwaita-qt
+          pkgs.qt6.qt5compat
+          pkgs.adwaita-qt6
+          pkgs.libadwaita
+          pkgs.gnome-themes-extra
+        ];
       preFixup =
         (old.preFixup or "")
         + ''
@@ -135,7 +139,7 @@ xdg.configFile."noctalia/plugins.json".text = builtins.toJSON {
         enableClipboardHistory = false;
         iconMode = "native";
         ignoreMouseInput = false;
-        pinnedApps = [ ];
+        pinnedApps = [];
         position = "center";
         screenshotAnnotationTool = "";
         showCategories = true;
@@ -148,7 +152,7 @@ xdg.configFile."noctalia/plugins.json".text = builtins.toJSON {
 
       audio = {
         cavaFrameRate = 30;
-        mprisBlacklist = [ ];
+        mprisBlacklist = [];
         preferredPlayer = "";
         visualizerType = "linear";
         volumeFeedback = false;
@@ -165,10 +169,10 @@ xdg.configFile."noctalia/plugins.json".text = builtins.toJSON {
         hideOnOverview = false;
         marginHorizontal = 8;
         marginVertical = 8;
-        monitors = [ ];
+        monitors = [];
         outerCorners = true;
         position = "top";
-        screenOverrides = [ ];
+        screenOverrides = [];
         showCapsule = false;
         showOutline = false;
         useSeparateOpacity = false;
@@ -248,12 +252,12 @@ xdg.configFile."noctalia/plugins.json".text = builtins.toJSON {
 
           right = [
             {
-              blacklist = [ ];
+              blacklist = [];
               colorizeIcons = false;
               drawerEnabled = true;
               hidePassive = false;
               id = "Tray";
-              pinned = [ ];
+              pinned = [];
             }
             {
               id = "Network";
@@ -366,15 +370,15 @@ xdg.configFile."noctalia/plugins.json".text = builtins.toJSON {
 
         shortcuts = {
           left = [
-            { id = "Network"; }
-            { id = "Bluetooth"; }
-            { id = "WallpaperSelector"; }
+            {id = "Network";}
+            {id = "Bluetooth";}
+            {id = "WallpaperSelector";}
           ];
           right = [
-            { id = "Notifications"; }
-            { id = "PowerProfile"; }
-            { id = "KeepAwake"; }
-            { id = "NightLight"; }
+            {id = "Notifications";}
+            {id = "PowerProfile";}
+            {id = "KeepAwake";}
+            {id = "NightLight";}
           ];
         };
       };
@@ -382,7 +386,7 @@ xdg.configFile."noctalia/plugins.json".text = builtins.toJSON {
       desktopWidgets = {
         enabled = false;
         gridSnap = false;
-        monitorWidgets = [ ];
+        monitorWidgets = [];
       };
 
       dock = {
@@ -394,9 +398,9 @@ xdg.configFile."noctalia/plugins.json".text = builtins.toJSON {
         enabled = false;
         floatingRatio = 1;
         inactiveIndicators = false;
-        monitors = [ ];
+        monitors = [];
         onlySameOutput = true;
-        pinnedApps = [ ];
+        pinnedApps = [];
         pinnedStatic = false;
         position = "bottom";
         size = 1;
@@ -489,7 +493,7 @@ xdg.configFile."noctalia/plugins.json".text = builtins.toJSON {
         enabled = true;
         location = "top_right";
         lowUrgencyDuration = 3;
-        monitors = [ ];
+        monitors = [];
         normalUrgencyDuration = 8;
         overlayLayer = true;
         respectExpireTimeout = false;
@@ -521,7 +525,7 @@ xdg.configFile."noctalia/plugins.json".text = builtins.toJSON {
           2
         ];
         location = "top_right";
-        monitors = [ ];
+        monitors = [];
         overlayLayer = true;
       };
 
@@ -637,7 +641,7 @@ xdg.configFile."noctalia/plugins.json".text = builtins.toJSON {
         fillColor = "#000000";
         fillMode = "crop";
         hideWallpaperFilenames = false;
-        monitorDirectories = [ ];
+        monitorDirectories = [];
         overviewEnabled = true;
         panelPosition = "follow_bar";
         randomIntervalSec = 300;

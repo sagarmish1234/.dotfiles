@@ -141,6 +141,23 @@
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
     MOZ_DISABLE_RDD_SANDBOX = "1";
+    DEFAULT_BROWSER = "zen-beta";
+    BROWSER = "zen-beta";
+  };
+
+  # Default Browser Associations
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = [ "zen-beta.desktop" ];
+      "text/xml" = [ "zen-beta.desktop" ];
+      "application/xhtml+xml" = [ "zen-beta.desktop" ];
+      "application/xml" = [ "zen-beta.desktop" ];
+      "x-scheme-handler/http" = [ "zen-beta.desktop" ];
+      "x-scheme-handler/https" = [ "zen-beta.desktop" ];
+      "x-scheme-handler/about" = [ "zen-beta.desktop" ];
+      "x-scheme-handler/unknown" = [ "zen-beta.desktop" ];
+    };
   };
 
   # Desktop Entry: Ensure Zen shows up in launchers with the correct icon and name.
