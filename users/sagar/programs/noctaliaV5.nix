@@ -137,12 +137,12 @@ in {
         enabled = true;
         fill_mode = "crop";
         transition = [
-          "fade"
-          "wipe"
+          # "fade"
+          # "wipe"
           "disc"
-          "stripes"
-          "zoom"
-          "honeycomb"
+          # "stripes"
+          # "zoom"
+          # "honeycomb"
         ];
         transition_duration = 1500;
         edge_smoothness = 0.3;
@@ -185,7 +185,7 @@ in {
       widget.active_window = {
         type = "active_window";
         display = "icon_only";
-        icon_size = 20.0;
+        icon_size = 26.0;
       };
       widget.network = {
         type = "network";

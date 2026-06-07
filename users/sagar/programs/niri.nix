@@ -102,7 +102,7 @@
      layer-rule {
        match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|osd)$"
        background-effect {
-         xray false
+         xray true
          // blur false
        }
      }
@@ -121,10 +121,10 @@
           clip-to-geometry true
           background-effect {
               blur true
-              xray false
+              xray true
           }
           draw-border-with-background false
-          open-maximized true
+          open-maximized false
       }
 
       // Set transparency for active and inactive windows so blur is visible
