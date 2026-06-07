@@ -185,6 +185,7 @@ in {
       widget.active_window = {
         type = "active_window";
         display = "icon_only";
+        icon_size = 20.0;
       };
       widget.network = {
         type = "network";
