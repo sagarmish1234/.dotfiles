@@ -154,6 +154,7 @@ in {
         margin_ends = 8;
         margin_edge = 10;
         shadow = true;
+        scale = 1.15;
         start = [
           "wallpaper"
           "workspaces"
