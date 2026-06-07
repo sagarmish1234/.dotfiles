@@ -25,6 +25,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    noctaliaV5 = {
+      url = "github:noctalia-dev/noctalia-shell/v5";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Antigravity CLI
     antigravity-nix.url = "github:jacopone/antigravity-nix";
 
@@ -44,13 +49,24 @@
   };
 
   # 'inputs' here are the resolved packages defined above.
-  outputs = { self, nixpkgs, home-manager, sops-nix, catppuccin, thorium, zen-browser, catppuccin-zen, antigravity-nix, ... }@inputs: {
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    sops-nix,
+    catppuccin,
+    thorium,
+    zen-browser,
+    catppuccin-zen,
+    antigravity-nix,
+    ...
+  } @ inputs: {
     # Define a system configuration named 'nixos'.
     # Applied via: sudo nixos-rebuild switch --flake .#nixos
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       # specialArgs allows us to pass flake inputs into individual modules.
-      specialArgs = { inherit inputs; };
+      specialArgs = {inherit inputs;};
       modules = [
         ./hosts/nixos # Base host configuration.
         sops-nix.nixosModules.sops # Secrets management module.
@@ -61,7 +77,7 @@
           home-manager.useGlobalPkgs = true; # Uses the system nixpkgs for user packages.
           home-manager.useUserPackages = true; # Installs user packages to /etc/profiles/per-user/sagar.
           home-manager.backupFileExtension = "backup"; # Automatically renames conflicting files to .backup.
-          home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.users.sagar = {
             imports = [
               ./users/sagar/home.nix # User-specific Home Manager configuration.

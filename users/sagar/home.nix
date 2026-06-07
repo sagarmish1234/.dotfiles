@@ -6,7 +6,8 @@
   # Imports: Modularly include user-specific program configurations.
   # This keeps the main home.nix clean.
   imports = [
-    ./programs/noctalia.nix
+    # ./programs/noctalia.nix
+    ./programs/noctaliaV5.nix
     ./programs/wallpapers.nix
     ./programs/zoxide.nix
     ./programs/niri.nix
