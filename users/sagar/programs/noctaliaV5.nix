@@ -159,12 +159,12 @@ in {
           "wallpaper"
           "workspaces"
           "active_window"
+          "media"
         ];
         center = [
           "clock"
         ];
         end = [
-          "media"
           "tray"
           "notifications"
           "network"
@@ -179,8 +179,8 @@ in {
       };
       widget.workspaces = {
         type = "workspaces";
-        minimal = true;
-        display = "none";
+        minimal = false;
+        display = "id";
       };
       widget.active_window = {
         type = "active_window";
