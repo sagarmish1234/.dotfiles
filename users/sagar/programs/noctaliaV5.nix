@@ -99,12 +99,33 @@ in {
   programs.noctalia = {
     enable = true;
 
+    customPalettes = {
+      MatchTerminal = {
+        mSurface = "#0c0c12";
+        mPrimary = "#cba6f7";
+        mSecondary = "#fab387";
+        mHover = "#94e2d5";
+        mSurfaceVariant = "#1e1e2e";
+        mOnSurface = "#cdd6f4";
+        mOnSurfaceVariant = "#a3b4eb";
+        mOutline = "#4c4f69";
+        mShadow = "#0c0c12";
+        mError = "#f38ba8";
+        mTertiary = "#94e2d5";
+        mOnError = "#11111b";
+        mOnHover = "#11111b";
+        mOnPrimary = "#11111b";
+        mOnSecondary = "#11111b";
+        mOnTertiary = "#11111b";
+      };
+    };
+
     settings = {
       # This may also be a string or path to a .toml file.
       theme = {
         mode = "dark";
-        source = "builtin";
-        builtin = "Catppuccin";
+        source = "custom";
+        custom_palette = "MatchTerminal";
       };
       shell = {
         corner_radius_scale = 1.25;
