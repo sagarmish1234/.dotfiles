@@ -99,13 +99,13 @@
          default-window-height { fixed 920; }
        }
 
-     layer-rule {
-       match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|osd)$"
-       background-effect {
-         xray true
-         // blur false
-       }
-     }
+      layer-rule {
+        match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|osd|overview-launcher)$"
+        background-effect {
+          blur true
+          xray true
+        }
+      }
 
     layer-rule {
           match namespace="^noctalia-overview.*$"
