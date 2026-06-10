@@ -109,7 +109,8 @@ in {
       shell = {
         corner_radius_scale = 1.25;
         font_family = "JetBrainsMono Nerd Font";
-
+        time_format = "{:%-I:%M %p}";
+        date_format = "%A, %B %-d";
         shadow = {
           direction = "down";
           alpha = 0.52;
@@ -207,7 +208,16 @@ in {
         type = "battery";
         show_label = false;
       };
+      widget.clock = {
+        format = "{:%-I:%M %p}";
+        vertical_format = "{:%H\n%M}";
+        tooltip_format = "{:%A, %B %d, %Y}";
+      };
 
+      widget.gap = {
+        type = "spacer";
+        length = 30;
+      };
       notification.background_opacity = 0.78;
       osd.background_opacity = 0.78;
     };

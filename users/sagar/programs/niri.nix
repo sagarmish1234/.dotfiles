@@ -135,7 +135,7 @@
 
       window-rule {
           match is-focused=true
-          opacity 0.60
+          opacity 0.90
       }
        debug {
          // Allows notification actions and window activation from Noctalia.
