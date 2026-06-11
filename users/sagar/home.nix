@@ -30,6 +30,8 @@
     ./programs/zen.nix
     ./programs/zed.nix
     ./programs/neovim.nix
+    ./programs/atuin.nix
+    ./programs/dolphin.nix
   ];
 
   # Home Manager Settings
