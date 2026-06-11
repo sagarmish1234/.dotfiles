@@ -17,7 +17,7 @@
         inner-pad = 12;
         line-height = 28;
         fields = "name,generic,comment,exec,categories,keywords";
-        terminal = "ghostty --class=fuzzel-cli -e";
+        terminal = "ghostty --class=com.mitchellh.ghostty.cli -e";
         layer = "overlay";
       };
 

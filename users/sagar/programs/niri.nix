@@ -93,7 +93,7 @@
           default-window-height { proportion 0.7; }
       }
       window-rule {
-          match app-id="fuzzel-cli"
+          match app-id="com.mitchellh.ghostty.cli"
           open-floating true
           default-column-width { proportion 0.7; }
           default-window-height { proportion 0.7; }
