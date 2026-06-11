@@ -39,6 +39,21 @@ in
       package = yazi-wrapped;
       shellWrapperName = "y"; # Use 'y' to open yazi.
 
+      flavors = {
+        tokyo-night = pkgs.fetchFromGitHub {
+          owner = "BennyOe";
+          repo = "tokyo-night.yazi";
+          rev = "main";
+          sha256 = "039wyx3q1ws0hr9frc3lby967gl1fxyxd58b0q8y9v43sx3f22ic";
+        };
+      };
+
+      theme = {
+        flavor = {
+          use = "tokyo-night";
+        };
+      };
+
       settings = {
         manager = {
           sort_by = "natural";
