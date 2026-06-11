@@ -50,8 +50,8 @@
           // Styled borders matching your Catppuccin theme (Lavender & Mauve linear gradient)
           border {
               width 2
-              active-gradient from="#04a5e5" to="#cba6f7" angle=45
-              inactive-color "#313244"
+              active-gradient from="#7aa2f7" to="#bb9af7" angle=45
+              inactive-color "#1a1b26"
           }
 
           focus-ring {
@@ -107,6 +107,15 @@
         }
       }
 
+      layer-rule {
+        match namespace="^launcher$"
+        geometry-corner-radius 7
+        background-effect {
+          blur true
+          xray true
+        }
+      }
+
     layer-rule {
           match namespace="^noctalia-overview.*$"
           place-within-backdrop true
@@ -152,7 +161,7 @@
           // Basic Controls
           Mod+Escape allow-inhibiting=false { spawn-sh "noctalia msg panel-toggle session"; }
           Mod+Return { spawn "ghostty"; }
-          Mod+Space { spawn-sh "noctalia msg panel-toggle launcher"; }
+          Mod+Space { spawn "fuzzel"; }
           Mod+Shift+W { spawn-sh "noctalia msg panel-toggle wallpaper"; }
           Mod+Shift+Q { quit; }
           Mod+W { close-window; }
@@ -246,5 +255,7 @@
           Ctrl+Print { screenshot-screen; }
           Alt+Print { screenshot-window; }
       }
+
+      include "noctalia.kdl"
   '';
 }

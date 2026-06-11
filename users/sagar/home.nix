@@ -21,6 +21,7 @@
     ./programs/eza.nix
     ./programs/fastfetch.nix
     ./programs/fzf.nix
+    ./programs/fuzzel.nix
     # ./programs/secrets.nix
     # ./programs/rclone.nix
     ./programs/ripgrep.nix
@@ -52,6 +53,7 @@
     xwayland-satellite
     wl-clipboard # Command-line copy/paste utilities for Wayland.
     gh
+    adw-gtk3 # Adwaita theme engine for GTK 3 (styled dynamically by Noctalia)
   ];
 
   # Ghostty: Modern, fast terminal emulator.
@@ -117,12 +119,12 @@
     '';
   };
 
-  # Starship: A cross-shell prompt that is fast and customizable.
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
     enableTransience = true; # Prompt clears on Enter for a cleaner history.
     settings = {
+      palette = "noctalia";
       add_newline = false;
       character = {
         success_symbol = "[➜](bold green)";
@@ -134,6 +136,45 @@
         "Downloads" = "󱑢 ";
         "Music" = "󰝚 ";
         "Pictures" = "󰉏 ";
+      };
+      palettes.noctalia = {
+        # Standard colors
+        blue      = "#7aa2f7";
+        red       = "#f7768e";
+        green     = "#9ece6a";
+        yellow    = "#e0af68";
+        cyan      = "#7dcfff";
+        magenta   = "#bb9af7";
+        white     = "#a9b1d6";
+        black     = "#15161e";
+
+        # Extended palette
+        rosewater = "#e0af68";
+        flamingo  = "#f7768e";
+        pink      = "#bb9af7";
+        mauve     = "#bb9af7";
+        maroon    = "#f7768e";
+        peach     = "#e0af68";
+        teal      = "#7dcfff";
+        sky       = "#7dcfff";
+        sapphire  = "#7aa2f7";
+        lavender  = "#bb9af7";
+
+        # Text shades
+        text      = "#c0caf5";
+        subtext1  = "#a9b1d6";
+        subtext0  = "#414868";
+
+        # Surface shades
+        overlay2  = "#414868";
+        overlay1  = "#414868";
+        overlay0  = "#15161e";
+        surface2  = "#15161e";
+        surface1  = "#15161e";
+        surface0  = "#1a1b26";
+        base      = "#1a1b26";
+        mantle    = "#1a1b26";
+        crust     = "#1a1b26";
       };
     };
   };

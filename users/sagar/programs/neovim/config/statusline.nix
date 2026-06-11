@@ -9,6 +9,7 @@
       enable = true;
       setupOpts = {
         options = {
+          separator_style = "slant";
           offsets = [
             {
               filetype = "neo-tree";

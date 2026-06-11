@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  config,
   ...
 }: let
   # noctalia-plugins-src = pkgs.fetchFromGitHub {
@@ -101,10 +102,14 @@ in {
 
     settings = {
       # This may also be a string or path to a .toml file.
-      theme = {
+       theme = {
         mode = "dark";
         source = "builtin";
-        builtin = "Catppuccin";
+        builtin = "Tokyo-Night";
+        templates = {
+          enable_builtin_templates = true;
+          builtin_ids = [ "ghostty" "gtk3" "gtk4" "qt" "niri" ];
+        };
       };
       shell = {
         corner_radius_scale = 1.25;
@@ -145,8 +150,8 @@ in {
           # "zoom"
           # "honeycomb"
         ];
-        transition_duration = 1500;
-        edge_smoothness = 0.3;
+        transition_duration = 3000;
+        edge_smoothness = 0.1;
         directory = "~/Pictures/Wallpapers";
       };
       bar.default = {
