@@ -108,7 +108,7 @@ in {
         builtin = "Tokyo-Night";
         templates = {
           enable_builtin_templates = true;
-          builtin_ids = [ "ghostty" "gtk3" "gtk4" "qt" "niri" ];
+          builtin_ids = [ "ghostty" "gtk3" "gtk4" "qt" "niri" "btop" "cava" ];
         };
       };
       shell = {
