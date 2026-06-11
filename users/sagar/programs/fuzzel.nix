@@ -12,6 +12,8 @@
         prompt = "❯  ";
         icon-theme = "candy-icons";
         width = 35;
+        lines = 10;
+        anchor = "center";
         horizontal-pad = 25;
         vertical-pad = 20;
         inner-pad = 12;

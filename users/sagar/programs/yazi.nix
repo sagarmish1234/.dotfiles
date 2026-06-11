@@ -20,6 +20,15 @@ in
     yazi-wrapped
   ];
 
+  xdg.dataFile = {
+    "icons/hicolor/32x32/apps/yazi.png".source = "${pkgs.yazi}/share/pixmaps/yazi.png";
+    "icons/hicolor/48x48/apps/yazi.png".source = "${pkgs.yazi}/share/pixmaps/yazi.png";
+    "icons/hicolor/64x64/apps/yazi.png".source = "${pkgs.yazi}/share/pixmaps/yazi.png";
+    "icons/hicolor/128x128/apps/yazi.png".source = "${pkgs.yazi}/share/pixmaps/yazi.png";
+    "icons/hicolor/256x256/apps/yazi.png".source = "${pkgs.yazi}/share/pixmaps/yazi.png";
+    "icons/hicolor/512x512/apps/yazi.png".source = "${pkgs.yazi}/share/pixmaps/yazi.png";
+  };
+
   programs = {
     # Shell Integration: Create 'yy' as a shortcut for Yazi.
     fish.functions = {
