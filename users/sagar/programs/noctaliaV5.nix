@@ -111,6 +111,9 @@ in {
           builtin_ids = [ "ghostty" "gtk3" "gtk4" "qt" "niri" "btop" "cava" ];
         };
       };
+      audio = {
+        volumeOverdrive = true;
+      };
       shell = {
         corner_radius_scale = 1.25;
         font_family = "JetBrainsMono Nerd Font";
