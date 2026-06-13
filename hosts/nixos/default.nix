@@ -1,6 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
+  # Apply NUR overlay
+  nixpkgs.overlays = [
+    inputs.nur.overlays.default
+  ];
+
   # Imports: Modularly include system components.
   imports = [
     ./hardware.nix             # Hardware scan results (CPU, Disks, GPU).

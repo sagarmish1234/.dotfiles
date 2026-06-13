@@ -1,5 +1,27 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
+let
+  superseedr-latest = pkgs.stdenv.mkDerivation rec {
+    pname = "superseedr";
+    version = "1.0.9";
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/Jagalite/superseedr/releases/download/v${version}/superseedr_v${version}_amd64.deb";
+      sha256 = "06vikv5r3k42dhq6d9n69r2i95dmf1gghmcymp0bg6kbpsk0d06a";
+    };
+
+    nativeBuildInputs = [ pkgs.autoPatchelfHook pkgs.dpkg ];
+
+    buildInputs = [ pkgs.openssl pkgs.gcc.cc.lib ];
+
+    unpackPhase = "dpkg-deb -x $src .";
+
+    installPhase = ''
+      mkdir -p $out/bin
+      cp usr/bin/superseedr $out/bin/
+    '';
+  };
+in
 {
   # Enable the Transmission daemon
   services.transmission = {
@@ -20,8 +42,9 @@
   # Add user 'sagar' to the transmission group to allow access to downloaded files
   users.users.sagar.extraGroups = [ "transmission" ];
 
-  # Install TUI clients (tremc)
+  # Install TUI clients (tremc, superseedr)
   environment.systemPackages = with pkgs; [
     tremc
+    superseedr-latest
   ];
 }

@@ -157,7 +157,7 @@
          honor-xdg-activation-with-invalid-serial
        }
       // Startup Applications
-      spawn-at-startup "noctalia"
+      spawn-at-startup "sh" "-c" "while true; do noctalia; sleep 1; done"
 
       // Keybindings mapping your previous Hyprland hotkeys
       binds {

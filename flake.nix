@@ -7,6 +7,18 @@
     # Updated to follow the stable 26.05 release branch
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
 
+    # Nix User Repository (NUR)
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Locked renesat NUR repository to bypass pure evaluation bugs
+    nur-renesat = {
+      url = "github:renesat/nur-renesat/6e553b193510f7aa8aac507b925f67346a408df6";
+      flake = false;
+    };
+
     # Updated to track the matching stable 26.05 Home Manager release branch
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
@@ -62,6 +74,7 @@
     zen-browser,
     catppuccin-zen,
     antigravity-nix,
+    nur,
     ...
   } @ inputs: {
     # Define a system configuration named 'nixos'.

@@ -32,6 +32,7 @@
     ./programs/neovim.nix
     ./programs/atuin.nix
     ./programs/dolphin.nix
+    ./programs/superseedr.nix
   ];
 
   # Home Manager Settings

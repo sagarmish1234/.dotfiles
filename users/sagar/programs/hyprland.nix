@@ -94,7 +94,7 @@
 
       # Autostart: Programs to launch when Hyprland starts.
       exec-once = [
-        "noctalia-shell"           # The main shell/bar.
+        "noctalia --daemon"           # The main shell/bar.
         "hypr-tabswitch-daemon"   # The fullscreen-aware window switcher helper.
       ];
 
@@ -177,10 +177,10 @@
 
       # Keybindings: $mod = SUPER (Windows key).
       bind = [
-        "$mod, ESCAPE, exec, noctalia-shell ipc call sessionMenu toggle"
+        "$mod, ESCAPE, exec, noctalia msg panel-toggle session"
         "$mod, RETURN, exec, ghostty"
-        "$mod, SPACE, exec, noctalia-shell ipc call launcher toggle"
-        "$mod SHIFT, W, exec, noctalia-shell ipc call plugin:wallcards toggle"
+        "$mod, SPACE, exec, noctalia msg panel-toggle launcher"
+        "$mod SHIFT, W, exec, noctalia msg panel-toggle wallpaper"
         "$mod SHIFT, Q, exit"
         "$mod, W, killactive"
         "$mod, F, fullscreen, 0"
@@ -193,7 +193,7 @@
         # Alt+Tab (Noctalia Tabber plugin) - fullscreen-aware
         "ALT, TAB, exec, hypr-tabswitch next"
         "ALT SHIFT, TAB, exec, hypr-tabswitch prev"
-        "ALT, Q, exec, noctalia-shell ipc call plugin:tabber action close"
+        # "ALT, Q, exec, noctalia msg ..." # Tabber plugin is deprecated in v5
 
         # Focus (Vim-style)
         "$mod, H, movefocus, l"
