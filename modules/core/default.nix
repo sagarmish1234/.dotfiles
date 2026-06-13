@@ -5,6 +5,7 @@
   imports = [
     ./tlp.nix          # Battery optimization and power management.
     ./performance.nix  # Performance tweaks (CPU governor, etc.).
+    ./torrent.nix      # Torrent daemon and TUI clients.
   ];
 
   # Time Zone: Set to Kolkata for Indian Standard Time.

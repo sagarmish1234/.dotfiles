@@ -39,6 +39,11 @@ This project manages a NixOS system configuration using Nix Flakes with a modula
     - `home.nix`: Home Manager entry point, imports program-specific modules.
     - `programs/`: Individual `.nix` files for each managed application (e.g., `hyprland.nix`, `noctalia.nix`, `yazi.nix`).
 - `/secrets/secrets.yaml`: Encrypted secrets file.
+- `/docs/plans/`: System migration and feature planning documents.
+    - `2026-05-24-nixos-unstable-migration.md`: Phased migration plan from NixOS stable to unstable.
+    - `2026-05-17-xonsh-migration-design.md`: Design document for transitioning from Fish shell to Xonsh.
+    - `2026-05-17-xonsh-migration-plan.md`: Step-by-step implementation plan for the Xonsh transition.
+
 
 ## Key Commands
 

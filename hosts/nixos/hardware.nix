@@ -4,15 +4,14 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ ];
 
-  # Boot: Essential kernel modules for hardware detection during the initial boot phase.
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ]; # Enable KVM virtualization for Intel CPUs.
-  boot.extraModulePackages = [ ];
+  # Note: Kernel modules and CPU settings are now automatically configured
+  # by nixos-facter via facter.json. Below manual settings are commented out.
+  # boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  # boot.initrd.kernelModules = [ ];
+  # boot.kernelModules = [ "kvm-intel" ]; # Enable KVM virtualization for Intel CPUs.
+  # boot.extraModulePackages = [ ];
 
   # Filesystems: Defined by UUID to ensure they are found regardless of disk order.
   # We use Btrfs for advanced features like subvolumes and compression.
@@ -46,8 +45,7 @@
 
   swapDevices = [ ]; # No physical swap partition; using ZRAM (configured in performance.nix).
 
-  # Platform: Architecture settings.
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  # Microcode: Ensure Intel CPU security and performance patches are loaded at boot.
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  # Platform and CPU microcode are now managed by nixos-facter.
+  # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  # hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

@@ -46,6 +46,9 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # NixOS Facter modules
+    nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
   };
 
   # 'inputs' here are the resolved packages defined above.
@@ -68,6 +71,10 @@
       # specialArgs allows us to pass flake inputs into individual modules.
       specialArgs = {inherit inputs;};
       modules = [
+        inputs.nixos-facter-modules.nixosModules.facter
+        {
+          config.hardware.facter.reportPath = ./facter.json;
+        }
         ./hosts/nixos # Base host configuration.
         sops-nix.nixosModules.sops # Secrets management module.
         catppuccin.nixosModules.catppuccin # Global Catppuccin theme module.

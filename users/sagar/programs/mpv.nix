@@ -38,4 +38,29 @@
       target-colorspace-hint = "no";
     };
   };
+
+  # Set MPV as the default media player for common audio/video file formats
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "video/mp4" = [ "mpv.desktop" ];
+      "video/mkv" = [ "mpv.desktop" ];
+      "video/webm" = [ "mpv.desktop" ];
+      "video/x-matroska" = [ "mpv.desktop" ];
+      "video/x-flv" = [ "mpv.desktop" ];
+      "video/quicktime" = [ "mpv.desktop" ];
+      "video/x-msvideo" = [ "mpv.desktop" ];
+      "video/x-ms-wmv" = [ "mpv.desktop" ];
+      "video/ogg" = [ "mpv.desktop" ];
+      "audio/mp3" = [ "mpv.desktop" ];
+      "audio/x-wav" = [ "mpv.desktop" ];
+      "audio/ogg" = [ "mpv.desktop" ];
+      "audio/flac" = [ "mpv.desktop" ];
+      "audio/mpeg" = [ "mpv.desktop" ];
+      "audio/aac" = [ "mpv.desktop" ];
+      "audio/m4a" = [ "mpv.desktop" ];
+      "audio/opus" = [ "mpv.desktop" ];
+      "audio/webm" = [ "mpv.desktop" ];
+    };
+  };
 }
