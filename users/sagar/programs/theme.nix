@@ -51,6 +51,6 @@
   catppuccin.yazi.enable = true;
   catppuccin.ghostty.enable = true;
   catppuccin.vscode.profiles.default.enable = true;
-  catppuccin.mpv.enable = true;
+  catppuccin.mpv.enable = false; # Handled manually in mpv.nix for Tokyo Night theme
   catppuccin.fuzzel.enable = true;
 }
