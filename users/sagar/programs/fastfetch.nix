@@ -9,8 +9,8 @@
       logo = {
         type = "kitty";
         source = "/home/sagar/Pictures/Wallpapers/anime_cafe_tokyonight.png";
-        width = 28;
-        height = 12;
+        width = 32;
+        height = 16;
         padding = {
           top = 1;
           left = 2;
@@ -22,71 +22,77 @@
         separator = " ";
       };
 
-      # Modules: Catnap ASCII Border Box style on the right, paired with the Kitty image logo on the left
+      # Modules: Structured dashboard boxes (2 & 3) paired with the Kitty image (4)
       modules = [
         {
           type = "custom";
-          format = "╭───────────╮";
+          format = "╭─ Hardware ╮";
+        }
+        {
+          type = "cpu";
+          key = "│ {#33} cpu      {#keys}│";
+          format = "{name}";
+        }
+        {
+          type = "gpu";
+          key = "│ {#34}󰍛 gpu      {#keys}│";
+          format = "{name}";
+        }
+        {
+          type = "disk";
+          key = "│ {#35} disk     {#keys}│";
+          folders = "/";
+          format = "{size-used} / {size-total} ({size-percentage}%)";
+        }
+        {
+          type = "memory";
+          key = "│ {#36} memory   {#keys}│";
+          format = "{used} / {total} ({percentage}%)";
+        }
+        {
+          type = "custom";
+          format = "╰───────────╯";
+        }
+        
+        "break"
+
+        {
+          type = "custom";
+          format = "╭─ System ──╮";
         }
         {
           type = "title";
-          key = "│ {#31} user    {#keys}│";
+          key = "│ {#31} user     {#keys}│";
           format = "{user-name}";
         }
         {
           type = "title";
-          key = "│ {#32}󰇅 hname   {#keys}│";
+          key = "│ {#32}󰇅 host     {#keys}│";
           format = "{host-name}";
         }
         {
-          type = "uptime";
-          key = "│ {#33}󰅐 uptime  {#keys}│";
-        }
-        {
           type = "os";
-          key = "│ {#34}󰣇 distro  {#keys}│";
+          key = "│ {#33} distro   {#keys}│";
         }
         {
           type = "kernel";
-          key = "│ {#35} kernel  {#keys}│";
+          key = "│ {#34} kernel   {#keys}│";
         }
         {
           type = "wm";
-          key = "│ {#36} desktop {#keys}│";
+          key = "│ {#35} desktop  {#keys}│";
         }
         {
           type = "terminal";
-          key = "│ {#31} term    {#keys}│";
+          key = "│ {#36} terminal {#keys}│";
         }
         {
           type = "shell";
-          key = "│ {#32} shell   {#keys}│";
+          key = "│ {#31} shell    {#keys}│";
         }
         {
-          type = "cpu";
-          key = "│ {#33} cpu     {#keys}│";
-        }
-        {
-          type = "gpu";
-          key = "│ {#34}󰍛 gpu     {#keys}│";
-        }
-        {
-          type = "disk";
-          key = "│ {#35}󰋊 disk    {#keys}│";
-          folders = "/";
-        }
-        {
-          type = "memory";
-          key = "│ {#36} memory  {#keys}│";
-        }
-        {
-          type = "custom";
-          format = "├───────────┤";
-        }
-        {
-          type = "colors";
-          key = "│ {#39} colors  {#keys}│";
-          symbol = "circle";
+          type = "uptime";
+          key = "│ {#32}󰅐 uptime   {#keys}│";
         }
         {
           type = "custom";
