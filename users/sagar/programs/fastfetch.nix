@@ -7,130 +7,60 @@
       "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
 
       logo = {
-        type = "small"; # Use a compact logo to save space.
+        type = "kitty";
+        source = "/home/sagar/Pictures/Wallpapers/anime_cafe_tokyonight.png";
+        width = 28;
+        height = 12;
         padding = {
           top = 1;
           left = 2;
+          right = 3;
         };
       };
 
       display = {
-        separator = " ▌ ";
-        key = {
-          width = 18;
-        };
-        bar = {
-          char = {
-            elapsed = "█";
-            total = "░";
-          };
-          width = 25;
+        separator = "  ";
+        color = {
+          keys = "magenta";
+          title = "#${config.lib.stylix.colors.base0D}"; # Stylix Accent/Blue
+          separator = "#${config.lib.stylix.colors.base03}"; # Stylix Muted
         };
       };
 
-      # Modules: Cyberpunk MAGI / Unit-00 layout
+      # Modules: Clean dashboard layout paired with the Kitty image logo
       modules = [
-        {
-          type = "custom";
-          format = "{#31}╔════════════════════════════════════════════════════════╗";
-        }
-        {
-          type = "custom";
-          format = "{#31}║ {#32}███╗   ██╗███████╗██████╗ ██╗   ██╗  {#33}EVA-00 SYSTEM     {#31}║";
-        }
-        {
-          type = "custom";
-          format = "{#31}║ {#32}████╗  ██║██╔════╝██╔══██╗██║   ██║  {#33}MAGI INTERFACE    {#31}║";
-        }
-        {
-          type = "custom";
-          format = "{#31}║ {#32}██╔██╗ ██║█████╗  ██████╔╝██║   ██║                    {#31}║";
-        }
-        {
-          type = "custom";
-          format = "{#31}║ {#32}██║╚██╗██║██╔══╝  ██╔══██╗╚██╗ ██╔╝  {#35}CLASSIFIED        {#31}║";
-        }
-        {
-          type = "custom";
-          format = "{#31}║ {#32}██║ ╚████║███████╗██║  ██║ ╚████╔╝   {#35}ACCESS ONLY       {#31}║";
-        }
-        {
-          type = "custom";
-          format = "{#31}║ {#32}╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝  ╚═══╝                      {#31}║";
-        }
-        {
-          type = "custom";
-          format = "{#31}╚════════════════════════════════════════════════════════╝";
-        }
-        {
-          type = "custom";
-          format = "{#33}▰▰▰▰ SYSTEM STATUS ▰▰▰▰";
-        }
-        {
-          type = "os";
-          key = "{#36}│ OS";
-        }
-        {
-          type = "kernel";
-          key = "{#36}│ KERNEL";
-        }
-        {
-          type = "uptime";
-          key = "{#36}│ UPTIME";
-        }
-        {
-          type = "custom";
-          format = "{#33}▰▰▰▰ USER DESIGNATION ▰▰▰▰";
-        }
-        {
-          type = "users";
-          key = "{#36}│ PILOT";
-          format = "{name} @ {host-name}";
-          myselfOnly = true;
-        }
-        {
-          type = "localip";
-          key = "{#36}│ NEURAL-LINK";
-          format = "{ipv4}";
-        }
-        {
-          type = "custom";
-          format = "{#31}▰▰▰▰ RESOURCE METRICS ▰▰▰▰";
-        }
-        {
-          type = "cpu";
-          key = "{#33}│ CPU";
-          format = "{name} ({cores-logical}T)";
-        }
+        "title"
+        "separator"
+        { type = "os"; key = "  OS"; }
+        { type = "kernel"; key = "  Kernel"; }
+        { type = "uptime"; key = "  Uptime"; }
+        { type = "packages"; key = "󰏖  Packages"; }
+        "break"
+        { type = "wm"; key = "  WM"; }
+        { type = "terminal"; key = "  Terminal"; }
+        { type = "shell"; key = "  Shell"; }
+        "break"
+        { type = "cpu"; key = "  CPU"; temp = true; }
+        { type = "gpu"; key = "󰍛  GPU"; temp = true; }
         {
           type = "memory";
-          key = "{#33}│ LCL (RAM)";
-          format = "{used} / {total}";
-        }
-        {
-          type = "memory";
-          key = "{#33}│ SYNC-RATE";
+          key = "  Memory";
           percent = {
-            type = [ "bar" "hide-others" ];
+            type = 3; # Bar & Percent
           };
         }
         {
           type = "disk";
+          key = "  Disk";
           folders = "/";
-          key = "{#33}│ ENTRY-PLUG";
-          format = "{size-used} / {size-total}";
-        }
-        {
-          type = "disk";
-          folders = "/";
-          key = "{#33}│ PLUG-DEPTH";
           percent = {
-            type = [ "bar" "hide-others" ];
+            type = 3; # Bar & Percent
           };
         }
+        "break"
         {
-          type = "custom";
-          format = "{#32}          [PILOT READY FOR DEPLOYMENT]";
+          type = "colors";
+          symbol = "circle";
         }
       ];
     };
