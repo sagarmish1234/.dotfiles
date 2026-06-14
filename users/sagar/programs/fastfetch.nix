@@ -15,55 +15,122 @@
       };
 
       display = {
-        separator = "  ";
-        color = {
-          keys = "magenta";
-          title = "#${config.lib.stylix.colors.base0D}"; # Stylix Accent/Blue.
-          separator = "#${config.lib.stylix.colors.base03}"; # Stylix Muted.
+        separator = " ▌ ";
+        key = {
+          width = 18;
+        };
+        bar = {
+          char = {
+            elapsed = "█";
+            total = "░";
+          };
+          width = 25;
         };
       };
 
-      # Modules: Select which information to display.
+      # Modules: Cyberpunk MAGI / Unit-00 layout
       modules = [
         {
-          type = "title";
-          color = {
-            user = "#${config.lib.stylix.colors.base0D}"; # Stylix Blue.
-            host = "#${config.lib.stylix.colors.base0E}"; # Stylix Magenta.
+          type = "custom";
+          format = "{#31}╔════════════════════════════════════════════════════════╗";
+        }
+        {
+          type = "custom";
+          format = "{#31}║ {#32}███╗   ██╗███████╗██████╗ ██╗   ██╗  {#33}EVA-00 SYSTEM     {#31}║";
+        }
+        {
+          type = "custom";
+          format = "{#31}║ {#32}████╗  ██║██╔════╝██╔══██╗██║   ██║  {#33}MAGI INTERFACE    {#31}║";
+        }
+        {
+          type = "custom";
+          format = "{#31}║ {#32}██╔██╗ ██║█████╗  ██████╔╝██║   ██║                    {#31}║";
+        }
+        {
+          type = "custom";
+          format = "{#31}║ {#32}██║╚██╗██║██╔══╝  ██╔══██╗╚██╗ ██╔╝  {#35}CLASSIFIED        {#31}║";
+        }
+        {
+          type = "custom";
+          format = "{#31}║ {#32}██║ ╚████║███████╗██║  ██║ ╚████╔╝   {#35}ACCESS ONLY       {#31}║";
+        }
+        {
+          type = "custom";
+          format = "{#31}║ {#32}╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝  ╚═══╝                      {#31}║";
+        }
+        {
+          type = "custom";
+          format = "{#31}╚════════════════════════════════════════════════════════╝";
+        }
+        {
+          type = "custom";
+          format = "{#33}▰▰▰▰ SYSTEM STATUS ▰▰▰▰";
+        }
+        {
+          type = "os";
+          key = "{#36}│ OS";
+        }
+        {
+          type = "kernel";
+          key = "{#36}│ KERNEL";
+        }
+        {
+          type = "uptime";
+          key = "{#36}│ UPTIME";
+        }
+        {
+          type = "custom";
+          format = "{#33}▰▰▰▰ USER DESIGNATION ▰▰▰▰";
+        }
+        {
+          type = "users";
+          key = "{#36}│ PILOT";
+          format = "{name} @ {host-name}";
+          myselfOnly = true;
+        }
+        {
+          type = "localip";
+          key = "{#36}│ NEURAL-LINK";
+          format = "{ipv4}";
+        }
+        {
+          type = "custom";
+          format = "{#31}▰▰▰▰ RESOURCE METRICS ▰▰▰▰";
+        }
+        {
+          type = "cpu";
+          key = "{#33}│ CPU";
+          format = "{name} ({cores-logical}T)";
+        }
+        {
+          type = "memory";
+          key = "{#33}│ LCL (RAM)";
+          format = "{used} / {total}";
+        }
+        {
+          type = "memory";
+          key = "{#33}│ SYNC-RATE";
+          percent = {
+            type = [ "bar" "hide-others" ];
           };
         }
-
-        "break"
-
-        { type = "os"; key = "󰣇 OS"; }
-        { type = "kernel"; key = " Kernel"; }
-        { type = "uptime"; key = "󰅐 Uptime"; }
-
-        "break"
-
-        { type = "wm"; key = " WM"; }
-        { type = "terminal"; key = " Terminal"; }
-        { type = "shell"; key = " Shell"; }
-
-        "break"
-
-        { type = "cpu"; key = " CPU"; }
-        { type = "gpu"; key = "󰍛 GPU"; }
-        { type = "memory"; key = "󰑭 Memory"; }
-
-        "break"
-
         {
           type = "disk";
-          key = "󰋊 Disk";
-          folders = [ "/" ];
+          folders = "/";
+          key = "{#33}│ ENTRY-PLUG";
+          format = "{size-used} / {size-total}";
         }
-
-        "break"
-
         {
-          type = "colors";
-          symbol = "●"; # Show the color palette as a row of dots.
+          type = "disk";
+          folders = "/";
+          key = "{#33}│ PLUG-DEPTH";
+          percent = {
+            type = [ "bar" "hide-others" ];
+          };
+        }
+        {
+          type = "custom";
+          format = "{#32}          [PILOT READY FOR DEPLOYMENT]";
         }
       ];
     };
