@@ -19,48 +19,78 @@
       };
 
       display = {
-        separator = "  ";
-        color = {
-          keys = "magenta";
-          title = "#${config.lib.stylix.colors.base0D}"; # Stylix Accent/Blue
-          separator = "#${config.lib.stylix.colors.base03}"; # Stylix Muted
-        };
+        separator = " ";
       };
 
-      # Modules: Clean dashboard layout paired with the Kitty image logo
+      # Modules: Catnap ASCII Border Box style on the right, paired with the Kitty image logo on the left
       modules = [
-        "title"
-        "separator"
-        { type = "os"; key = "  OS"; }
-        { type = "kernel"; key = "  Kernel"; }
-        { type = "uptime"; key = "  Uptime"; }
-        { type = "packages"; key = "󰏖  Packages"; }
-        "break"
-        { type = "wm"; key = "  WM"; }
-        { type = "terminal"; key = "  Terminal"; }
-        { type = "shell"; key = "  Shell"; }
-        "break"
-        { type = "cpu"; key = "  CPU"; temp = true; }
-        { type = "gpu"; key = "󰍛  GPU"; temp = true; }
         {
-          type = "memory";
-          key = "  Memory";
-          percent = {
-            type = 3; # Bar & Percent
-          };
+          type = "custom";
+          format = "╭───────────╮";
+        }
+        {
+          type = "title";
+          key = "│ {#31} user    {#keys}│";
+          format = "{user-name}";
+        }
+        {
+          type = "title";
+          key = "│ {#32}󰇅 hname   {#keys}│";
+          format = "{host-name}";
+        }
+        {
+          type = "uptime";
+          key = "│ {#33}󰅐 uptime  {#keys}│";
+        }
+        {
+          type = "os";
+          key = "│ {#34}󰣇 distro  {#keys}│";
+        }
+        {
+          type = "kernel";
+          key = "│ {#35} kernel  {#keys}│";
+        }
+        {
+          type = "wm";
+          key = "│ {#36} desktop {#keys}│";
+        }
+        {
+          type = "terminal";
+          key = "│ {#31} term    {#keys}│";
+        }
+        {
+          type = "shell";
+          key = "│ {#32} shell   {#keys}│";
+        }
+        {
+          type = "cpu";
+          key = "│ {#33} cpu     {#keys}│";
+        }
+        {
+          type = "gpu";
+          key = "│ {#34}󰍛 gpu     {#keys}│";
         }
         {
           type = "disk";
-          key = "  Disk";
+          key = "│ {#35}󰋊 disk    {#keys}│";
           folders = "/";
-          percent = {
-            type = 3; # Bar & Percent
-          };
         }
-        "break"
+        {
+          type = "memory";
+          key = "│ {#36} memory  {#keys}│";
+        }
+        {
+          type = "custom";
+          format = "├───────────┤";
+        }
         {
           type = "colors";
+          key = "│ {#39} colors  {#keys}│";
           symbol = "circle";
+        }
+        {
+          type = "custom";
+          format = "╰───────────╯";
         }
       ];
     };
