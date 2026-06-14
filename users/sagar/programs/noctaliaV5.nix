@@ -155,6 +155,13 @@ in {
         transition_duration = 3000;
         edge_smoothness = 0.1;
         directory = "~/Pictures/Wallpapers";
+
+        automation = {
+          enabled = true;
+          interval_minutes = 30; # Cycle wallpapers every 30 minutes
+          order = "random";      # Randomize wallpaper selection
+          recursive = true;
+        };
       };
       bar.default = {
         background_opacity = 0.58;
