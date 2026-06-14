@@ -7,13 +7,13 @@
       "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
 
       logo = {
-        type = "builtin";
+        type = "small"; # Use the compact small NixOS logo
         color = {
           "1" = "#${config.lib.stylix.colors.base0D}"; # Stylix Blue
           "2" = "#${config.lib.stylix.colors.base0E}"; # Stylix Magenta
         };
         padding = {
-          top = 2;
+          top = 2; # Push down to vertically center with the 11-line box
           left = 2;
           right = 3;
         };
@@ -23,43 +23,11 @@
         separator = " ";
       };
 
-      # Modules: Structured dashboard boxes (2 & 3) paired with the customized NixOS ASCII (4)
+      # Modules: A single, compact ASCII border box aligned with the small logo
       modules = [
         {
           type = "custom";
-          format = "╭─ Hardware ╮";
-        }
-        {
-          type = "cpu";
-          key = "│ {#33} cpu      {#keys}│";
-          format = "{name}";
-        }
-        {
-          type = "gpu";
-          key = "│ {#34}󰍛 gpu      {#keys}│";
-          format = "{name}";
-        }
-        {
-          type = "disk";
-          key = "│ {#35} disk     {#keys}│";
-          folders = "/";
-          format = "{size-used} / {size-total} ({size-percentage}%)";
-        }
-        {
-          type = "memory";
-          key = "│ {#36} memory   {#keys}│";
-          format = "{used} / {total} ({percentage}%)";
-        }
-        {
-          type = "custom";
-          format = "╰───────────╯";
-        }
-        
-        "break"
-
-        {
-          type = "custom";
-          format = "╭─ System ──╮";
+          format = "╭───────────╮";
         }
         {
           type = "title";
@@ -84,16 +52,24 @@
           key = "│ {#35} desktop  {#keys}│";
         }
         {
-          type = "terminal";
-          key = "│ {#36} terminal {#keys}│";
-        }
-        {
           type = "shell";
-          key = "│ {#31} shell    {#keys}│";
+          key = "│ {#36} shell    {#keys}│";
         }
         {
-          type = "uptime";
-          key = "│ {#32}󰅐 uptime   {#keys}│";
+          type = "cpu";
+          key = "│ {#31} cpu      {#keys}│";
+          format = "{name}";
+        }
+        {
+          type = "memory";
+          key = "│ {#32} memory   {#keys}│";
+          format = "{used} / {total}";
+        }
+        {
+          type = "disk";
+          key = "│ {#33} disk     {#keys}│";
+          folders = "/";
+          format = "{size-used} / {size-total}";
         }
         {
           type = "custom";
