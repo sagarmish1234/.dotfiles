@@ -7,12 +7,13 @@
       "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
 
       logo = {
-        type = "kitty";
-        source = "/home/sagar/Pictures/Wallpapers/anime_cafe_tokyonight.png";
-        width = 32;
-        height = 16;
+        type = "builtin";
+        color = {
+          "1" = "#${config.lib.stylix.colors.base0D}"; # Stylix Blue
+          "2" = "#${config.lib.stylix.colors.base0E}"; # Stylix Magenta
+        };
         padding = {
-          top = 1;
+          top = 2;
           left = 2;
           right = 3;
         };
@@ -22,7 +23,7 @@
         separator = " ";
       };
 
-      # Modules: Structured dashboard boxes (2 & 3) paired with the Kitty image (4)
+      # Modules: Structured dashboard boxes (2 & 3) paired with the customized NixOS ASCII (4)
       modules = [
         {
           type = "custom";
