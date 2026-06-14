@@ -158,8 +158,8 @@ in {
 
         automation = {
           enabled = true;
-          interval_minutes = 30; # Cycle wallpapers every 30 minutes
-          order = "random";      # Randomize wallpaper selection
+          interval_minutes = 5; # Cycle wallpapers every 5 minutes
+          order = "random";     # Randomize wallpaper selection
           recursive = true;
         };
       };
