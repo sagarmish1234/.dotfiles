@@ -46,13 +46,12 @@
     antigravity-nix.url = "github:jacopone/antigravity-nix";
 
     # External themes and specialized browsers
-    catppuccin.url = "github:catppuccin/nix";
+    stylix = {
+      url = "github:danth/stylix/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     thorium.url = "github:Rishabh5321/custom-packages-flake";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    catppuccin-zen = {
-      url = "github:catppuccin/zen-browser";
-      flake = false; # This input is just raw files (CSS/JS), not a Nix flake itself.
-    };
 
     nvf = {
       url = "github:notashelf/nvf";
@@ -69,10 +68,9 @@
     nixpkgs,
     home-manager,
     sops-nix,
-    catppuccin,
+    stylix,
     thorium,
     zen-browser,
-    catppuccin-zen,
     antigravity-nix,
     nur,
     ...
@@ -90,7 +88,7 @@
         }
         ./hosts/nixos # Base host configuration.
         sops-nix.nixosModules.sops # Secrets management module.
-        catppuccin.nixosModules.catppuccin # Global Catppuccin theme module.
+        inputs.stylix.nixosModules.stylix # Stylix universal theming module.
         home-manager.nixosModules.home-manager # Home Manager system integration.
         {
           # Home Manager Settings
@@ -101,7 +99,6 @@
           home-manager.users.sagar = {
             imports = [
               ./users/sagar/home.nix # User-specific Home Manager configuration.
-              catppuccin.homeModules.catppuccin # Catppuccin theme for the user.
               inputs.nvf.homeManagerModules.default
               inputs.sops-nix.homeManagerModules.sops
             ];

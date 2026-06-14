@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   programs.zed-editor = {
@@ -9,9 +9,9 @@
       "git-firefly"
     ];
     userSettings = {
-      ui_font_size = 16;
-      buffer_font_size = 14;
-      buffer_font_family = "JetBrainsMono Nerd Font";
+      ui_font_size = lib.mkForce 16;
+      buffer_font_size = lib.mkForce 14;
+      buffer_font_family = lib.mkForce "JetBrainsMono Nerd Font";
       telemetry = {
         diagnostics = false;
         metrics = false;
@@ -21,12 +21,9 @@
         show = "auto";
       };
       terminal = {
-        font_family = "JetBrainsMono Nerd Font";
-        font_size = 13;
+        font_family = lib.mkForce "JetBrainsMono Nerd Font";
+        font_size = lib.mkForce 13;
       };
     };
   };
-
-  # Enable the Catppuccin theme integration for Zed
-  catppuccin.zed.enable = true;
 }

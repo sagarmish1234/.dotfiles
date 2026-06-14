@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   # Fastfetch: A fast, highly customizable system information tool.
   programs.fastfetch = {
@@ -18,8 +18,8 @@
         separator = "  ";
         color = {
           keys = "magenta";
-          title = "#b4befe"; # Catppuccin Lavender.
-          separator = "#585b70";
+          title = "#${config.lib.stylix.colors.base0D}"; # Stylix Accent/Blue.
+          separator = "#${config.lib.stylix.colors.base03}"; # Stylix Muted.
         };
       };
 
@@ -28,8 +28,8 @@
         {
           type = "title";
           color = {
-            user = "#b4befe"; # Lavender.
-            host = "#f5c2e7"; # Pink.
+            user = "#${config.lib.stylix.colors.base0D}"; # Stylix Blue.
+            host = "#${config.lib.stylix.colors.base0E}"; # Stylix Magenta.
           };
         }
 

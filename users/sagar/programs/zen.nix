@@ -133,9 +133,6 @@
     };
   };
 
-  # Theme Support: Apply Catppuccin Mocha styles to the browser UI.
-  home.file.".zen/np8fsws6.Default Profile/chrome/userChrome.css".source = "${inputs.catppuccin-zen}/themes/mocha/userChrome.css";
-  home.file.".zen/np8fsws6.Default Profile/chrome/userContent.css".source = "${inputs.catppuccin-zen}/themes/mocha/userContent.css";
 
   # Environment Variables
   home.sessionVariables = {

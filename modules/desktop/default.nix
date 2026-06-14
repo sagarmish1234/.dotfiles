@@ -5,6 +5,7 @@
   imports = [
     ./niri.nix
     ./sddm.nix
+    ./stylix.nix
     # ./gnome.nix
   ];
 

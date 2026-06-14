@@ -103,8 +103,8 @@
         gaps_in = 5;
         gaps_out = 8;
         border_size = 2;
-        "col.active_border" = "rgba(b4befeee) rgba(cba6f7ee) 45deg"; # Lavender to Mauve gradient.
-        "col.inactive_border" = "rgba(313244ee)";
+        "col.active_border" = "rgba(${config.lib.stylix.colors.base0D}ee) rgba(${config.lib.stylix.colors.base0E}ee) 45deg"; # Tokyo Night Blue to Magenta gradient.
+        "col.inactive_border" = "rgba(${config.lib.stylix.colors.base00}ee)";
         layout = "dwindle";
       };
 

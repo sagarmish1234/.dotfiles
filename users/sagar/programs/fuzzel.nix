@@ -7,7 +7,7 @@
     enable = true;
     settings = {
       main = {
-        font = "Outfit:size=13";
+        font = lib.mkForce "Outfit:size=13";
         dpi-aware = "no";
         prompt = "❯  ";
         icon-theme = "candy-icons";

@@ -47,11 +47,12 @@
 
           default-column-width { proportion 0.5; }
 
-          // Styled borders matching your Catppuccin theme (Lavender & Mauve linear gradient)
+          // Styled borders matching Tokyo Night theme (Blue & Magenta linear gradient)
           border {
+              on
               width 2
-              active-gradient from="#7aa2f7" to="#bb9af7" angle=45
-              inactive-color "#1a1b26"
+              active-gradient from="#${config.lib.stylix.colors.base0D}" to="#${config.lib.stylix.colors.base0E}" angle=45
+              inactive-color "#${config.lib.stylix.colors.base00}"
           }
 
           focus-ring {
@@ -261,7 +262,5 @@
           Ctrl+Print { screenshot-screen; }
           Alt+Print { screenshot-window; }
       }
-
-      include "noctalia.kdl"
   '';
 }
