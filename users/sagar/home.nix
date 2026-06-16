@@ -41,7 +41,7 @@
 
   # State Version: The Home Manager version used to initialize this setup.
   # Like system.stateVersion, only change if you know what you are doing.
-  home.stateVersion = "26.05";
+  home.stateVersion = "26.11";
 
   # User Packages: Simple CLI tools and GUI apps that don't need complex configs.
   home.packages = with pkgs; [

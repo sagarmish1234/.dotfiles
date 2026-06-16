@@ -1,6 +1,9 @@
-{ config, pkgs, inputs, ... }:
-
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   # Apply NUR overlay
   nixpkgs.overlays = [
     inputs.nur.overlays.default
@@ -8,12 +11,12 @@
 
   # Imports: Modularly include system components.
   imports = [
-    ./hardware.nix             # Hardware scan results (CPU, Disks, GPU).
-    ../../modules/core         # Essential system settings (Locale, Nix, etc.).
+    ./hardware.nix # Hardware scan results (CPU, Disks, GPU).
+    ../../modules/core # Essential system settings (Locale, Nix, etc.).
     ../../modules/core/secrets.nix # Encrypted secrets (sops-nix).
-    ../../modules/core/nvidia.nix  # NVIDIA driver configuration.
-    ../../modules/desktop      # Desktop environment (Hyprland, SDDM).
-    ../../users/sagar          # User-specific system settings.
+    ../../modules/core/nvidia.nix # NVIDIA driver configuration.
+    ../../modules/desktop # Desktop environment (Hyprland, SDDM).
+    ../../users/sagar # User-specific system settings.
   ];
 
   # Networking: Hostname and basic tweaks.
@@ -71,7 +74,7 @@
   ];
 
   # Blacklist: Explicitly prevent these modules from ever being loaded.
-  boot.blacklistedKernelModules = [ "tpm" "tpm_tis" "tpm_crb" ];
+  boot.blacklistedKernelModules = ["tpm" "tpm_tis" "tpm_crb"];
 
   virtualisation = {
     containers.enable = true;
@@ -84,5 +87,5 @@
 
   # State Version: The NixOS version the system was originally installed on.
   # NEVER change this unless you have read the release notes and handled migrations.
-  system.stateVersion = "26.05";
+  system.stateVersion = "26.11";
 }

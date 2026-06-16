@@ -5,7 +5,7 @@
 
   inputs = {
     # Updated to follow the stable 26.05 release branch
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Nix User Repository (NUR)
     nur = {
@@ -21,7 +21,7 @@
 
     # Updated to track the matching stable 26.05 Home Manager release branch
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -47,7 +47,7 @@
 
     # External themes and specialized browsers
     stylix = {
-      url = "github:danth/stylix/release-26.05";
+      url = "github:danth/stylix/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     thorium.url = "github:Rishabh5321/custom-packages-flake";
