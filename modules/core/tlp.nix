@@ -7,8 +7,10 @@
     settings = {
       # Battery Longevity: Limit charging to 80% to reduce chemical aging of the battery.
       # Useful for laptops that are frequently plugged in.
-      START_CHARGE_THRESH_BAT0 = 80;
+      START_CHARGE_THRESH_BAT0 = 75;
       STOP_CHARGE_THRESH_BAT0 = 80;
+      START_CHARGE_THRESH_BAT1 = 75;
+      STOP_CHARGE_THRESH_BAT1 = 80;
     };
   };
 
