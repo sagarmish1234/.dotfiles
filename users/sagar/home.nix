@@ -33,6 +33,7 @@
     ./programs/atuin.nix
     ./programs/dolphin.nix
     ./programs/superseedr.nix
+    ./programs/mcp.nix
   ];
 
   # Home Manager Settings
