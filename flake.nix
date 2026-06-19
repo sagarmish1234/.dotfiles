@@ -32,15 +32,8 @@
     };
 
     # noctalia: The shell/desktop environment components.
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    noctaliaV5 = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
+    noctaliaV5.url = "github:noctalia-dev/noctalia-shell";
 
     # Antigravity CLI
     antigravity-nix.url = "github:jacopone/antigravity-nix";

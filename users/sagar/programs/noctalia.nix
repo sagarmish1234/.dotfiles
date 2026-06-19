@@ -98,36 +98,27 @@ in {
   };
   programs.noctalia-shell = {
     enable = true;
-    package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
-      # patches = (old.patches or [ ]) ++ [
-      #   ./patches/noctalia-shell-custom.patch
-      # ];
-      buildInputs =
-        (old.buildInputs or [])
-        ++ [
-          pkgs.qt6.qtsvg
-          pkgs.qt6.qtwayland
-          pkgs.adwaita-qt
-          pkgs.qt6.qt5compat
-          pkgs.adwaita-qt6
-          pkgs.libadwaita
-          pkgs.gnome-themes-extra
-        ];
-      preFixup =
-        (old.preFixup or "")
-        + ''
-          qtWrapperArgs+=(
-            --set XDG_ICON_THEME candy-icons
-            --set GTK_THEME Adwaita:dark
-            --set QT_QPA_PLATFORMTHEME gtk3
-            --prefix XDG_DATA_DIRS : "${pkgs.candy-icons}/share"
-            --prefix XDG_DATA_DIRS : "${pkgs.adwaita-icon-theme}/share"
-            --prefix XDG_DATA_DIRS : "${pkgs.hicolor-icon-theme}/share"
-            --prefix GTK_PATH : "${pkgs.gnome-themes-extra}/lib/gtk-2.0"
-            --prefix GTK_PATH : "${pkgs.gnome-themes-extra}/lib/gtk-3.0"
-          )
-        '';
-    });
+    package = pkgs.symlinkJoin {
+      name = "noctalia-shell-wrapped";
+      paths = [ inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        rm $out/bin/noctalia
+        makeWrapper ${inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/noctalia $out/bin/noctalia \
+          --set XDG_ICON_THEME candy-icons \
+          --set GTK_THEME Adwaita:dark \
+          --set QT_QPA_PLATFORMTHEME gtk3 \
+          --prefix XDG_DATA_DIRS : "${pkgs.candy-icons}/share" \
+          --prefix XDG_DATA_DIRS : "${pkgs.adwaita-icon-theme}/share" \
+          --prefix XDG_DATA_DIRS : "${pkgs.hicolor-icon-theme}/share" \
+          --prefix GTK_PATH : "${pkgs.gnome-themes-extra}/lib/gtk-2.0" \
+          --prefix GTK_PATH : "${pkgs.gnome-themes-extra}/lib/gtk-3.0" \
+          --prefix QT_PLUGIN_PATH : "${pkgs.qt6.qtsvg}/${pkgs.qt6.qtbase.qtPluginPrefix}" \
+          --prefix QT_PLUGIN_PATH : "${pkgs.qt6.qtwayland}/${pkgs.qt6.qtbase.qtPluginPrefix}" \
+          --prefix QT_PLUGIN_PATH : "${pkgs.qt6.qt5compat}/${pkgs.qt6.qtbase.qtPluginPrefix}" \
+          --prefix QT_PLUGIN_PATH : "${pkgs.adwaita-qt6}/${pkgs.qt6.qtbase.qtPluginPrefix}"
+      '';
+    };
     systemd.enable = false;
     settings = {
       appLauncher = {
