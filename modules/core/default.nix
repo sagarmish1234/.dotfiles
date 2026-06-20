@@ -1,11 +1,13 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Imports: System-wide modules for specific hardware or services.
   imports = [
-    ./tlp.nix          # Battery optimization and power management.
-    ./performance.nix  # Performance tweaks (CPU governor, etc.).
-    ./torrent.nix      # Torrent daemon and TUI clients.
+    ./tlp.nix # Battery optimization and power management.
+    ./performance.nix # Performance tweaks (CPU governor, etc.).
+    ./torrent.nix # Torrent daemon and TUI clients.
   ];
 
   # Time Zone: Set to Kolkata for Indian Standard Time.
@@ -32,28 +34,28 @@
 
   # Essential System Packages: Critical tools available to all users.
   environment.systemPackages = with pkgs; [
-    git           # Version control.
-    vim           # Text editor.
-    wget          # File downloader.
-    fish          # Modern interactive shell.
-    psmisc        # Process management tools (killall, pstree).
+    git # Version control.
+    vim # Text editor.
+    wget # File downloader.
+    fish # Modern interactive shell.
+    psmisc # Process management tools (killall, pstree).
     linuxPackages.cpupower # Tool to manage CPU power settings.
   ];
 
   # Nix Settings: Configure the behavior of the Nix package manager.
   nix.settings = {
     # Flakes: Enable modern Nix commands and experimental flake support.
-    experimental-features = [ "nix-command" "flakes" ];
-    
+    experimental-features = ["nix-command" "flakes"];
+
     # Binary Caches: Pre-built package repositories to avoid local compilation.
     substituters = [
-      "https://cache.nixos.org"           # Official NixOS cache.
-      "https://nix-community.cachix.org"  # Community-maintained packages.
-      "https://hyprland.cachix.org"       # Optimized Hyprland builds.
-      "https://noctalia.cachix.org"       # Pre-built Noctalia shell packages.
-      "https://cache.garnix.io"           # Continuous integration cache for many flakes.
+      "https://cache.nixos.org" # Official NixOS cache.
+      "https://nix-community.cachix.org" # Community-maintained packages.
+      "https://hyprland.cachix.org" # Optimized Hyprland builds.
+      "https://noctalia.cachix.org" # Pre-built Noctalia shell packages.
+      "https://cache.garnix.io" # Continuous integration cache for many flakes.
     ];
-    
+
     # Public Keys: Security keys used to verify packages from the caches above.
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -76,11 +78,12 @@
 
   # Shell: Set Fish as the default interactive shell.
   programs.fish.enable = true;
-  environment.shells = with pkgs; [ fish ];
+  environment.shells = with pkgs; [fish];
 
   # Fonts: System-wide font availability.
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono # Used for the UI, terminal, and shell.
+    nerd-fonts.iosevka
   ];
 
   # Security:

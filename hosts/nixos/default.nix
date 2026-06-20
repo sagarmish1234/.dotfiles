@@ -7,6 +7,21 @@
   # Apply NUR overlay
   nixpkgs.overlays = [
     inputs.nur.overlays.default
+    (final: prev: {
+      stdenv = prev.stdenv // {
+        mkDerivation = args: prev.stdenv.mkDerivation (
+          if (args.pname or "") == "fetch" then
+            args // {
+              postPatch = (args.postPatch or "") + ''
+                substituteInPlace fetch.c \
+                  --replace-fail "static int get_term_rows(void) {" "static int get_term_rows(void) { return 0; "
+              '';
+            }
+          else
+            args
+        );
+      };
+    })
   ];
 
   # Imports: Modularly include system components.

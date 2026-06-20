@@ -38,6 +38,12 @@
     # Antigravity CLI
     antigravity-nix.url = "github:jacopone/antigravity-nix";
 
+    # Animated 3D fetch tool
+    areofyl-fetch = {
+      url = "github:areofyl/fetch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # External themes and specialized browsers
     stylix = {
       url = "github:danth/stylix/master";
