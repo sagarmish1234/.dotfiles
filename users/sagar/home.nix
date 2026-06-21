@@ -59,6 +59,7 @@
     wl-clipboard # Command-line copy/paste utilities for Wayland.
     gh
     adw-gtk3 # Adwaita theme engine for GTK 3 (styled dynamically by Noctalia)
+    visidata # Terminal spreadsheet viewer and analyzer
   ];
 
   # Ghostty: Modern, fast terminal emulator.

@@ -111,7 +111,7 @@ in {
         };
       };
       audio = {
-        volumeOverdrive = true;
+        enable_overdrive = true;
       };
       shell = {
         corner_radius_scale = 1.25;
