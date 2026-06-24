@@ -35,6 +35,9 @@
     ./programs/superseedr.nix
     ./programs/mcp.nix
     ./programs/direnv.nix
+    ./programs/onlyoffice.nix
+    # ./programs/qutebrowser.nix
+    # ./programs/nyxt.nix
   ];
 
   # Home Manager Settings
