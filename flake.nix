@@ -59,6 +59,12 @@
 
     # NixOS Facter modules
     nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
+
+    # nix-index-database: Provides a weekly-updated prebuilt database for nix-index and comma.
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # 'inputs' here are the resolved packages defined above.
@@ -100,6 +106,7 @@
               ./users/sagar/home.nix # User-specific Home Manager configuration.
               inputs.nvf.homeManagerModules.default
               inputs.sops-nix.homeManagerModules.sops
+              inputs.nix-index-database.homeModules.nix-index
             ];
           };
         }

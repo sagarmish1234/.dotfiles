@@ -32,8 +32,4 @@
       bat-rebuild = "bat cache --build";
     };
   };
-
-  # Optimization: Disable automatic cache generation to speed up activation.
-  # Manual rebuild via 'bat-rebuild' if you change themes.
-  home.activation.batCache = pkgs.lib.mkForce "";
 }

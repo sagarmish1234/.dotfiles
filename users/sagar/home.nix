@@ -36,6 +36,8 @@
     ./programs/mcp.nix
     ./programs/direnv.nix
     ./programs/onlyoffice.nix
+    ./programs/superfile.nix
+    ./programs/nix-index.nix
     # ./programs/qutebrowser.nix
     # ./programs/nyxt.nix
   ];
