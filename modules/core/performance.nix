@@ -91,9 +91,9 @@
     max-free = 1000000000; # Clean up until 1GB is free.
   };
 
-  # Garbage Collection: Automatically delete old system generations every week.
+  # Garbage Collection: Disable Nix's automatic gc in favor of nh's clean functionality.
   nix.gc = {
-    automatic = true;
+    automatic = false;
     dates = "weekly";
     options = "--delete-older-than 14d";
   };

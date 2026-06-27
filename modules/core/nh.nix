@@ -1,0 +1,21 @@
+{
+  config,
+  pkgs,
+  ...
+}: {
+  # nh (Nix Helper) configuration
+  programs.nh = {
+    enable = true;
+    clean = {
+      enable = true;
+      extraArgs = "--keep-since 4d --keep 3";
+    };
+    flake = "/home/sagar/.dotfiles";
+  };
+
+  # Optional packages to enhance nh experience
+  environment.systemPackages = with pkgs; [
+    nix-output-monitor
+    nvd
+  ];
+}
