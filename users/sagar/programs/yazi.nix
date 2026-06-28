@@ -17,8 +17,13 @@ in
   # Packages: Extra tools used by Yazi (like exiftool for metadata).
   home.packages = [
     pkgs.exiftool
+    pkgs.trash-cli            # System trash bin integration (recycle-bin plugin)
+    pkgs.ouch                 # Modern compression engine (ouch plugin)
+    pkgs.poppler-utils        # PDF previews
+    pkgs.ffmpegthumbnailer    # Video previews
     yazi-wrapped
   ];
+
 
   xdg.dataFile = {
     "icons/hicolor/32x32/apps/yazi.png".source = "${pkgs.yazi}/share/pixmaps/yazi.png";
@@ -107,6 +112,10 @@ in
           toggle-pane  # Maximize/restore preview pane.
           mount        # Mount/unmount drives.
           starship     # Use starship prompt in yazi.
+          ouch         # Archive compressing/unpacking.
+          recycle-bin  # Browse and restore deleted files.
+          wl-clipboard # Copy files to Wayland system clipboard.
+          smart-paste  # Paste files from system clipboard.
           ;
       };
 
@@ -143,6 +152,32 @@ in
             on = "<C-n>";
             run = ''shell '${lib.getExe pkgs.ripdrag} "$@" -x 2>/dev/null &' --confirm'';
             desc = "Drag and drop selected files";
+          }
+          # Dolphin-like GUI additions:
+          {
+            on = [ "g" "r" ];
+            run = "plugin recycle-bin";
+            desc = "Go to Recycle Bin / Trash";
+          }
+          {
+            on = [ "c" "z" ];
+            run = "plugin ouch --args=zip";
+            desc = "Compress files with ouch";
+          }
+          {
+            on = [ "e" "x" ];
+            run = "plugin ouch --args=unpack";
+            desc = "Extract archive with ouch";
+          }
+          {
+            on = "y";
+            run = "plugin wl-clipboard";
+            desc = "Copy files to system clipboard";
+          }
+          {
+            on = "p";
+            run = "plugin smart-paste";
+            desc = "Paste files from system clipboard";
           }
         ];
       };
