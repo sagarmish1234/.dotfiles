@@ -211,6 +211,8 @@
   programs.git = {
     enable = true;
     settings = {
+      user.name = "Sagar Mishra";
+      user.email = "sagarmish1234@gmail.com";
       credential.helper = "store";
     };
   };
