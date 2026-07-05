@@ -1,6 +1,8 @@
 {
+  home,
   config,
   pkgs,
+  inputs,
   ...
 }: {
   # Imports: Modularly include user-specific program configurations.
@@ -65,6 +67,8 @@
     gh
     adw-gtk3 # Adwaita theme engine for GTK 3 (styled dynamically by Noctalia)
     visidata # Terminal spreadsheet viewer and analyzer
+    ani-cli
+    inputs.curd.packages.${pkgs.system}.default
   ];
 
   # Ghostty: Modern, fast terminal emulator.

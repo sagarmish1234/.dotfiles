@@ -65,6 +65,11 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    curd = {
+      url = "github:Wraient/curd";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # 'inputs' here are the resolved packages defined above.

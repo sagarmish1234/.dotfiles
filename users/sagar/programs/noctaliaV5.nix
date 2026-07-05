@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   config,
+  lib,
   ...
 }: let
   # noctalia-plugins-src = pkgs.fetchFromGitHub {
@@ -103,8 +104,8 @@ in {
     settings = {
       # This may also be a string or path to a .toml file.
        theme = {
-        mode = "dark";
-        source = "builtin";
+        mode = lib.mkForce "dark";
+        source = lib.mkForce "builtin";
         builtin = "Tokyo-Night";
         templates = {
           enable_builtin_templates = false;
@@ -115,7 +116,7 @@ in {
       };
       shell = {
         corner_radius_scale = 1.25;
-        font_family = "JetBrainsMono Nerd Font";
+        font_family = lib.mkForce "JetBrainsMono Nerd Font";
         time_format = "{:%-I:%M %p}";
         date_format = "%A, %B %-d";
         shadow = {
@@ -232,8 +233,8 @@ in {
         type = "spacer";
         length = 30;
       };
-      notification.background_opacity = 0.78;
-      osd.background_opacity = 0.78;
+      notification.background_opacity = lib.mkForce 0.78;
+      osd.background_opacity = lib.mkForce 0.78;
     };
   };
 }
