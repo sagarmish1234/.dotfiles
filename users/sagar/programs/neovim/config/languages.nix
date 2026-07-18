@@ -31,6 +31,7 @@
         lsp.servers = [ "basedpyright" "ruff" ];
       };
       rust.enable = true;
+      svelte.enable = true;
     };
 
     treesitter.context.enable = true;

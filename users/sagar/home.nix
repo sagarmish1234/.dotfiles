@@ -31,6 +31,7 @@
     ./programs/webapps.nix
     ./programs/zen.nix
     ./programs/zed.nix
+    ./programs/helix.nix
     ./programs/neovim.nix
     ./programs/atuin.nix
     ./programs/dolphin.nix
@@ -42,6 +43,7 @@
     ./programs/nix-index.nix
     # ./programs/qutebrowser.nix
     # ./programs/nyxt.nix
+    ./programs/tmux.nix
   ];
 
   # Home Manager Settings
@@ -67,8 +69,7 @@
     gh
     adw-gtk3 # Adwaita theme engine for GTK 3 (styled dynamically by Noctalia)
     visidata # Terminal spreadsheet viewer and analyzer
-    ani-cli
-    inputs.curd.packages.${pkgs.system}.default
+    p7zip
   ];
 
   # Ghostty: Modern, fast terminal emulator.

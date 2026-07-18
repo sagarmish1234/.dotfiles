@@ -12,5 +12,6 @@
     ./git.nix
     ./binds.nix
     ./utility.nix
+    ./notifications.nix
   ];
 }
