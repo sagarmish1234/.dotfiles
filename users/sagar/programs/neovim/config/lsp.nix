@@ -11,6 +11,18 @@
       nvim-docs-view.enable = true;
     };
 
+    diagnostics = {
+      enable = true;
+      config = {
+        virtual_text = {
+          spacing = 4;
+          prefix = "●";
+        };
+        underline = true;
+        signs = true;
+      };
+    };
+
     debugger.nvim-dap = {
       enable = true;
       ui.enable = true;

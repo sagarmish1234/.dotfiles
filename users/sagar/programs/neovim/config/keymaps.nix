@@ -48,6 +48,7 @@
     { key = "K"; mode = [ "n" ]; action = "<cmd>lua vim.lsp.buf.hover()<cr>"; desc = "Hover Info"; }
     { key = "<leader>cr"; mode = [ "n" ]; action = "<cmd>lua vim.lsp.buf.rename()<cr>"; desc = "Rename Symbol"; }
     { key = "<leader>ca"; mode = [ "n" "v" ]; action = "<cmd>lua vim.lsp.buf.code_action()<cr>"; desc = "Code Action"; }
+    { key = "<leader>cR"; mode = [ "n" ]; action = "<cmd>LspRestart<cr>"; desc = "Restart LSP"; }
 
     # Oil
     { key = "-"; mode = [ "n" ]; action = "<cmd>Oil<cr>"; desc = "Open parent directory in Oil"; }

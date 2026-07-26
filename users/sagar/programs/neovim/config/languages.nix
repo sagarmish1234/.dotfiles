@@ -8,18 +8,19 @@
       # Supported languages
       nix = {
         enable = true;
-        lsp.servers = [ "nixd" ];
+        lsp.servers = ["nixd"];
       };
       markdown = {
         enable = true;
-        lsp.servers = [ "marksman" ];
+        lsp.servers = ["marksman"];
       };
+      yaml.enable = true;
       bash.enable = true;
       clang.enable = true;
       css.enable = true;
       html = {
         enable = true;
-        lsp.servers = [ "superhtml" ];
+        lsp.servers = ["superhtml"];
       };
       json.enable = true;
       sql.enable = true;
@@ -28,7 +29,7 @@
       lua.enable = true;
       python = {
         enable = true;
-        lsp.servers = [ "basedpyright" "ruff" ];
+        lsp.servers = ["basedpyright" "ruff"];
       };
       rust.enable = true;
       svelte.enable = true;

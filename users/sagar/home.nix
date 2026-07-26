@@ -70,6 +70,7 @@
     adw-gtk3 # Adwaita theme engine for GTK 3 (styled dynamically by Noctalia)
     visidata # Terminal spreadsheet viewer and analyzer
     p7zip
+    glow
   ];
 
   # Ghostty: Modern, fast terminal emulator.
